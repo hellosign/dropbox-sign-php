@@ -1,4 +1,4 @@
-# HelloSignSDK\SignatureRequestApi
+# Dropbox\Sign\SignatureRequestApi
 
 All URIs are relative to https://api.hellosign.com/v3.
 
@@ -25,7 +25,7 @@ All URIs are relative to https://api.hellosign.com/v3.
 ## `signatureRequestBulkCreateEmbeddedWithTemplate()`
 
 ```php
-signatureRequestBulkCreateEmbeddedWithTemplate($signature_request_bulk_create_embedded_with_template_request): \HelloSignSDK\Model\BulkSendJobSendResponse
+signatureRequestBulkCreateEmbeddedWithTemplate($signature_request_bulk_create_embedded_with_template_request): \Dropbox\Sign\Model\BulkSendJobSendResponse
 ```
 
 Embedded Bulk Send with Template
@@ -39,46 +39,46 @@ Creates BulkSendJob which sends up to 250 SignatureRequests in bulk based off of
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signerList1Signer = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signerList1Signer = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signerList1Signer->setRole("Client")
     ->setName("George")
     ->setEmailAddress("george@example.com")
     ->setPin("d79a3td");
 
-$signerList1CustomFields = new HelloSignSDK\Model\SubBulkSignerListCustomField();
+$signerList1CustomFields = new Dropbox\Sign\Model\SubBulkSignerListCustomField();
 $signerList1CustomFields->setName("company")
     ->setValue("ABC Corp");
 
-$signerList1 = new HelloSignSDK\Model\SubBulkSignerList();
+$signerList1 = new Dropbox\Sign\Model\SubBulkSignerList();
 $signerList1->setSigners([$signerList1Signer])
     ->setCustomFields([$signerList1CustomFields]);
 
-$signerList2Signer = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signerList2Signer = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signerList2Signer->setRole("Client")
     ->setName("Mary")
     ->setEmailAddress("mary@example.com")
     ->setPin("gd9as5b");
 
-$signerList2CustomFields = new HelloSignSDK\Model\SubBulkSignerListCustomField();
+$signerList2CustomFields = new Dropbox\Sign\Model\SubBulkSignerListCustomField();
 $signerList2CustomFields->setName("company")
     ->setValue("123 LLC");
 
-$signerList2 = new HelloSignSDK\Model\SubBulkSignerList();
+$signerList2 = new Dropbox\Sign\Model\SubBulkSignerList();
 $signerList2->setSigners([$signerList2Signer])
     ->setCustomFields([$signerList2CustomFields]);
 
-$cc1 = new HelloSignSDK\Model\SubCC();
+$cc1 = new Dropbox\Sign\Model\SubCC();
 $cc1->setRole("Accounting")
     ->setEmailAddress("accounting@example.com");
 
-$data = new HelloSignSDK\Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest();
 $data->setClientId("1a659d9ad95bccd307ecad78d72192f8")
     ->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setSubject("Purchase Order")
@@ -88,11 +88,11 @@ $data->setClientId("1a659d9ad95bccd307ecad78d72192f8")
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestBulkCreateEmbeddedWithTemplate($data);
+    $result = $signatureRequestApi->signatureRequestBulkCreateEmbeddedWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -102,11 +102,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_bulk_create_embedded_with_template_request** | [**\HelloSignSDK\Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest**](../Model/SignatureRequestBulkCreateEmbeddedWithTemplateRequest.md)|  | |
+| **signature_request_bulk_create_embedded_with_template_request** | [**\Dropbox\Sign\Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest**](../Model/SignatureRequestBulkCreateEmbeddedWithTemplateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\BulkSendJobSendResponse**](../Model/BulkSendJobSendResponse.md)
+[**\Dropbox\Sign\Model\BulkSendJobSendResponse**](../Model/BulkSendJobSendResponse.md)
 
 ### Authorization
 
@@ -124,7 +124,7 @@ try {
 ## `signatureRequestBulkSendWithTemplate()`
 
 ```php
-signatureRequestBulkSendWithTemplate($signature_request_bulk_send_with_template_request): \HelloSignSDK\Model\BulkSendJobSendResponse
+signatureRequestBulkSendWithTemplate($signature_request_bulk_send_with_template_request): \Dropbox\Sign\Model\BulkSendJobSendResponse
 ```
 
 Bulk Send with Template
@@ -138,7 +138,7 @@ Creates BulkSendJob which sends up to 250 SignatureRequests in bulk based off of
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -146,41 +146,41 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signerList1Signer = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signerList1Signer = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signerList1Signer->setRole("Client")
     ->setName("George")
     ->setEmailAddress("george@example.com")
     ->setPin("d79a3td");
 
-$signerList1CustomFields = new HelloSignSDK\Model\SubBulkSignerListCustomField();
+$signerList1CustomFields = new Dropbox\Sign\Model\SubBulkSignerListCustomField();
 $signerList1CustomFields->setName("company")
     ->setValue("ABC Corp");
 
-$signerList1 = new HelloSignSDK\Model\SubBulkSignerList();
+$signerList1 = new Dropbox\Sign\Model\SubBulkSignerList();
 $signerList1->setSigners([$signerList1Signer])
     ->setCustomFields([$signerList1CustomFields]);
 
-$signerList2Signer = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signerList2Signer = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signerList2Signer->setRole("Client")
     ->setName("Mary")
     ->setEmailAddress("mary@example.com")
     ->setPin("gd9as5b");
 
-$signerList2CustomFields = new HelloSignSDK\Model\SubBulkSignerListCustomField();
+$signerList2CustomFields = new Dropbox\Sign\Model\SubBulkSignerListCustomField();
 $signerList2CustomFields->setName("company")
     ->setValue("123 LLC");
 
-$signerList2 = new HelloSignSDK\Model\SubBulkSignerList();
+$signerList2 = new Dropbox\Sign\Model\SubBulkSignerList();
 $signerList2->setSigners([$signerList2Signer])
     ->setCustomFields([$signerList2CustomFields]);
 
-$cc1 = new HelloSignSDK\Model\SubCC();
+$cc1 = new Dropbox\Sign\Model\SubCC();
 $cc1->setRole("Accounting")
     ->setEmailAddress("accounting@example.com");
 
-$data = new HelloSignSDK\Model\SignatureRequestBulkSendWithTemplateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestBulkSendWithTemplateRequest();
 $data->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setSubject("Purchase Order")
     ->setMessage("Glad we could come to an agreement.")
@@ -189,11 +189,11 @@ $data->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestBulkSendWithTemplate($data);
+    $result = $signatureRequestApi->signatureRequestBulkSendWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -203,11 +203,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_bulk_send_with_template_request** | [**\HelloSignSDK\Model\SignatureRequestBulkSendWithTemplateRequest**](../Model/SignatureRequestBulkSendWithTemplateRequest.md)|  | |
+| **signature_request_bulk_send_with_template_request** | [**\Dropbox\Sign\Model\SignatureRequestBulkSendWithTemplateRequest**](../Model/SignatureRequestBulkSendWithTemplateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\BulkSendJobSendResponse**](../Model/BulkSendJobSendResponse.md)
+[**\Dropbox\Sign\Model\BulkSendJobSendResponse**](../Model/BulkSendJobSendResponse.md)
 
 ### Authorization
 
@@ -239,7 +239,7 @@ Cancels an incomplete signature request. This action is **not reversible**.  The
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -247,15 +247,15 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "2f9781e1a8e2045224d808c153c2e1d3df6f8f2f";
 
 try {
-    $api->signatureRequestCancel($signatureRequestId);
-} catch (HelloSignSDK\ApiException $e) {
+    $signatureRequestApi->signatureRequestCancel($signatureRequestId);
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -287,7 +287,7 @@ void (empty response body)
 ## `signatureRequestCreateEmbedded()`
 
 ```php
-signatureRequestCreateEmbedded($signature_request_create_embedded_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestCreateEmbedded($signature_request_create_embedded_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Create Embedded Signature Request
@@ -301,7 +301,7 @@ Creates a new SignatureRequest with the submitted documents to be signed in an e
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -309,45 +309,45 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubSignatureRequestSigner();
+$signer1 = new Dropbox\Sign\Model\SubSignatureRequestSigner();
 $signer1->setEmailAddress("jack@example.com")
     ->setName("Jack")
     ->setOrder(0);
 
-$signer2 = new HelloSignSDK\Model\SubSignatureRequestSigner();
+$signer2 = new Dropbox\Sign\Model\SubSignatureRequestSigner();
 $signer2->setEmailAddress("jill@example.com")
     ->setName("Jill")
     ->setOrder(1);
 
-$signingOptions = new HelloSignSDK\Model\SubSigningOptions();
+$signingOptions = new Dropbox\Sign\Model\SubSigningOptions();
 $signingOptions->setDraw(true)
     ->setType(true)
     ->setUpload(true)
     ->setPhone(true)
-    ->setDefaultType(HelloSignSDK\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
+    ->setDefaultType(Dropbox\Sign\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
 
-$data = new HelloSignSDK\Model\SignatureRequestCreateEmbeddedRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestCreateEmbeddedRequest();
 $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTitle("NDA with Acme Co.")
     ->setSubject("The NDA we talked about")
     ->setMessage("Please sign this NDA and then we can discuss more. Let me know if you have any questions.")
     ->setSigners([$signer1, $signer2])
     ->setCcEmailAddresses([
-        "lawyer@hellosign.com",
-        "lawyer@example.com",
+        "lawyer@dropboxsign.com",
+        "lawyer@dropboxsign.com",
     ])
-    ->setFile([new SplFileObject(__DIR__ . "/example_signature_request.pdf")])
+    ->setFiles([new SplFileObject(__DIR__ . "/example_signature_request.pdf")])
     ->setSigningOptions($signingOptions)
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestCreateEmbedded($data);
+    $result = $signatureRequestApi->signatureRequestCreateEmbedded($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -357,11 +357,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_create_embedded_request** | [**\HelloSignSDK\Model\SignatureRequestCreateEmbeddedRequest**](../Model/SignatureRequestCreateEmbeddedRequest.md)|  | |
+| **signature_request_create_embedded_request** | [**\Dropbox\Sign\Model\SignatureRequestCreateEmbeddedRequest**](../Model/SignatureRequestCreateEmbeddedRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -379,7 +379,7 @@ try {
 ## `signatureRequestCreateEmbeddedWithTemplate()`
 
 ```php
-signatureRequestCreateEmbeddedWithTemplate($signature_request_create_embedded_with_template_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestCreateEmbeddedWithTemplate($signature_request_create_embedded_with_template_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Create Embedded Signature Request with Template
@@ -393,7 +393,7 @@ Creates a new SignatureRequest based on the given Template(s) to be signed in an
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -401,21 +401,21 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signer1 = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signer1->setRole("Client")
     ->setEmailAddress("george@example.com")
     ->setName("George");
 
-$signingOptions = new HelloSignSDK\Model\SubSigningOptions();
+$signingOptions = new Dropbox\Sign\Model\SubSigningOptions();
 $signingOptions->setDraw(true)
     ->setType(true)
     ->setUpload(true)
     ->setPhone(false)
-    ->setDefaultType(HelloSignSDK\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
+    ->setDefaultType(Dropbox\Sign\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
 
-$data = new HelloSignSDK\Model\SignatureRequestCreateEmbeddedWithTemplateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestCreateEmbeddedWithTemplateRequest();
 $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setSubject("Purchase Order")
@@ -425,11 +425,11 @@ $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestCreateEmbeddedWithTemplate($data);
+    $result = $signatureRequestApi->signatureRequestCreateEmbeddedWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -439,11 +439,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_create_embedded_with_template_request** | [**\HelloSignSDK\Model\SignatureRequestCreateEmbeddedWithTemplateRequest**](../Model/SignatureRequestCreateEmbeddedWithTemplateRequest.md)|  | |
+| **signature_request_create_embedded_with_template_request** | [**\Dropbox\Sign\Model\SignatureRequestCreateEmbeddedWithTemplateRequest**](../Model/SignatureRequestCreateEmbeddedWithTemplateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -475,7 +475,7 @@ Obtain a copy of the current documents specified by the `signature_request_id` p
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -483,17 +483,17 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "fa5c8a0b0f492d768749333ad6fcc214c111e967";
 $fileType = "pdf";
 
 try {
-    $result = $api->signatureRequestFiles($signatureRequestId, $fileType);
+    $result = $signatureRequestApi->signatureRequestFiles($signatureRequestId, $fileType);
     copy($result->getRealPath(), __DIR__ . '/file_response.pdf');
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -526,7 +526,7 @@ try {
 ## `signatureRequestFilesAsDataUri()`
 
 ```php
-signatureRequestFilesAsDataUri($signature_request_id): \HelloSignSDK\Model\FileResponseDataUri
+signatureRequestFilesAsDataUri($signature_request_id): \Dropbox\Sign\Model\FileResponseDataUri
 ```
 
 Download Files as Data Uri
@@ -540,7 +540,7 @@ Obtain a copy of the current documents specified by the `signature_request_id` p
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -548,16 +548,16 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "fa5c8a0b0f492d768749333ad6fcc214c111e967";
 
 try {
-    $result = $api->signatureRequestFilesAsDataUri($signatureRequestId);
+    $result = $signatureRequestApi->signatureRequestFilesAsDataUri($signatureRequestId);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -571,7 +571,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\FileResponseDataUri**](../Model/FileResponseDataUri.md)
+[**\Dropbox\Sign\Model\FileResponseDataUri**](../Model/FileResponseDataUri.md)
 
 ### Authorization
 
@@ -589,7 +589,7 @@ try {
 ## `signatureRequestFilesAsFileUrl()`
 
 ```php
-signatureRequestFilesAsFileUrl($signature_request_id): \HelloSignSDK\Model\FileResponse
+signatureRequestFilesAsFileUrl($signature_request_id): \Dropbox\Sign\Model\FileResponse
 ```
 
 Download Files as File Url
@@ -603,7 +603,7 @@ Obtain a copy of the current documents specified by the `signature_request_id` p
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -611,16 +611,16 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "fa5c8a0b0f492d768749333ad6fcc214c111e967";
 
 try {
-    $result = $api->signatureRequestFilesAsFileUrl($signatureRequestId);
+    $result = $signatureRequestApi->signatureRequestFilesAsFileUrl($signatureRequestId);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -634,7 +634,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\FileResponse**](../Model/FileResponse.md)
+[**\Dropbox\Sign\Model\FileResponse**](../Model/FileResponse.md)
 
 ### Authorization
 
@@ -652,7 +652,7 @@ try {
 ## `signatureRequestGet()`
 
 ```php
-signatureRequestGet($signature_request_id): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestGet($signature_request_id): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Get Signature Request
@@ -666,7 +666,7 @@ Returns the status of the SignatureRequest specified by the `signature_request_i
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -674,16 +674,16 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "fa5c8a0b0f492d768749333ad6fcc214c111e967";
 
 try {
-    $result = $api->signatureRequestGet($signatureRequestId);
+    $result = $signatureRequestApi->signatureRequestGet($signatureRequestId);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -697,7 +697,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -715,7 +715,7 @@ try {
 ## `signatureRequestList()`
 
 ```php
-signatureRequestList($account_id, $page, $page_size, $query): \HelloSignSDK\Model\SignatureRequestListResponse
+signatureRequestList($account_id, $page, $page_size, $query): \Dropbox\Sign\Model\SignatureRequestListResponse
 ```
 
 List Signature Requests
@@ -729,7 +729,7 @@ Returns a list of SignatureRequests that you can access. This includes Signature
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -737,17 +737,17 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $accountId = null;
 $page = 1;
 
 try {
-    $result = $api->signatureRequestList($accountId, $page);
+    $result = $signatureRequestApi->signatureRequestList($accountId, $page);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -764,7 +764,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestListResponse**](../Model/SignatureRequestListResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestListResponse**](../Model/SignatureRequestListResponse.md)
 
 ### Authorization
 
@@ -782,7 +782,7 @@ try {
 ## `signatureRequestReleaseHold()`
 
 ```php
-signatureRequestReleaseHold($signature_request_id): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestReleaseHold($signature_request_id): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Release On-Hold Signature Request
@@ -796,7 +796,7 @@ Releases a held SignatureRequest that was claimed and prepared from an [Unclaime
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -804,16 +804,16 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "2f9781e1a8e2045224d808c153c2e1d3df6f8f2f";
 
 try {
-    $result = $api->signatureRequestReleaseHold($signatureRequestId);
+    $result = $signatureRequestApi->signatureRequestReleaseHold($signatureRequestId);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -827,7 +827,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -845,7 +845,7 @@ try {
 ## `signatureRequestRemind()`
 
 ```php
-signatureRequestRemind($signature_request_id, $signature_request_remind_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestRemind($signature_request_id, $signature_request_remind_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Send Request Reminder
@@ -859,7 +859,7 @@ Sends an email to the signer reminding them to sign the signature request. You c
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -867,19 +867,19 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$data = new HelloSignSDK\Model\SignatureRequestRemindRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestRemindRequest();
 $data->setEmailAddress("john@example.com");
 
 $signatureRequestId = "2f9781e1a8e2045224d808c153c2e1d3df6f8f2f";
 
 try {
-    $result = $api->signatureRequestRemind($signatureRequestId, $data);
+    $result = $signatureRequestApi->signatureRequestRemind($signatureRequestId, $data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -890,11 +890,11 @@ try {
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **signature_request_id** | **string**| The id of the SignatureRequest to send a reminder for. | |
-| **signature_request_remind_request** | [**\HelloSignSDK\Model\SignatureRequestRemindRequest**](../Model/SignatureRequestRemindRequest.md)|  | |
+| **signature_request_remind_request** | [**\Dropbox\Sign\Model\SignatureRequestRemindRequest**](../Model/SignatureRequestRemindRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -926,20 +926,20 @@ Removes your access to a completed signature request. This action is **not rever
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
 $signatureRequestId = "2f9781e1a8e2045224d808c153c2e1d3df6f8f2f";
 
 try {
-    $api->signatureRequestRemove($signatureRequestId);
-} catch (HelloSignSDK\ApiException $e) {
+    $signatureRequestApi->signatureRequestRemove($signatureRequestId);
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -971,7 +971,7 @@ void (empty response body)
 ## `signatureRequestSend()`
 
 ```php
-signatureRequestSend($signature_request_send_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestSend($signature_request_send_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Send Signature Request
@@ -985,7 +985,7 @@ Creates and sends a new SignatureRequest with the submitted documents. If `form_
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -993,38 +993,38 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubSignatureRequestSigner();
+$signer1 = new Dropbox\Sign\Model\SubSignatureRequestSigner();
 $signer1->setEmailAddress("jack@example.com")
     ->setName("Jack")
     ->setOrder(0);
 
-$signer2 = new HelloSignSDK\Model\SubSignatureRequestSigner();
+$signer2 = new Dropbox\Sign\Model\SubSignatureRequestSigner();
 $signer2->setEmailAddress("jill@example.com")
     ->setName("Jill")
     ->setOrder(1);
 
-$signingOptions = new HelloSignSDK\Model\SubSigningOptions();
+$signingOptions = new Dropbox\Sign\Model\SubSigningOptions();
 $signingOptions->setDraw(true)
     ->setType(true)
     ->setUpload(true)
     ->setPhone(false)
-    ->setDefaultType(HelloSignSDK\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
+    ->setDefaultType(Dropbox\Sign\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
 
-$fieldOptions = new HelloSignSDK\Model\SubFieldOptions();
-$fieldOptions->setDateFormat(HelloSignSDK\Model\SubFieldOptions::DATE_FORMAT_DD_MM_YYYY);
+$fieldOptions = new Dropbox\Sign\Model\SubFieldOptions();
+$fieldOptions->setDateFormat(Dropbox\Sign\Model\SubFieldOptions::DATE_FORMAT_DD_MM_YYYY);
 
-$data = new HelloSignSDK\Model\SignatureRequestSendRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestSendRequest();
 $data->setTitle("NDA with Acme Co.")
     ->setSubject("The NDA we talked about")
     ->setMessage("Please sign this NDA and then we can discuss more. Let me know if you have any questions.")
     ->setSigners([$signer1, $signer2])
     ->setCcEmailAddresses([
-        "lawyer@hellosign.com",
-        "lawyer@example.com",
+        "lawyer@dropboxsign.com",
+        "lawyer@dropboxsign.com",
     ])
-    ->setFile([new SplFileObject(__DIR__ . "/example_signature_request.pdf")])
+    ->setFiles([new SplFileObject(__DIR__ . "/example_signature_request.pdf")])
     ->setMetadata([
         "custom_id" => 1234,
         "custom_text" => "NDA #9",
@@ -1034,11 +1034,11 @@ $data->setTitle("NDA with Acme Co.")
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestSend($data);
+    $result = $signatureRequestApi->signatureRequestSend($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -1048,11 +1048,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_send_request** | [**\HelloSignSDK\Model\SignatureRequestSendRequest**](../Model/SignatureRequestSendRequest.md)|  | |
+| **signature_request_send_request** | [**\Dropbox\Sign\Model\SignatureRequestSendRequest**](../Model/SignatureRequestSendRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -1070,7 +1070,7 @@ try {
 ## `signatureRequestSendWithTemplate()`
 
 ```php
-signatureRequestSendWithTemplate($signature_request_send_with_template_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestSendWithTemplate($signature_request_send_with_template_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Send with Template
@@ -1084,7 +1084,7 @@ Creates and sends a new SignatureRequest based off of the Template(s) specified 
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -1092,31 +1092,31 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signer1 = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signer1->setRole("Client")
     ->setEmailAddress("george@example.com")
     ->setName("George");
 
-$cc1 = new HelloSignSDK\Model\SubCC();
+$cc1 = new Dropbox\Sign\Model\SubCC();
 $cc1->setRole("Accounting")
     ->setEmailAddress("accounting@example.com");
 
-$customField1 = new HelloSignSDK\Model\SubCustomField();
+$customField1 = new Dropbox\Sign\Model\SubCustomField();
 $customField1->setName("Cost")
     ->setValue("$20,000")
     ->setEditor("Client")
     ->setRequired(true);
 
-$signingOptions = new HelloSignSDK\Model\SubSigningOptions();
+$signingOptions = new Dropbox\Sign\Model\SubSigningOptions();
 $signingOptions->setDraw(true)
     ->setType(true)
     ->setUpload(true)
     ->setPhone(false)
-    ->setDefaultType(HelloSignSDK\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
+    ->setDefaultType(Dropbox\Sign\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
 
-$data = new HelloSignSDK\Model\SignatureRequestSendWithTemplateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestSendWithTemplateRequest();
 $data->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setSubject("Purchase Order")
     ->setMessage("Glad we could come to an agreement.")
@@ -1127,11 +1127,11 @@ $data->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestSendWithTemplate($data);
+    $result = $signatureRequestApi->signatureRequestSendWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -1141,11 +1141,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **signature_request_send_with_template_request** | [**\HelloSignSDK\Model\SignatureRequestSendWithTemplateRequest**](../Model/SignatureRequestSendWithTemplateRequest.md)|  | |
+| **signature_request_send_with_template_request** | [**\Dropbox\Sign\Model\SignatureRequestSendWithTemplateRequest**](../Model/SignatureRequestSendWithTemplateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 
@@ -1163,7 +1163,7 @@ try {
 ## `signatureRequestUpdate()`
 
 ```php
-signatureRequestUpdate($signature_request_id, $signature_request_update_request): \HelloSignSDK\Model\SignatureRequestGetResponse
+signatureRequestUpdate($signature_request_id, $signature_request_update_request): \Dropbox\Sign\Model\SignatureRequestGetResponse
 ```
 
 Update Signature Request
@@ -1177,7 +1177,7 @@ Updates the email address and/or the name for a given signer on a signature requ
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -1185,20 +1185,20 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$data = new HelloSignSDK\Model\SignatureRequestUpdateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestUpdateRequest();
 $data->setEmailAddress("john@example.com")
     ->setSignatureId("78caf2a1d01cd39cea2bc1cbb340dac3");
 
 $signatureRequestId = "2f9781e1a8e2045224d808c153c2e1d3df6f8f2f";
 
 try {
-    $result = $api->signatureRequestUpdate($signatureRequestId, $data);
+    $result = $signatureRequestApi->signatureRequestUpdate($signatureRequestId, $data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -1209,11 +1209,11 @@ try {
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **signature_request_id** | **string**| The id of the SignatureRequest to update. | |
-| **signature_request_update_request** | [**\HelloSignSDK\Model\SignatureRequestUpdateRequest**](../Model/SignatureRequestUpdateRequest.md)|  | |
+| **signature_request_update_request** | [**\Dropbox\Sign\Model\SignatureRequestUpdateRequest**](../Model/SignatureRequestUpdateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
+[**\Dropbox\Sign\Model\SignatureRequestGetResponse**](../Model/SignatureRequestGetResponse.md)
 
 ### Authorization
 

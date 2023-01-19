@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -70,12 +70,12 @@ class TemplateResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'can_edit' => 'bool',
         'is_locked' => 'bool',
         'metadata' => 'array',
-        'signer_roles' => '\HelloSignSDK\Model\TemplateResponseSignerRole[]',
-        'cc_roles' => '\HelloSignSDK\Model\TemplateResponseCCRole[]',
-        'documents' => '\HelloSignSDK\Model\TemplateResponseDocument[]',
-        'custom_fields' => '\HelloSignSDK\Model\TemplateResponseCustomField[]',
-        'named_form_fields' => '\HelloSignSDK\Model\TemplateResponseNamedFormField[]',
-        'accounts' => '\HelloSignSDK\Model\TemplateResponseAccount[]',
+        'signer_roles' => '\Dropbox\Sign\Model\TemplateResponseSignerRole[]',
+        'cc_roles' => '\Dropbox\Sign\Model\TemplateResponseCCRole[]',
+        'documents' => '\Dropbox\Sign\Model\TemplateResponseDocument[]',
+        'custom_fields' => '\Dropbox\Sign\Model\TemplateResponseCustomField[]',
+        'named_form_fields' => '\Dropbox\Sign\Model\TemplateResponseNamedFormField[]',
+        'accounts' => '\Dropbox\Sign\Model\TemplateResponseAccount[]',
     ];
 
     /**
@@ -266,7 +266,14 @@ class TemplateResponse implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['accounts'] = $data['accounts'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponse
     {
         /** @var TemplateResponse $obj */
         $obj = ObjectSerializer::deserialize(

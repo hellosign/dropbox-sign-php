@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK;
+namespace Dropbox\Sign;
 
 /**
  * ApiException Class Doc Comment

@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SubFormFieldsPerDocumentCheckboxMerge Class Doc Comment
@@ -174,7 +174,14 @@ class SubFormFieldsPerDocumentCheckboxMerge extends SubFormFieldsPerDocumentBase
         $this->container['type'] = $data['type'] ?? 'checkbox-merge';
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldsPerDocumentCheckboxMerge
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldsPerDocumentCheckboxMerge
     {
         /** @var SubFormFieldsPerDocumentCheckboxMerge $obj */
         $obj = ObjectSerializer::deserialize(

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -192,7 +192,14 @@ class SubFormFieldGroup implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['requirement'] = $data['requirement'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldGroup
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldGroup
     {
         /** @var SubFormFieldGroup $obj */
         $obj = ObjectSerializer::deserialize(

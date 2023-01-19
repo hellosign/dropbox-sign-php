@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -192,7 +192,14 @@ class TemplateAddUserRequest implements ModelInterface, ArrayAccess, JsonSeriali
         $this->container['skip_notification'] = $data['skip_notification'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateAddUserRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateAddUserRequest
     {
         /** @var TemplateAddUserRequest $obj */
         $obj = ObjectSerializer::deserialize(

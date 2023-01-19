@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -10,19 +10,19 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\UnclaimedDraftApi($config);
+$unclaimedDraftApi = new Dropbox\Sign\Api\UnclaimedDraftApi($config);
 
-$data = new HelloSignSDK\Model\UnclaimedDraftEditAndResendRequest();
+$data = new Dropbox\Sign\Model\UnclaimedDraftEditAndResendRequest();
 $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTestMode(true);
 
 $signatureRequestId = "2f9781e1a83jdja934d808c153c2e1d3df6f8f2f";
 
 try {
-    $result = $api->unclaimedDraftEditAndResend($signatureRequestId, $data);
+    $result = $unclaimedDraftApi->unclaimedDraftEditAndResend($signatureRequestId, $data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }

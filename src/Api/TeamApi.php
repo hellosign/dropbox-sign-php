@@ -25,8 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Api;
+namespace Dropbox\Sign\Api;
 
+use Dropbox\Sign\ApiException;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\HeaderSelector;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\ObjectSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
@@ -35,11 +40,6 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Utils;
-use HelloSignSDK\ApiException;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\HeaderSelector;
-use HelloSignSDK\Model;
-use HelloSignSDK\ObjectSerializer;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -188,14 +188,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -204,20 +204,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -235,7 +235,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetResponse',
+                    '\Dropbox\Sign\Model\TeamGetResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -246,7 +246,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -290,7 +290,7 @@ class TeamApi
      */
     public function teamAddMemberAsyncWithHttpInfo(Model\TeamAddMemberRequest $team_add_member_request, string $team_id = null)
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
         $request = $this->teamAddMemberRequest($team_add_member_request, $team_id);
 
         return $this->client
@@ -519,14 +519,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -535,20 +535,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -566,7 +566,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetResponse',
+                    '\Dropbox\Sign\Model\TeamGetResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -577,7 +577,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -619,7 +619,7 @@ class TeamApi
      */
     public function teamCreateAsyncWithHttpInfo(Model\TeamCreateRequest $team_create_request)
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
         $request = $this->teamCreateRequest($team_create_request);
 
         return $this->client
@@ -836,7 +836,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1055,14 +1055,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -1071,20 +1071,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1102,7 +1102,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetResponse',
+                    '\Dropbox\Sign\Model\TeamGetResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1113,7 +1113,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1151,7 +1151,7 @@ class TeamApi
      */
     public function teamGetAsyncWithHttpInfo()
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
         $request = $this->teamGetRequest();
 
         return $this->client
@@ -1346,14 +1346,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetInfoResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetInfoResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetInfoResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetInfoResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -1362,20 +1362,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetInfoResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetInfoResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1393,7 +1393,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetInfoResponse',
+                    '\Dropbox\Sign\Model\TeamGetInfoResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1404,7 +1404,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1446,7 +1446,7 @@ class TeamApi
      */
     public function teamInfoAsyncWithHttpInfo(string $team_id = null)
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetInfoResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetInfoResponse';
         $request = $this->teamInfoRequest($team_id);
 
         return $this->client
@@ -1654,14 +1654,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamInvitesResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamInvitesResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamInvitesResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamInvitesResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -1670,20 +1670,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamInvitesResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamInvitesResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1701,7 +1701,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamInvitesResponse',
+                    '\Dropbox\Sign\Model\TeamInvitesResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1712,7 +1712,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -1754,7 +1754,7 @@ class TeamApi
      */
     public function teamInvitesAsyncWithHttpInfo(string $email_address = null)
     {
-        $returnType = '\HelloSignSDK\Model\TeamInvitesResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamInvitesResponse';
         $request = $this->teamInvitesRequest($email_address);
 
         return $this->client
@@ -1966,14 +1966,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamMembersResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamMembersResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamMembersResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamMembersResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -1982,20 +1982,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamMembersResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamMembersResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2013,7 +2013,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamMembersResponse',
+                    '\Dropbox\Sign\Model\TeamMembersResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2024,7 +2024,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2070,7 +2070,7 @@ class TeamApi
      */
     public function teamMembersAsyncWithHttpInfo(string $team_id, int $page = 1, int $page_size = 20)
     {
-        $returnType = '\HelloSignSDK\Model\TeamMembersResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamMembersResponse';
         $request = $this->teamMembersRequest($team_id, $page, $page_size);
 
         return $this->client
@@ -2312,14 +2312,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -2328,20 +2328,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2359,7 +2359,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetResponse',
+                    '\Dropbox\Sign\Model\TeamGetResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2370,7 +2370,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2412,7 +2412,7 @@ class TeamApi
      */
     public function teamRemoveMemberAsyncWithHttpInfo(Model\TeamRemoveMemberRequest $team_remove_member_request)
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
         $request = $this->teamRemoveMemberRequest($team_remove_member_request);
 
         return $this->client
@@ -2633,14 +2633,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamSubTeamsResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamSubTeamsResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamSubTeamsResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamSubTeamsResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -2649,20 +2649,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamSubTeamsResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamSubTeamsResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2680,7 +2680,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamSubTeamsResponse',
+                    '\Dropbox\Sign\Model\TeamSubTeamsResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2691,7 +2691,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -2737,7 +2737,7 @@ class TeamApi
      */
     public function teamSubTeamsAsyncWithHttpInfo(string $team_id, int $page = 1, int $page_size = 20)
     {
-        $returnType = '\HelloSignSDK\Model\TeamSubTeamsResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamSubTeamsResponse';
         $request = $this->teamSubTeamsRequest($team_id, $page, $page_size);
 
         return $this->client
@@ -2979,14 +2979,14 @@ class TeamApi
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                if ('\HelloSignSDK\Model\TeamGetResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\TeamGetResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\TeamGetResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\TeamGetResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
@@ -2995,20 +2995,20 @@ class TeamApi
             $rangeCodeLeft = (int) (substr('4XX', 0, 1) . '00');
             $rangeCodeRight = (int) (substr('4XX', 0, 1) . '99');
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
-                if ('\HelloSignSDK\Model\ErrorResponse' === '\SplFileObject') {
+                if ('\Dropbox\Sign\Model\ErrorResponse' === '\SplFileObject') {
                     $content = $response->getBody(); //stream goes to serializer
                 } else {
                     $content = (string) $response->getBody();
                 }
 
                 return [
-                    ObjectSerializer::deserialize($content, '\HelloSignSDK\Model\ErrorResponse', []),
+                    ObjectSerializer::deserialize($content, '\Dropbox\Sign\Model\ErrorResponse', []),
                     $response->getStatusCode(),
                     $response->getHeaders(),
                 ];
             }
 
-            $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+            $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -3026,7 +3026,7 @@ class TeamApi
             if ($statusCode === 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\TeamGetResponse',
+                    '\Dropbox\Sign\Model\TeamGetResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -3037,7 +3037,7 @@ class TeamApi
             if ($statusCode >= $rangeCodeLeft && $statusCode <= $rangeCodeRight) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    '\HelloSignSDK\Model\ErrorResponse',
+                    '\Dropbox\Sign\Model\ErrorResponse',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -3079,7 +3079,7 @@ class TeamApi
      */
     public function teamUpdateAsyncWithHttpInfo(Model\TeamUpdateRequest $team_update_request)
     {
-        $returnType = '\HelloSignSDK\Model\TeamGetResponse';
+        $returnType = '\Dropbox\Sign\Model\TeamGetResponse';
         $request = $this->teamUpdateRequest($team_update_request);
 
         return $this->client

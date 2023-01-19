@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -181,7 +181,14 @@ class SubOptions implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['can_insert_everywhere'] = $data['can_insert_everywhere'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubOptions
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubOptions
     {
         /** @var SubOptions $obj */
         $obj = ObjectSerializer::deserialize(

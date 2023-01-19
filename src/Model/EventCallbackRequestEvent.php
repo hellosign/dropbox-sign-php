@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -64,7 +64,7 @@ class EventCallbackRequestEvent implements ModelInterface, ArrayAccess, JsonSeri
         'event_time' => 'string',
         'event_type' => 'string',
         'event_hash' => 'string',
-        'event_metadata' => '\HelloSignSDK\Model\EventCallbackRequestEventMetadata',
+        'event_metadata' => '\Dropbox\Sign\Model\EventCallbackRequestEventMetadata',
     ];
 
     /**
@@ -200,6 +200,7 @@ class EventCallbackRequestEvent implements ModelInterface, ArrayAccess, JsonSeri
     public const EVENT_TYPE_SIGNATURE_REQUEST_EXPIRED = 'signature_request_expired';
     public const EVENT_TYPE_TEMPLATE_CREATED = 'template_created';
     public const EVENT_TYPE_TEMPLATE_ERROR = 'template_error';
+    public const EVENT_TYPE_CALLBACK_TEST = 'callback_test';
 
     /**
      * Gets allowable values of the enum
@@ -230,6 +231,7 @@ class EventCallbackRequestEvent implements ModelInterface, ArrayAccess, JsonSeri
             self::EVENT_TYPE_SIGNATURE_REQUEST_EXPIRED,
             self::EVENT_TYPE_TEMPLATE_CREATED,
             self::EVENT_TYPE_TEMPLATE_ERROR,
+            self::EVENT_TYPE_CALLBACK_TEST,
         ];
     }
 
@@ -254,7 +256,14 @@ class EventCallbackRequestEvent implements ModelInterface, ArrayAccess, JsonSeri
         $this->container['event_metadata'] = $data['event_metadata'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): EventCallbackRequestEvent
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): EventCallbackRequestEvent
     {
         /** @var EventCallbackRequestEvent $obj */
         $obj = ObjectSerializer::deserialize(

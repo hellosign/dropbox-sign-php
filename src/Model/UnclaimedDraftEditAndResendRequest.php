@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,7 +60,7 @@ class UnclaimedDraftEditAndResendRequest implements ModelInterface, ArrayAccess,
      */
     protected static $openAPITypes = [
         'client_id' => 'string',
-        'editor_options' => '\HelloSignSDK\Model\SubEditorOptions',
+        'editor_options' => '\Dropbox\Sign\Model\SubEditorOptions',
         'is_for_embedded_signing' => 'bool',
         'requester_email_address' => 'string',
         'requesting_redirect_url' => 'string',
@@ -222,7 +222,14 @@ class UnclaimedDraftEditAndResendRequest implements ModelInterface, ArrayAccess,
         $this->container['test_mode'] = $data['test_mode'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): UnclaimedDraftEditAndResendRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): UnclaimedDraftEditAndResendRequest
     {
         /** @var UnclaimedDraftEditAndResendRequest $obj */
         $obj = ObjectSerializer::deserialize(

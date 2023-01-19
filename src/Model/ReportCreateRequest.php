@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -209,7 +209,14 @@ class ReportCreateRequest implements ModelInterface, ArrayAccess, JsonSerializab
         $this->container['start_date'] = $data['start_date'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): ReportCreateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): ReportCreateRequest
     {
         /** @var ReportCreateRequest $obj */
         $obj = ObjectSerializer::deserialize(

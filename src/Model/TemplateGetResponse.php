@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,8 +60,8 @@ class TemplateGetResponse implements ModelInterface, ArrayAccess, JsonSerializab
      * @var string[]
      */
     protected static $openAPITypes = [
-        'template' => '\HelloSignSDK\Model\TemplateResponse',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'template' => '\Dropbox\Sign\Model\TemplateResponse',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -187,7 +187,14 @@ class TemplateGetResponse implements ModelInterface, ArrayAccess, JsonSerializab
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateGetResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateGetResponse
     {
         /** @var TemplateGetResponse $obj */
         $obj = ObjectSerializer::deserialize(

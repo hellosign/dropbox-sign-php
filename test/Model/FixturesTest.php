@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Model;
+namespace Dropbox\Sign\Test\Model;
 
-use HelloSignSDK\Model as ModelNS;
-use HelloSignSDK\ObjectSerializer;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
+use Dropbox\Sign\Model as ModelNS;
+use Dropbox\Sign\ObjectSerializer;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 
-class FixturesTest extends HelloTestCase
+class FixturesTest extends SignTestCase
 {
     /**
      * @dataProvider providerValues

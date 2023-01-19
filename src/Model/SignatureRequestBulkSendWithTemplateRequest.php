@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -63,11 +63,11 @@ class SignatureRequestBulkSendWithTemplateRequest implements ModelInterface, Arr
     protected static $openAPITypes = [
         'template_ids' => 'string[]',
         'signer_file' => '\SplFileObject',
-        'signer_list' => '\HelloSignSDK\Model\SubBulkSignerList[]',
+        'signer_list' => '\Dropbox\Sign\Model\SubBulkSignerList[]',
         'allow_decline' => 'bool',
-        'ccs' => '\HelloSignSDK\Model\SubCC[]',
+        'ccs' => '\Dropbox\Sign\Model\SubCC[]',
         'client_id' => 'string',
-        'custom_fields' => '\HelloSignSDK\Model\SubCustomField[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'signing_redirect_url' => 'string',
@@ -254,7 +254,14 @@ class SignatureRequestBulkSendWithTemplateRequest implements ModelInterface, Arr
         $this->container['title'] = $data['title'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestBulkSendWithTemplateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestBulkSendWithTemplateRequest
     {
         /** @var SignatureRequestBulkSendWithTemplateRequest $obj */
         $obj = ObjectSerializer::deserialize(

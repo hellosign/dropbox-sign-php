@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Model;
+namespace Dropbox\Sign\Test\Model;
 
-use HelloSignSDK\Model\SignatureRequestSendRequest;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
+use Dropbox\Sign\Model\SignatureRequestSendRequest;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 
-class SubFormFieldsPerDocumentTest extends HelloTestCase
+class SubFormFieldsPerDocumentTest extends SignTestCase
 {
     /**
      * @dataProvider providerSubFormFieldsPerDocumentBase
@@ -21,11 +21,11 @@ class SubFormFieldsPerDocumentTest extends HelloTestCase
             'form_fields_per_document' => [$form_field],
         ];
 
-        $obj = SignatureRequestSendRequest::fromArray($data);
+        $obj = SignatureRequestSendRequest::init($data);
 
         $field = $obj->getFormFieldsPerDocument()[0];
 
-        $this->assertInstanceOf("\\HelloSignSDK\\Model\\{$type}", $field);
+        $this->assertInstanceOf("\\Dropbox\\Sign\\Model\\{$type}", $field);
         $this->assertEquals(
             $data['form_fields_per_document'],
             json_decode(json_encode($obj->getFormFieldsPerDocument()), true)
@@ -51,11 +51,11 @@ class SubFormFieldsPerDocumentTest extends HelloTestCase
             null,
         ];
 
-        $obj = SignatureRequestSendRequest::fromArray($data);
+        $obj = SignatureRequestSendRequest::init($data);
 
         $field = $obj->getFormFieldsPerDocument()[0];
 
-        $this->assertInstanceOf("\\HelloSignSDK\\Model\\{$type}", $field);
+        $this->assertInstanceOf("\\Dropbox\\Sign\\Model\\{$type}", $field);
         $this->assertEquals(
             $expected,
             json_decode(json_encode($obj->getFormFieldsPerDocument()), true)

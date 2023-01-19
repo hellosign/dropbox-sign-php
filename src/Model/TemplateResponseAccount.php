@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -65,7 +65,7 @@ class TemplateResponseAccount implements ModelInterface, ArrayAccess, JsonSerial
         'is_locked' => 'bool',
         'is_paid_hs' => 'bool',
         'is_paid_hf' => 'bool',
-        'quotas' => '\HelloSignSDK\Model\TemplateResponseAccountQuota',
+        'quotas' => '\Dropbox\Sign\Model\TemplateResponseAccountQuota',
     ];
 
     /**
@@ -211,7 +211,14 @@ class TemplateResponseAccount implements ModelInterface, ArrayAccess, JsonSerial
         $this->container['quotas'] = $data['quotas'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponseAccount
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponseAccount
     {
         /** @var TemplateResponseAccount $obj */
         $obj = ObjectSerializer::deserialize(

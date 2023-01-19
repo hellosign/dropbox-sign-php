@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -226,7 +226,14 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['upload'] = $data['upload'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubSigningOptions
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubSigningOptions
     {
         /** @var SubSigningOptions $obj */
         $obj = ObjectSerializer::deserialize(

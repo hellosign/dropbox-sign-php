@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -61,10 +61,10 @@ class EmbeddedEditUrlRequest implements ModelInterface, ArrayAccess, JsonSeriali
     protected static $openAPITypes = [
         'allow_edit_ccs' => 'bool',
         'cc_roles' => 'string[]',
-        'editor_options' => '\HelloSignSDK\Model\SubEditorOptions',
+        'editor_options' => '\Dropbox\Sign\Model\SubEditorOptions',
         'force_signer_roles' => 'bool',
         'force_subject_message' => 'bool',
-        'merge_fields' => '\HelloSignSDK\Model\SubMergeField[]',
+        'merge_fields' => '\Dropbox\Sign\Model\SubMergeField[]',
         'preview_only' => 'bool',
         'show_preview' => 'bool',
         'show_progress_stepper' => 'bool',
@@ -234,7 +234,14 @@ class EmbeddedEditUrlRequest implements ModelInterface, ArrayAccess, JsonSeriali
         $this->container['test_mode'] = $data['test_mode'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): EmbeddedEditUrlRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): EmbeddedEditUrlRequest
     {
         /** @var EmbeddedEditUrlRequest $obj */
         $obj = ObjectSerializer::deserialize(

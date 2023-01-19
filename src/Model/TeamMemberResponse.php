@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -193,7 +193,14 @@ class TeamMemberResponse implements ModelInterface, ArrayAccess, JsonSerializabl
         $this->container['role'] = $data['role'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TeamMemberResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TeamMemberResponse
     {
         /** @var TeamMemberResponse $obj */
         $obj = ObjectSerializer::deserialize(

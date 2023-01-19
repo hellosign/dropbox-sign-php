@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -260,7 +260,14 @@ class ApiAppResponseWhiteLabelingOptions implements ModelInterface, ArrayAccess,
         $this->container['text_color2'] = $data['text_color2'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): ApiAppResponseWhiteLabelingOptions
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): ApiAppResponseWhiteLabelingOptions
     {
         /** @var ApiAppResponseWhiteLabelingOptions $obj */
         $obj = ObjectSerializer::deserialize(

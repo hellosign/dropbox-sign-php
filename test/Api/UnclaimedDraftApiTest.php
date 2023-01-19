@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 use SplFileObject;
 
-class UnclaimedDraftApiTest extends HelloTestCase
+class UnclaimedDraftApiTest extends SignTestCase
 {
     /** @var Api\UnclaimedDraftApi */
     protected $api;
@@ -41,8 +41,8 @@ class UnclaimedDraftApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\UnclaimedDraftCreateRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\UnclaimedDraftCreateRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -64,8 +64,8 @@ class UnclaimedDraftApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\UnclaimedDraftCreateEmbeddedRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\UnclaimedDraftCreateEmbeddedRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -87,10 +87,10 @@ class UnclaimedDraftApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\UnclaimedDraftCreateEmbeddedWithTemplateRequest::fromArray(
+        $obj = Model\UnclaimedDraftCreateEmbeddedWithTemplateRequest::init(
             $requestData
         );
-        $obj->setFile([
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -113,7 +113,7 @@ class UnclaimedDraftApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\UnclaimedDraftEditAndResendRequest::fromArray($requestData);
+        $obj = Model\UnclaimedDraftEditAndResendRequest::init($requestData);
 
         $response = $this->api->unclaimedDraftEditAndResend(
             $signatureRequestId,

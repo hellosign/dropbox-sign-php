@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -216,7 +216,14 @@ class SubOAuth implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['scopes'] = $data['scopes'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubOAuth
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubOAuth
     {
         /** @var SubOAuth $obj */
         $obj = ObjectSerializer::deserialize(

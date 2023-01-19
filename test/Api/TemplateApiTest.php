@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 use SplFileObject;
 
-class TemplateApiTest extends HelloTestCase
+class TemplateApiTest extends SignTestCase
 {
     /** @var Api\TemplateApi */
     protected $api;
@@ -42,7 +42,7 @@ class TemplateApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\TemplateAddUserRequest::fromArray($requestData);
+        $obj = Model\TemplateAddUserRequest::init($requestData);
 
         $response = $this->api->templateAddUser($templateId, $obj);
         $serialized = TestUtils::toArray($response);
@@ -62,8 +62,8 @@ class TemplateApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\TemplateCreateEmbeddedDraftRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\TemplateCreateEmbeddedDraftRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -130,7 +130,7 @@ class TemplateApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\TemplateRemoveUserRequest::fromArray($requestData);
+        $obj = Model\TemplateRemoveUserRequest::init($requestData);
 
         $response = $this->api->templateRemoveUser($templateId, $obj);
         $serialized = TestUtils::toArray($response);
@@ -151,8 +151,8 @@ class TemplateApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\TemplateUpdateFilesRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\TemplateUpdateFilesRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 

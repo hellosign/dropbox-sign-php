@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -187,7 +187,14 @@ class TemplateResponseDocumentFieldGroup implements ModelInterface, ArrayAccess,
         $this->container['rule'] = $data['rule'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponseDocumentFieldGroup
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponseDocumentFieldGroup
     {
         /** @var TemplateResponseDocumentFieldGroup $obj */
         $obj = ObjectSerializer::deserialize(

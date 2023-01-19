@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 use SplFileObject;
 
-class SignatureRequestApiTest extends HelloTestCase
+class SignatureRequestApiTest extends SignTestCase
 {
     /** @var Api\SignatureRequestApi */
     protected $api;
@@ -41,7 +41,7 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest::fromArray(
+        $obj = Model\SignatureRequestBulkCreateEmbeddedWithTemplateRequest::init(
             $requestData
         );
         $obj->setSignerFile(
@@ -66,7 +66,7 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestBulkSendWithTemplateRequest::fromArray(
+        $obj = Model\SignatureRequestBulkSendWithTemplateRequest::init(
             $requestData
         );
         $obj->setSignerFile(
@@ -96,10 +96,10 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestCreateEmbeddedRequest::fromArray(
+        $obj = Model\SignatureRequestCreateEmbeddedRequest::init(
             $requestData
         );
-        $obj->setFile([
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -121,10 +121,10 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestCreateEmbeddedWithTemplateRequest::fromArray(
+        $obj = Model\SignatureRequestCreateEmbeddedWithTemplateRequest::init(
             $requestData
         );
-        $obj->setFile([
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -203,7 +203,7 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestRemindRequest::fromArray($requestData);
+        $obj = Model\SignatureRequestRemindRequest::init($requestData);
 
         $response = $this->api->signatureRequestRemind($signatureRequestId, $obj);
         $serialized = TestUtils::toArray($response);
@@ -228,8 +228,8 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestSendRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\SignatureRequestSendRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -251,7 +251,7 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestSendWithTemplateRequest::fromArray(
+        $obj = Model\SignatureRequestSendWithTemplateRequest::init(
             $requestData
         );
 
@@ -274,7 +274,7 @@ class SignatureRequestApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestUpdateRequest::fromArray($requestData);
+        $obj = Model\SignatureRequestUpdateRequest::init($requestData);
 
         $response = $this->api->signatureRequestUpdate(
             $signatureRequestId,

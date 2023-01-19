@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SubFormFieldsPerDocumentCheckbox Class Doc Comment
@@ -186,7 +186,14 @@ class SubFormFieldsPerDocumentCheckbox extends SubFormFieldsPerDocumentBase
         $this->container['group'] = $data['group'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldsPerDocumentCheckbox
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldsPerDocumentCheckbox
     {
         /** @var SubFormFieldsPerDocumentCheckbox $obj */
         $obj = ObjectSerializer::deserialize(

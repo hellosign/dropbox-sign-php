@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 
 /**
@@ -187,7 +187,14 @@ class SubFormFieldsPerDocumentDropdown extends SubFormFieldsPerDocumentBase
         $this->container['content'] = $data['content'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldsPerDocumentDropdown
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldsPerDocumentDropdown
     {
         /** @var SubFormFieldsPerDocumentDropdown $obj */
         $obj = ObjectSerializer::deserialize(

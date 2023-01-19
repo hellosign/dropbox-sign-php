@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SubFormFieldsPerDocumentRadio Class Doc Comment
@@ -186,7 +186,14 @@ class SubFormFieldsPerDocumentRadio extends SubFormFieldsPerDocumentBase
         $this->container['is_checked'] = $data['is_checked'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldsPerDocumentRadio
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldsPerDocumentRadio
     {
         /** @var SubFormFieldsPerDocumentRadio $obj */
         $obj = ObjectSerializer::deserialize(

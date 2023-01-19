@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -181,7 +181,14 @@ class FileResponseDataUri implements ModelInterface, ArrayAccess, JsonSerializab
         $this->container['data_uri'] = $data['data_uri'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): FileResponseDataUri
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): FileResponseDataUri
     {
         /** @var FileResponseDataUri $obj */
         $obj = ObjectSerializer::deserialize(

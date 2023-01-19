@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -62,8 +62,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static $openAPITypes = [
         'name' => 'string',
-        'accounts' => '\HelloSignSDK\Model\AccountResponse[]',
-        'invited_accounts' => '\HelloSignSDK\Model\AccountResponse[]',
+        'accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
+        'invited_accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
     ];
 
     /**
@@ -194,7 +194,14 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['invited_accounts'] = $data['invited_accounts'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TeamResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TeamResponse
     {
         /** @var TeamResponse $obj */
         $obj = ObjectSerializer::deserialize(

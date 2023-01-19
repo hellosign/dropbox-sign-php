@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -64,7 +64,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
         'template_id' => 'string',
         'edit_url' => 'string',
         'expires_at' => 'int',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -200,7 +200,14 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateCreateEmbeddedDraftResponseTemplate
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateCreateEmbeddedDraftResponseTemplate
     {
         /** @var TemplateCreateEmbeddedDraftResponseTemplate $obj */
         $obj = ObjectSerializer::deserialize(

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -59,8 +59,8 @@ class SubBulkSignerList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'custom_fields' => '\HelloSignSDK\Model\SubBulkSignerListCustomField[]',
-        'signers' => '\HelloSignSDK\Model\SubSignatureRequestTemplateSigner[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubBulkSignerListCustomField[]',
+        'signers' => '\Dropbox\Sign\Model\SubSignatureRequestTemplateSigner[]',
     ];
 
     /**
@@ -186,7 +186,14 @@ class SubBulkSignerList implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['signers'] = $data['signers'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubBulkSignerList
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubBulkSignerList
     {
         /** @var SubBulkSignerList $obj */
         $obj = ObjectSerializer::deserialize(

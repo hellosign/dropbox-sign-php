@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,9 +60,9 @@ class AccountCreateResponse implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $openAPITypes = [
-        'account' => '\HelloSignSDK\Model\AccountResponse',
-        'oauth_data' => '\HelloSignSDK\Model\OAuthTokenResponse',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'account' => '\Dropbox\Sign\Model\AccountResponse',
+        'oauth_data' => '\Dropbox\Sign\Model\OAuthTokenResponse',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -193,7 +193,14 @@ class AccountCreateResponse implements ModelInterface, ArrayAccess, JsonSerializ
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): AccountCreateResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): AccountCreateResponse
     {
         /** @var AccountCreateResponse $obj */
         $obj = ObjectSerializer::deserialize(

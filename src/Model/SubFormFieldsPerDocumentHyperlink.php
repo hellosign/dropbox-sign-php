@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SubFormFieldsPerDocumentHyperlink Class Doc Comment
@@ -186,7 +186,14 @@ class SubFormFieldsPerDocumentHyperlink extends SubFormFieldsPerDocumentBase
         $this->container['content_url'] = $data['content_url'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldsPerDocumentHyperlink
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldsPerDocumentHyperlink
     {
         /** @var SubFormFieldsPerDocumentHyperlink $obj */
         $obj = ObjectSerializer::deserialize(

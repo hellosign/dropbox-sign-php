@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -187,7 +187,14 @@ class TemplateResponseSignerRole implements ModelInterface, ArrayAccess, JsonSer
         $this->container['order'] = $data['order'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponseSignerRole
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponseSignerRole
     {
         /** @var TemplateResponseSignerRole $obj */
         $obj = ObjectSerializer::deserialize(

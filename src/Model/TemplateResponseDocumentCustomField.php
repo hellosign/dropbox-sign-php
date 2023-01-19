@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -71,7 +71,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
         'required' => 'bool',
         'api_id' => 'string',
         'group' => 'string',
-        'avg_text_length' => '\HelloSignSDK\Model\TemplateResponseFieldAvgTextLength',
+        'avg_text_length' => '\Dropbox\Sign\Model\TemplateResponseFieldAvgTextLength',
         'is_multiline' => 'bool',
         'original_font_size' => 'int',
         'font_family' => 'string',
@@ -288,7 +288,14 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
         $this->container['reusable_form_id'] = $data['reusable_form_id'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponseDocumentCustomField
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponseDocumentCustomField
     {
         /** @var TemplateResponseDocumentCustomField $obj */
         $obj = ObjectSerializer::deserialize(

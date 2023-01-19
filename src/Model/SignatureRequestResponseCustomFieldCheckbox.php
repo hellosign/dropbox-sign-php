@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SignatureRequestResponseCustomFieldCheckbox Class Doc Comment
@@ -180,7 +180,14 @@ class SignatureRequestResponseCustomFieldCheckbox extends SignatureRequestRespon
         $this->container['value'] = $data['value'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestResponseCustomFieldCheckbox
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestResponseCustomFieldCheckbox
     {
         /** @var SignatureRequestResponseCustomFieldCheckbox $obj */
         $obj = ObjectSerializer::deserialize(

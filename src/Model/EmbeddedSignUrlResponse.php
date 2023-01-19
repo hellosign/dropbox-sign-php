@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,8 +60,8 @@ class EmbeddedSignUrlResponse implements ModelInterface, ArrayAccess, JsonSerial
      * @var string[]
      */
     protected static $openAPITypes = [
-        'embedded' => '\HelloSignSDK\Model\EmbeddedSignUrlResponseEmbedded',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'embedded' => '\Dropbox\Sign\Model\EmbeddedSignUrlResponseEmbedded',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -187,7 +187,14 @@ class EmbeddedSignUrlResponse implements ModelInterface, ArrayAccess, JsonSerial
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): EmbeddedSignUrlResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): EmbeddedSignUrlResponse
     {
         /** @var EmbeddedSignUrlResponse $obj */
         $obj = ObjectSerializer::deserialize(

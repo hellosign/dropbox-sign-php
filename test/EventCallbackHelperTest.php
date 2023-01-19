@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test;
+namespace Dropbox\Sign\Test;
 
-use HelloSignSDK\EventCallbackHelper;
-use HelloSignSDK\Model\EventCallbackRequest;
+use Dropbox\Sign\EventCallbackHelper;
+use Dropbox\Sign\Model\EventCallbackRequest;
 
-class EventCallbackHelperTest extends HelloTestCase
+class EventCallbackHelperTest extends SignTestCase
 {
     protected const APIKEY = '324e3b0840f065eb51f3fd63231d0d33daa35d4ed10d27718839e81737065782';
 
@@ -19,7 +19,7 @@ class EventCallbackHelperTest extends HelloTestCase
         array $data,
         bool $passes
     ) {
-        $callback_event = EventCallbackRequest::fromArray($data);
+        $callback_event = EventCallbackRequest::init($data);
 
         $isValid = EventCallbackHelper::isValid($apiKey, $callback_event);
 

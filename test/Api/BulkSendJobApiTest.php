@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 
-class BulkSendJobApiTest extends HelloTestCase
+class BulkSendJobApiTest extends SignTestCase
 {
     /** @var Api\BulkSendJobApi */
     protected $api;

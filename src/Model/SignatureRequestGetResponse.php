@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,8 +60,8 @@ class SignatureRequestGetResponse implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $openAPITypes = [
-        'signature_request' => '\HelloSignSDK\Model\SignatureRequestResponse',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'signature_request' => '\Dropbox\Sign\Model\SignatureRequestResponse',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -187,7 +187,14 @@ class SignatureRequestGetResponse implements ModelInterface, ArrayAccess, JsonSe
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestGetResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestGetResponse
     {
         /** @var SignatureRequestGetResponse $obj */
         $obj = ObjectSerializer::deserialize(

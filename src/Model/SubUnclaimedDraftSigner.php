@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -192,7 +192,14 @@ class SubUnclaimedDraftSigner implements ModelInterface, ArrayAccess, JsonSerial
         $this->container['order'] = $data['order'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubUnclaimedDraftSigner
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubUnclaimedDraftSigner
     {
         /** @var SubUnclaimedDraftSigner $obj */
         $obj = ObjectSerializer::deserialize(

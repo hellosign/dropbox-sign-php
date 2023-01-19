@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -200,7 +200,14 @@ class ListInfoResponse implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['page_size'] = $data['page_size'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): ListInfoResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): ListInfoResponse
     {
         /** @var ListInfoResponse $obj */
         $obj = ObjectSerializer::deserialize(

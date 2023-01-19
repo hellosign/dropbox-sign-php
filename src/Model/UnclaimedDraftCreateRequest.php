@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -62,23 +62,23 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static $openAPITypes = [
         'type' => 'string',
-        'file' => '\SplFileObject[]',
-        'file_url' => 'string[]',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
         'allow_decline' => 'bool',
-        'attachments' => '\HelloSignSDK\Model\SubAttachment[]',
+        'attachments' => '\Dropbox\Sign\Model\SubAttachment[]',
         'cc_email_addresses' => 'string[]',
         'client_id' => 'string',
-        'custom_fields' => '\HelloSignSDK\Model\SubCustomField[]',
-        'field_options' => '\HelloSignSDK\Model\SubFieldOptions',
-        'form_field_groups' => '\HelloSignSDK\Model\SubFormFieldGroup[]',
-        'form_field_rules' => '\HelloSignSDK\Model\SubFormFieldRule[]',
-        'form_fields_per_document' => '\HelloSignSDK\Model\SubFormFieldsPerDocumentBase[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
+        'field_options' => '\Dropbox\Sign\Model\SubFieldOptions',
+        'form_field_groups' => '\Dropbox\Sign\Model\SubFormFieldGroup[]',
+        'form_field_rules' => '\Dropbox\Sign\Model\SubFormFieldRule[]',
+        'form_fields_per_document' => '\Dropbox\Sign\Model\SubFormFieldsPerDocumentBase[]',
         'hide_text_tags' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'show_progress_stepper' => 'bool',
-        'signers' => '\HelloSignSDK\Model\SubUnclaimedDraftSigner[]',
-        'signing_options' => '\HelloSignSDK\Model\SubSigningOptions',
+        'signers' => '\Dropbox\Sign\Model\SubUnclaimedDraftSigner[]',
+        'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
         'signing_redirect_url' => 'string',
         'subject' => 'string',
         'test_mode' => 'bool',
@@ -96,8 +96,8 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static $openAPIFormats = [
         'type' => null,
-        'file' => 'binary',
-        'file_url' => null,
+        'files' => 'binary',
+        'file_urls' => null,
         'allow_decline' => null,
         'attachments' => null,
         'cc_email_addresses' => 'email',
@@ -149,8 +149,8 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static $attributeMap = [
         'type' => 'type',
-        'file' => 'file',
-        'file_url' => 'file_url',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
         'allow_decline' => 'allow_decline',
         'attachments' => 'attachments',
         'cc_email_addresses' => 'cc_email_addresses',
@@ -181,8 +181,8 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static $setters = [
         'type' => 'setType',
-        'file' => 'setFile',
-        'file_url' => 'setFileUrl',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
         'allow_decline' => 'setAllowDecline',
         'attachments' => 'setAttachments',
         'cc_email_addresses' => 'setCcEmailAddresses',
@@ -213,8 +213,8 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static $getters = [
         'type' => 'getType',
-        'file' => 'getFile',
-        'file_url' => 'getFileUrl',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
         'allow_decline' => 'getAllowDecline',
         'attachments' => 'getAttachments',
         'cc_email_addresses' => 'getCcEmailAddresses',
@@ -311,8 +311,8 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
     public function __construct(array $data = null)
     {
         $this->container['type'] = $data['type'] ?? null;
-        $this->container['file'] = $data['file'] ?? null;
-        $this->container['file_url'] = $data['file_url'] ?? null;
+        $this->container['files'] = $data['files'] ?? null;
+        $this->container['file_urls'] = $data['file_urls'] ?? null;
         $this->container['allow_decline'] = $data['allow_decline'] ?? false;
         $this->container['attachments'] = $data['attachments'] ?? null;
         $this->container['cc_email_addresses'] = $data['cc_email_addresses'] ?? null;
@@ -336,7 +336,14 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
         $this->container['expires_at'] = $data['expires_at'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): UnclaimedDraftCreateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): UnclaimedDraftCreateRequest
     {
         /** @var UnclaimedDraftCreateRequest $obj */
         $obj = ObjectSerializer::deserialize(
@@ -425,49 +432,49 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
     }
 
     /**
-     * Gets file
+     * Gets files
      *
      * @return SplFileObject[]|null
      */
-    public function getFile()
+    public function getFiles()
     {
-        return $this->container['file'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets file
+     * Sets files
      *
-     * @param SplFileObject[]|null $file Use `file[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param SplFileObject[]|null $files Use `files[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFile(?array $file)
+    public function setFiles(?array $files)
     {
-        $this->container['file'] = $file;
+        $this->container['files'] = $files;
 
         return $this;
     }
 
     /**
-     * Gets file_url
+     * Gets file_urls
      *
      * @return string[]|null
      */
-    public function getFileUrl()
+    public function getFileUrls()
     {
-        return $this->container['file_url'];
+        return $this->container['file_urls'];
     }
 
     /**
-     * Sets file_url
+     * Sets file_urls
      *
-     * @param string[]|null $file_url Use `file_url[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param string[]|null $file_urls Use `file_urls[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFileUrl(?array $file_url)
+    public function setFileUrls(?array $file_urls)
     {
-        $this->container['file_url'] = $file_url;
+        $this->container['file_urls'] = $file_urls;
 
         return $this;
     }
@@ -677,7 +684,7 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Sets form_fields_per_document
      *
-     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/placing-fields/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
+     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/openapi/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
      *
      * @return self
      */
@@ -973,7 +980,7 @@ class UnclaimedDraftCreateRequest implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Sets expires_at
      *
-     * @param int|null $expires_at When the signature request will expire. Unsigned signatures will be moved to the expired status, and no longer signable.  **Note** This does not correspond to the **expires_at** returned in the response.
+     * @param int|null $expires_at When the signature request will expire. Unsigned signatures will be moved to the expired status, and no longer signable. See [Signature Request Expiration Date](https://developers.hellosign.com/docs/signature-request/expiration/) for details.  **Note**: This does not correspond to the **expires_at** returned in the response.
      *
      * @return self
      */

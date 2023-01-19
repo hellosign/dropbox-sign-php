@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -62,25 +62,25 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
      */
     protected static $openAPITypes = [
         'client_id' => 'string',
-        'file' => '\SplFileObject[]',
-        'file_url' => 'string[]',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
         'allow_ccs' => 'bool',
         'allow_reassign' => 'bool',
-        'attachments' => '\HelloSignSDK\Model\SubAttachment[]',
+        'attachments' => '\Dropbox\Sign\Model\SubAttachment[]',
         'cc_roles' => 'string[]',
-        'editor_options' => '\HelloSignSDK\Model\SubEditorOptions',
-        'field_options' => '\HelloSignSDK\Model\SubFieldOptions',
+        'editor_options' => '\Dropbox\Sign\Model\SubEditorOptions',
+        'field_options' => '\Dropbox\Sign\Model\SubFieldOptions',
         'force_signer_roles' => 'bool',
         'force_subject_message' => 'bool',
-        'form_field_groups' => '\HelloSignSDK\Model\SubFormFieldGroup[]',
-        'form_field_rules' => '\HelloSignSDK\Model\SubFormFieldRule[]',
-        'form_fields_per_document' => '\HelloSignSDK\Model\SubFormFieldsPerDocumentBase[]',
-        'merge_fields' => '\HelloSignSDK\Model\SubMergeField[]',
+        'form_field_groups' => '\Dropbox\Sign\Model\SubFormFieldGroup[]',
+        'form_field_rules' => '\Dropbox\Sign\Model\SubFormFieldRule[]',
+        'form_fields_per_document' => '\Dropbox\Sign\Model\SubFormFieldsPerDocumentBase[]',
+        'merge_fields' => '\Dropbox\Sign\Model\SubMergeField[]',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'show_preview' => 'bool',
         'show_progress_stepper' => 'bool',
-        'signer_roles' => '\HelloSignSDK\Model\SubTemplateRole[]',
+        'signer_roles' => '\Dropbox\Sign\Model\SubTemplateRole[]',
         'skip_me_now' => 'bool',
         'subject' => 'string',
         'test_mode' => 'bool',
@@ -97,8 +97,8 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
      */
     protected static $openAPIFormats = [
         'client_id' => null,
-        'file' => 'binary',
-        'file_url' => null,
+        'files' => 'binary',
+        'file_urls' => null,
         'allow_ccs' => null,
         'allow_reassign' => null,
         'attachments' => null,
@@ -151,8 +151,8 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
      */
     protected static $attributeMap = [
         'client_id' => 'client_id',
-        'file' => 'file',
-        'file_url' => 'file_url',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
         'allow_ccs' => 'allow_ccs',
         'allow_reassign' => 'allow_reassign',
         'attachments' => 'attachments',
@@ -184,8 +184,8 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
      */
     protected static $setters = [
         'client_id' => 'setClientId',
-        'file' => 'setFile',
-        'file_url' => 'setFileUrl',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
         'allow_ccs' => 'setAllowCcs',
         'allow_reassign' => 'setAllowReassign',
         'attachments' => 'setAttachments',
@@ -217,8 +217,8 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
      */
     protected static $getters = [
         'client_id' => 'getClientId',
-        'file' => 'getFile',
-        'file_url' => 'getFileUrl',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
         'allow_ccs' => 'getAllowCcs',
         'allow_reassign' => 'getAllowReassign',
         'attachments' => 'getAttachments',
@@ -300,8 +300,8 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
     public function __construct(array $data = null)
     {
         $this->container['client_id'] = $data['client_id'] ?? null;
-        $this->container['file'] = $data['file'] ?? null;
-        $this->container['file_url'] = $data['file_url'] ?? null;
+        $this->container['files'] = $data['files'] ?? null;
+        $this->container['file_urls'] = $data['file_urls'] ?? null;
         $this->container['allow_ccs'] = $data['allow_ccs'] ?? true;
         $this->container['allow_reassign'] = $data['allow_reassign'] ?? false;
         $this->container['attachments'] = $data['attachments'] ?? null;
@@ -326,7 +326,14 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
         $this->container['use_preexisting_fields'] = $data['use_preexisting_fields'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateCreateEmbeddedDraftRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateCreateEmbeddedDraftRequest
     {
         /** @var TemplateCreateEmbeddedDraftRequest $obj */
         $obj = ObjectSerializer::deserialize(
@@ -396,49 +403,49 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
     }
 
     /**
-     * Gets file
+     * Gets files
      *
      * @return SplFileObject[]|null
      */
-    public function getFile()
+    public function getFiles()
     {
-        return $this->container['file'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets file
+     * Sets files
      *
-     * @param SplFileObject[]|null $file Use `file[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param SplFileObject[]|null $files Use `files[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFile(?array $file)
+    public function setFiles(?array $files)
     {
-        $this->container['file'] = $file;
+        $this->container['files'] = $files;
 
         return $this;
     }
 
     /**
-     * Gets file_url
+     * Gets file_urls
      *
      * @return string[]|null
      */
-    public function getFileUrl()
+    public function getFileUrls()
     {
-        return $this->container['file_url'];
+        return $this->container['file_urls'];
     }
 
     /**
-     * Sets file_url
+     * Sets file_urls
      *
-     * @param string[]|null $file_url Use `file_url[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param string[]|null $file_urls Use `file_urls[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFileUrl(?array $file_url)
+    public function setFileUrls(?array $file_urls)
     {
-        $this->container['file_url'] = $file_url;
+        $this->container['file_urls'] = $file_urls;
 
         return $this;
     }
@@ -696,7 +703,7 @@ class TemplateCreateEmbeddedDraftRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets form_fields_per_document
      *
-     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/placing-fields/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
+     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/openapi/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
      *
      * @return self
      */

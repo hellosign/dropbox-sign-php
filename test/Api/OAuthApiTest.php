@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 
-class OAuthApiTest extends HelloTestCase
+class OAuthApiTest extends SignTestCase
 {
     /** @var Api\OAuthApi */
     protected $api;
@@ -40,7 +40,7 @@ class OAuthApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\OAuthTokenGenerateRequest::fromArray($requestData);
+        $obj = Model\OAuthTokenGenerateRequest::init($requestData);
 
         $response = $this->api->oauthTokenGenerate($obj);
         $serialized = TestUtils::toArray($response);
@@ -60,7 +60,7 @@ class OAuthApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\OAuthTokenRefreshRequest::fromArray($requestData);
+        $obj = Model\OAuthTokenRefreshRequest::init($requestData);
 
         $response = $this->api->oauthTokenRefresh($obj);
         $serialized = TestUtils::toArray($response);

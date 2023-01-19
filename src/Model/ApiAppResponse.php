@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -67,10 +67,10 @@ class ApiAppResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'domains' => 'string[]',
         'name' => 'string',
         'is_approved' => 'bool',
-        'oauth' => '\HelloSignSDK\Model\ApiAppResponseOAuth',
-        'options' => '\HelloSignSDK\Model\ApiAppResponseOptions',
-        'owner_account' => '\HelloSignSDK\Model\ApiAppResponseOwnerAccount',
-        'white_labeling_options' => '\HelloSignSDK\Model\ApiAppResponseWhiteLabelingOptions',
+        'oauth' => '\Dropbox\Sign\Model\ApiAppResponseOAuth',
+        'options' => '\Dropbox\Sign\Model\ApiAppResponseOptions',
+        'owner_account' => '\Dropbox\Sign\Model\ApiAppResponseOwnerAccount',
+        'white_labeling_options' => '\Dropbox\Sign\Model\ApiAppResponseWhiteLabelingOptions',
     ];
 
     /**
@@ -236,7 +236,14 @@ class ApiAppResponse implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['white_labeling_options'] = $data['white_labeling_options'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): ApiAppResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): ApiAppResponse
     {
         /** @var ApiAppResponse $obj */
         $obj = ObjectSerializer::deserialize(

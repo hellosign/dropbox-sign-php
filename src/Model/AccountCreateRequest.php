@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -198,7 +198,14 @@ class AccountCreateRequest implements ModelInterface, ArrayAccess, JsonSerializa
         $this->container['locale'] = $data['locale'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): AccountCreateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): AccountCreateRequest
     {
         /** @var AccountCreateRequest $obj */
         $obj = ObjectSerializer::deserialize(

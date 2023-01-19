@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseCCRole
+ * SubSignatureRequestGroupedSigners
  *
  * PHP version 7.3
  *
@@ -33,7 +33,7 @@ use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * TemplateResponseCCRole Class Doc Comment
+ * SubSignatureRequestGroupedSigners Class Doc Comment
  *
  * @category Class
  * @author   OpenAPI Generator team
@@ -41,9 +41,8 @@ use JsonSerializable;
  * @implements \ArrayAccess<TKey, TValue>
  * @template TKey int|null
  * @template TValue mixed|null
- * @internal This class should not be instantiated directly
  */
-class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSerializable
+class SubSignatureRequestGroupedSigners implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +51,7 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseCCRole';
+    protected static $openAPIModelName = 'SubSignatureRequestGroupedSigners';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -60,7 +59,9 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
+        'group' => 'string',
+        'signers' => '\Dropbox\Sign\Model\SubSignatureRequestSigner[]',
+        'order' => 'int',
     ];
 
     /**
@@ -71,7 +72,9 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
+        'group' => null,
+        'signers' => null,
+        'order' => null,
     ];
 
     /**
@@ -101,7 +104,9 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
+        'group' => 'group',
+        'signers' => 'signers',
+        'order' => 'order',
     ];
 
     /**
@@ -110,7 +115,9 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
+        'group' => 'setGroup',
+        'signers' => 'setSigners',
+        'order' => 'setOrder',
     ];
 
     /**
@@ -119,7 +126,9 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
+        'group' => 'getGroup',
+        'signers' => 'getSigners',
+        'order' => 'getOrder',
     ];
 
     /**
@@ -178,22 +187,24 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
+        $this->container['group'] = $data['group'] ?? null;
+        $this->container['signers'] = $data['signers'] ?? null;
+        $this->container['order'] = $data['order'] ?? null;
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): TemplateResponseCCRole
+    public static function fromArray(array $data): SubSignatureRequestGroupedSigners
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TemplateResponseCCRole
+    public static function init(array $data): SubSignatureRequestGroupedSigners
     {
-        /** @var TemplateResponseCCRole $obj */
+        /** @var SubSignatureRequestGroupedSigners $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            TemplateResponseCCRole::class,
+            SubSignatureRequestGroupedSigners::class,
         );
 
         return $obj;
@@ -207,6 +218,13 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['group'] === null) {
+            $invalidProperties[] = "'group' can't be null";
+        }
+        if ($this->container['signers'] === null) {
+            $invalidProperties[] = "'signers' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -223,25 +241,73 @@ class TemplateResponseCCRole implements ModelInterface, ArrayAccess, JsonSeriali
     }
 
     /**
-     * Gets name
+     * Gets group
      *
-     * @return string|null
+     * @return string
      */
-    public function getName()
+    public function getGroup()
     {
-        return $this->container['name'];
+        return $this->container['group'];
     }
 
     /**
-     * Sets name
+     * Sets group
      *
-     * @param string|null $name the name of the Role
+     * @param string $group the name of the group
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setGroup(string $group)
     {
-        $this->container['name'] = $name;
+        $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets signers
+     *
+     * @return SubSignatureRequestSigner[]
+     */
+    public function getSigners()
+    {
+        return $this->container['signers'];
+    }
+
+    /**
+     * Sets signers
+     *
+     * @param SubSignatureRequestSigner[] $signers Signers belonging to this Group.  **NOTE**: Only `name`, `email_address`, and `pin` are available to Grouped Signers. We will ignore all other properties, even though they are listed below.
+     *
+     * @return self
+     */
+    public function setSigners(array $signers)
+    {
+        $this->container['signers'] = $signers;
+
+        return $this;
+    }
+
+    /**
+     * Gets order
+     *
+     * @return int|null
+     */
+    public function getOrder()
+    {
+        return $this->container['order'];
+    }
+
+    /**
+     * Sets order
+     *
+     * @param int|null $order The order the group is required to sign in. Use this instead of Signer-level `order`.
+     *
+     * @return self
+     */
+    public function setOrder(?int $order)
+    {
+        $this->container['order'] = $order;
 
         return $this;
     }

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\ApiException;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
-use HelloSignSDK\Api;
-use HelloSignSDK\ApiException;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 
-class AccountApiTest extends HelloTestCase
+class AccountApiTest extends SignTestCase
 {
     /** @var Api\AccountApi */
     protected $api;
@@ -41,7 +41,7 @@ class AccountApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData, mt_rand(400, 499));
 
-        $obj = Model\AccountVerifyRequest::fromArray($requestData);
+        $obj = Model\AccountVerifyRequest::init($requestData);
 
         $error = null;
 
@@ -65,7 +65,7 @@ class AccountApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\AccountCreateRequest::fromArray($requestData);
+        $obj = Model\AccountCreateRequest::init($requestData);
 
         $response = $this->api->accountCreate($obj);
 
@@ -96,7 +96,7 @@ class AccountApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\AccountUpdateRequest::fromArray($requestData);
+        $obj = Model\AccountUpdateRequest::init($requestData);
 
         $response = $this->api->accountUpdate($obj);
 
@@ -114,7 +114,7 @@ class AccountApiTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\AccountVerifyRequest::fromArray($requestData);
+        $obj = Model\AccountVerifyRequest::init($requestData);
 
         $response = $this->api->accountVerify($obj);
 

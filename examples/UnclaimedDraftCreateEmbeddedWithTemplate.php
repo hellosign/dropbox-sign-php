@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -10,30 +10,30 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\UnclaimedDraftApi($config);
+$unclaimedDraftApi = new Dropbox\Sign\Api\UnclaimedDraftApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubUnclaimedDraftTemplateSigner();
+$signer1 = new Dropbox\Sign\Model\SubUnclaimedDraftTemplateSigner();
 $signer1->setRole("Client")
     ->setName("George")
     ->setEmailAddress("george@example.com");
 
-$cc1 = new HelloSignSDK\Model\SubCC();
+$cc1 = new Dropbox\Sign\Model\SubCC();
 $cc1->setRole("Accounting")
-    ->setEmailAddress("accounting@hellosign.com");
+    ->setEmailAddress("accounting@dropboxsign.com");
 
-$data = new HelloSignSDK\Model\UnclaimedDraftCreateEmbeddedWithTemplateRequest();
+$data = new Dropbox\Sign\Model\UnclaimedDraftCreateEmbeddedWithTemplateRequest();
 $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTemplateIds(["61a832ff0d8423f91d503e76bfbcc750f7417c78"])
-    ->setRequesterEmailAddress("jack@hellosign.com")
+    ->setRequesterEmailAddress("jack@dropboxsign.com")
     ->setSigners([$signer1])
     ->setCcs([$cc1])
     ->setTestMode(true);
 
 try {
-    $result = $api->unclaimedDraftCreateEmbeddedWithTemplate($data);
+    $result = $unclaimedDraftApi->unclaimedDraftCreateEmbeddedWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }

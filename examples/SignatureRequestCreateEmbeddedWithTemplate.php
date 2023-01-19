@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -10,21 +10,21 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\SignatureRequestApi($config);
+$signatureRequestApi = new Dropbox\Sign\Api\SignatureRequestApi($config);
 
-$signer1 = new HelloSignSDK\Model\SubSignatureRequestTemplateSigner();
+$signer1 = new Dropbox\Sign\Model\SubSignatureRequestTemplateSigner();
 $signer1->setRole("Client")
     ->setEmailAddress("george@example.com")
     ->setName("George");
 
-$signingOptions = new HelloSignSDK\Model\SubSigningOptions();
+$signingOptions = new Dropbox\Sign\Model\SubSigningOptions();
 $signingOptions->setDraw(true)
     ->setType(true)
     ->setUpload(true)
     ->setPhone(false)
-    ->setDefaultType(HelloSignSDK\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
+    ->setDefaultType(Dropbox\Sign\Model\SubSigningOptions::DEFAULT_TYPE_DRAW);
 
-$data = new HelloSignSDK\Model\SignatureRequestCreateEmbeddedWithTemplateRequest();
+$data = new Dropbox\Sign\Model\SignatureRequestCreateEmbeddedWithTemplateRequest();
 $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTemplateIds(["c26b8a16784a872da37ea946b9ddec7c1e11dff6"])
     ->setSubject("Purchase Order")
@@ -34,10 +34,10 @@ $data->setClientId("ec64a202072370a737edf4a0eb7f4437")
     ->setTestMode(true);
 
 try {
-    $result = $api->signatureRequestCreateEmbeddedWithTemplate($data);
+    $result = $signatureRequestApi->signatureRequestCreateEmbeddedWithTemplate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }

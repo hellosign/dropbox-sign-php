@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -80,10 +80,10 @@ class SignatureRequestResponse implements ModelInterface, ArrayAccess, JsonSeria
         'cc_email_addresses' => 'string[]',
         'signing_redirect_url' => 'string',
         'template_ids' => 'string[]',
-        'custom_fields' => '\HelloSignSDK\Model\SignatureRequestResponseCustomFieldBase[]',
-        'attachments' => '\HelloSignSDK\Model\SignatureRequestResponseAttachment[]',
-        'response_data' => '\HelloSignSDK\Model\SignatureRequestResponseDataBase[]',
-        'signatures' => '\HelloSignSDK\Model\SignatureRequestResponseSignatures[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SignatureRequestResponseCustomFieldBase[]',
+        'attachments' => '\Dropbox\Sign\Model\SignatureRequestResponseAttachment[]',
+        'response_data' => '\Dropbox\Sign\Model\SignatureRequestResponseDataBase[]',
+        'signatures' => '\Dropbox\Sign\Model\SignatureRequestResponseSignatures[]',
     ];
 
     /**
@@ -314,7 +314,14 @@ class SignatureRequestResponse implements ModelInterface, ArrayAccess, JsonSeria
         $this->container['signatures'] = $data['signatures'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestResponse
     {
         /** @var SignatureRequestResponse $obj */
         $obj = ObjectSerializer::deserialize(
@@ -577,7 +584,7 @@ class SignatureRequestResponse implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Sets expires_at
      *
-     * @param int|null $expires_at the time when the signature request will expire pending signatures
+     * @param int|null $expires_at The time when the signature request will expire unsigned signatures. See [Signature Request Expiration Date](https://developers.hellosign.com/docs/signature-request/expiration/) for details.
      *
      * @return self
      */

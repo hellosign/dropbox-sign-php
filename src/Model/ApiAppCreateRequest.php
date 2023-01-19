@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -65,9 +65,9 @@ class ApiAppCreateRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'name' => 'string',
         'callback_url' => 'string',
         'custom_logo_file' => '\SplFileObject',
-        'oauth' => '\HelloSignSDK\Model\SubOAuth',
-        'options' => '\HelloSignSDK\Model\SubOptions',
-        'white_labeling_options' => '\HelloSignSDK\Model\SubWhiteLabelingOptions',
+        'oauth' => '\Dropbox\Sign\Model\SubOAuth',
+        'options' => '\Dropbox\Sign\Model\SubOptions',
+        'white_labeling_options' => '\Dropbox\Sign\Model\SubWhiteLabelingOptions',
     ];
 
     /**
@@ -218,7 +218,14 @@ class ApiAppCreateRequest implements ModelInterface, ArrayAccess, JsonSerializab
         $this->container['white_labeling_options'] = $data['white_labeling_options'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): ApiAppCreateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): ApiAppCreateRequest
     {
         /** @var ApiAppCreateRequest $obj */
         $obj = ObjectSerializer::deserialize(

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -38,7 +38,6 @@ use SplFileObject;
  * SignatureRequestCreateEmbeddedRequest Class Doc Comment
  *
  * @category Class
- * @description Calls SignatureRequestSend in controller
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -63,22 +62,23 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
      */
     protected static $openAPITypes = [
         'client_id' => 'string',
-        'signers' => '\HelloSignSDK\Model\SubSignatureRequestSigner[]',
-        'file' => '\SplFileObject[]',
-        'file_url' => 'string[]',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
+        'signers' => '\Dropbox\Sign\Model\SubSignatureRequestSigner[]',
+        'grouped_signers' => '\Dropbox\Sign\Model\SubSignatureRequestGroupedSigners[]',
         'allow_decline' => 'bool',
         'allow_reassign' => 'bool',
-        'attachments' => '\HelloSignSDK\Model\SubAttachment[]',
+        'attachments' => '\Dropbox\Sign\Model\SubAttachment[]',
         'cc_email_addresses' => 'string[]',
-        'custom_fields' => '\HelloSignSDK\Model\SubCustomField[]',
-        'field_options' => '\HelloSignSDK\Model\SubFieldOptions',
-        'form_field_groups' => '\HelloSignSDK\Model\SubFormFieldGroup[]',
-        'form_field_rules' => '\HelloSignSDK\Model\SubFormFieldRule[]',
-        'form_fields_per_document' => '\HelloSignSDK\Model\SubFormFieldsPerDocumentBase[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
+        'field_options' => '\Dropbox\Sign\Model\SubFieldOptions',
+        'form_field_groups' => '\Dropbox\Sign\Model\SubFormFieldGroup[]',
+        'form_field_rules' => '\Dropbox\Sign\Model\SubFormFieldRule[]',
+        'form_fields_per_document' => '\Dropbox\Sign\Model\SubFormFieldsPerDocumentBase[]',
         'hide_text_tags' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
-        'signing_options' => '\HelloSignSDK\Model\SubSigningOptions',
+        'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
         'subject' => 'string',
         'test_mode' => 'bool',
         'title' => 'string',
@@ -96,9 +96,10 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
      */
     protected static $openAPIFormats = [
         'client_id' => null,
+        'files' => 'binary',
+        'file_urls' => null,
         'signers' => null,
-        'file' => 'binary',
-        'file_url' => null,
+        'grouped_signers' => null,
         'allow_decline' => null,
         'allow_reassign' => null,
         'attachments' => null,
@@ -148,9 +149,10 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
      */
     protected static $attributeMap = [
         'client_id' => 'client_id',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
         'signers' => 'signers',
-        'file' => 'file',
-        'file_url' => 'file_url',
+        'grouped_signers' => 'grouped_signers',
         'allow_decline' => 'allow_decline',
         'allow_reassign' => 'allow_reassign',
         'attachments' => 'attachments',
@@ -179,9 +181,10 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
      */
     protected static $setters = [
         'client_id' => 'setClientId',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
         'signers' => 'setSigners',
-        'file' => 'setFile',
-        'file_url' => 'setFileUrl',
+        'grouped_signers' => 'setGroupedSigners',
         'allow_decline' => 'setAllowDecline',
         'allow_reassign' => 'setAllowReassign',
         'attachments' => 'setAttachments',
@@ -210,9 +213,10 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
      */
     protected static $getters = [
         'client_id' => 'getClientId',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
         'signers' => 'getSigners',
-        'file' => 'getFile',
-        'file_url' => 'getFileUrl',
+        'grouped_signers' => 'getGroupedSigners',
         'allow_decline' => 'getAllowDecline',
         'allow_reassign' => 'getAllowReassign',
         'attachments' => 'getAttachments',
@@ -291,9 +295,10 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     public function __construct(array $data = null)
     {
         $this->container['client_id'] = $data['client_id'] ?? null;
+        $this->container['files'] = $data['files'] ?? null;
+        $this->container['file_urls'] = $data['file_urls'] ?? null;
         $this->container['signers'] = $data['signers'] ?? null;
-        $this->container['file'] = $data['file'] ?? null;
-        $this->container['file_url'] = $data['file_url'] ?? null;
+        $this->container['grouped_signers'] = $data['grouped_signers'] ?? null;
         $this->container['allow_decline'] = $data['allow_decline'] ?? false;
         $this->container['allow_reassign'] = $data['allow_reassign'] ?? false;
         $this->container['attachments'] = $data['attachments'] ?? null;
@@ -315,7 +320,14 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
         $this->container['expires_at'] = $data['expires_at'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestCreateEmbeddedRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestCreateEmbeddedRequest
     {
         /** @var SignatureRequestCreateEmbeddedRequest $obj */
         $obj = ObjectSerializer::deserialize(
@@ -337,9 +349,6 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
 
         if ($this->container['client_id'] === null) {
             $invalidProperties[] = "'client_id' can't be null";
-        }
-        if ($this->container['signers'] === null) {
-            $invalidProperties[] = "'signers' can't be null";
         }
         if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) > 5000)) {
             $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 5000.";
@@ -392,9 +401,57 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     }
 
     /**
+     * Gets files
+     *
+     * @return SplFileObject[]|null
+     */
+    public function getFiles()
+    {
+        return $this->container['files'];
+    }
+
+    /**
+     * Sets files
+     *
+     * @param SplFileObject[]|null $files Use `files[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
+     *
+     * @return self
+     */
+    public function setFiles(?array $files)
+    {
+        $this->container['files'] = $files;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_urls
+     *
+     * @return string[]|null
+     */
+    public function getFileUrls()
+    {
+        return $this->container['file_urls'];
+    }
+
+    /**
+     * Sets file_urls
+     *
+     * @param string[]|null $file_urls Use `file_urls[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
+     *
+     * @return self
+     */
+    public function setFileUrls(?array $file_urls)
+    {
+        $this->container['file_urls'] = $file_urls;
+
+        return $this;
+    }
+
+    /**
      * Gets signers
      *
-     * @return SubSignatureRequestSigner[]
+     * @return SubSignatureRequestSigner[]|null
      */
     public function getSigners()
     {
@@ -404,11 +461,11 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     /**
      * Sets signers
      *
-     * @param SubSignatureRequestSigner[] $signers add Signers to your Signature Request
+     * @param SubSignatureRequestSigner[]|null $signers Add Signers to your Signature Request.  This endpoint requires either **signers** or **grouped_signers**, but not both.
      *
      * @return self
      */
-    public function setSigners(array $signers)
+    public function setSigners(?array $signers)
     {
         $this->container['signers'] = $signers;
 
@@ -416,49 +473,25 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     }
 
     /**
-     * Gets file
+     * Gets grouped_signers
      *
-     * @return SplFileObject[]|null
+     * @return SubSignatureRequestGroupedSigners[]|null
      */
-    public function getFile()
+    public function getGroupedSigners()
     {
-        return $this->container['file'];
+        return $this->container['grouped_signers'];
     }
 
     /**
-     * Sets file
+     * Sets grouped_signers
      *
-     * @param SplFileObject[]|null $file Use `file[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param SubSignatureRequestGroupedSigners[]|null $grouped_signers Add Grouped Signers to your Signature Request.  This endpoint requires either **signers** or **grouped_signers**, but not both.
      *
      * @return self
      */
-    public function setFile(?array $file)
+    public function setGroupedSigners(?array $grouped_signers)
     {
-        $this->container['file'] = $file;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_url
-     *
-     * @return string[]|null
-     */
-    public function getFileUrl()
-    {
-        return $this->container['file_url'];
-    }
-
-    /**
-     * Sets file_url
-     *
-     * @param string[]|null $file_url Use `file_url[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
-     *
-     * @return self
-     */
-    public function setFileUrl(?array $file_url)
-    {
-        $this->container['file_url'] = $file_url;
+        $this->container['grouped_signers'] = $grouped_signers;
 
         return $this;
     }
@@ -668,7 +701,7 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     /**
      * Sets form_fields_per_document
      *
-     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/placing-fields/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
+     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: <a href=\"/docs/openapi/form-fields-per-document\" target=\"_blank\">Using Form Fields per Document</a>.)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
      *
      * @return self
      */
@@ -920,7 +953,7 @@ class SignatureRequestCreateEmbeddedRequest implements ModelInterface, ArrayAcce
     /**
      * Sets expires_at
      *
-     * @param int|null $expires_at When the signature request will expire. Unsigned signatures will be moved to the expired status, and no longer signable.  **Note** This does not correspond to the **expires_at** returned in the response.
+     * @param int|null $expires_at When the signature request will expire. Unsigned signatures will be moved to the expired status, and no longer signable. See [Signature Request Expiration Date](https://developers.hellosign.com/docs/signature-request/expiration/) for details.  **Note**: This does not correspond to the **expires_at** returned in the response.
      *
      * @return self
      */

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace HelloSignSDK\Test\Api;
+namespace Dropbox\Sign\Test\Api;
 
+use Dropbox\Sign\Api;
+use Dropbox\Sign\Configuration;
+use Dropbox\Sign\Model;
+use Dropbox\Sign\ObjectSerializer;
+use Dropbox\Sign\Test\SignTestCase;
+use Dropbox\Sign\Test\TestUtils;
 use GuzzleHttp;
 use GuzzleHttp\Psr7;
-use HelloSignSDK\Api;
-use HelloSignSDK\Configuration;
-use HelloSignSDK\Model;
-use HelloSignSDK\ObjectSerializer;
-use HelloSignSDK\Test\HelloTestCase;
-use HelloSignSDK\Test\TestUtils;
 use SplFileObject;
 
-class ObjectSerializerTest extends HelloTestCase
+class ObjectSerializerTest extends SignTestCase
 {
     /** @var Api\SignatureRequestApi */
     protected $api;
@@ -43,8 +43,8 @@ class ObjectSerializerTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestSendRequest::fromArray($requestData);
-        $obj->setFile([
+        $obj = Model\SignatureRequestSendRequest::init($requestData);
+        $obj->setFiles([
             new SplFileObject(self::ROOT_FILE_PATH . '/pdf-sample.pdf'),
         ]);
 
@@ -75,7 +75,7 @@ class ObjectSerializerTest extends HelloTestCase
 
         $this->setExpectedResponse($responseData);
 
-        $obj = Model\SignatureRequestSendRequest::fromArray($requestData);
+        $obj = Model\SignatureRequestSendRequest::init($requestData);
 
         $response = $this->api->signatureRequestSend($obj);
         $request = $this->handler->getLastRequest();

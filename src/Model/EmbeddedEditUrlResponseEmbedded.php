@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -188,7 +188,14 @@ class EmbeddedEditUrlResponseEmbedded implements ModelInterface, ArrayAccess, Js
         $this->container['expires_at'] = $data['expires_at'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): EmbeddedEditUrlResponseEmbedded
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): EmbeddedEditUrlResponseEmbedded
     {
         /** @var EmbeddedEditUrlResponseEmbedded $obj */
         $obj = ObjectSerializer::deserialize(

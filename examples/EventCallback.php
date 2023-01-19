@@ -20,12 +20,12 @@ $callback_data = [
     ],
 ];
 
-$callback_event = HelloSignSDK\Model\EventCallbackRequest::fromArray($callback_data);
+$callback_event = Dropbox\Sign\Model\EventCallbackRequest::init($callback_data);
 
 // verify that a callback came from HelloSign.com
-if (HelloSignSDK\EventCallbackHelper::isValid($api_key, $callback_event)) {
+if (Dropbox\Sign\EventCallbackHelper::isValid($api_key, $callback_event)) {
     // one of "account_callback" or "api_app_callback"
-    $callback_type = HelloSignSDK\EventCallbackHelper::getCallbackType($callback_event);
+    $callback_type = Dropbox\Sign\EventCallbackHelper::getCallbackType($callback_event);
 
     // do your magic below!
 }

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -38,7 +38,6 @@ use SplFileObject;
  * SignatureRequestBulkCreateEmbeddedWithTemplateRequest Class Doc Comment
  *
  * @category Class
- * @description Calls SignatureRequestBulkSendWithTemplate in controller
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -65,10 +64,10 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
         'template_ids' => 'string[]',
         'client_id' => 'string',
         'signer_file' => '\SplFileObject',
-        'signer_list' => '\HelloSignSDK\Model\SubBulkSignerList[]',
+        'signer_list' => '\Dropbox\Sign\Model\SubBulkSignerList[]',
         'allow_decline' => 'bool',
-        'ccs' => '\HelloSignSDK\Model\SubCC[]',
-        'custom_fields' => '\HelloSignSDK\Model\SubCustomField[]',
+        'ccs' => '\Dropbox\Sign\Model\SubCC[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'signing_redirect_url' => 'string',
@@ -255,7 +254,14 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
         $this->container['title'] = $data['title'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestBulkCreateEmbeddedWithTemplateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestBulkCreateEmbeddedWithTemplateRequest
     {
         /** @var SignatureRequestBulkCreateEmbeddedWithTemplateRequest $obj */
         $obj = ObjectSerializer::deserialize(

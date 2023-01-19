@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-| `account` | [```\HelloSignSDK\Model\AccountVerifyResponseAccount```](AccountVerifyResponseAccount.md) |    |  |
-| `warnings` | [```\HelloSignSDK\Model\WarningResponse[]```](WarningResponse.md) |  A list of warnings.  |  |
+| `account` | [```\Dropbox\Sign\Model\AccountVerifyResponseAccount```](AccountVerifyResponseAccount.md) |    |  |
+| `warnings` | [```\Dropbox\Sign\Model\WarningResponse[]```](WarningResponse.md) |  A list of warnings.  |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

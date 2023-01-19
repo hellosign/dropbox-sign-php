@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,7 +60,7 @@ class TemplateUpdateFilesResponse implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $openAPITypes = [
-        'template' => '\HelloSignSDK\Model\TemplateUpdateFilesResponseTemplate',
+        'template' => '\Dropbox\Sign\Model\TemplateUpdateFilesResponseTemplate',
     ];
 
     /**
@@ -181,7 +181,14 @@ class TemplateUpdateFilesResponse implements ModelInterface, ArrayAccess, JsonSe
         $this->container['template'] = $data['template'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateUpdateFilesResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateUpdateFilesResponse
     {
         /** @var TemplateUpdateFilesResponse $obj */
         $obj = ObjectSerializer::deserialize(

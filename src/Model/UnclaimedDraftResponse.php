@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -212,7 +212,14 @@ class UnclaimedDraftResponse implements ModelInterface, ArrayAccess, JsonSeriali
         $this->container['test_mode'] = $data['test_mode'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): UnclaimedDraftResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): UnclaimedDraftResponse
     {
         /** @var UnclaimedDraftResponse $obj */
         $obj = ObjectSerializer::deserialize(

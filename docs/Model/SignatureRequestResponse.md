@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 | `message` | ```string``` |  The custom message in the email that was initially sent to the signers.  |  |
 | `metadata` | ```array``` |  The metadata attached to the signature request.  |  |
 | `created_at` | ```int``` |  Time the signature request was created.  |  |
-| `expires_at` | ```int``` |  The time when the signature request will expire pending signatures.  |  |
+| `expires_at` | ```int``` |  The time when the signature request will expire unsigned signatures. See [Signature Request Expiration Date](https://developers.hellosign.com/docs/signature-request/expiration/) for details.  |  |
 | `is_complete` | ```bool``` |  Whether or not the SignatureRequest has been fully executed by all signers.  |  |
 | `is_declined` | ```bool``` |  Whether or not the SignatureRequest has been declined by a signer.  |  |
 | `has_error` | ```bool``` |  Whether or not an error occurred (either during the creation of the SignatureRequest or during one of the signings).  |  |
@@ -25,9 +25,9 @@ Name | Type | Description | Notes
 | `cc_email_addresses` | ```string[]``` |  A list of email addresses that were CCed on the SignatureRequest. They will receive a copy of the final PDF once all the signers have signed.  |  |
 | `signing_redirect_url` | ```string``` |  The URL you want the signer redirected to after they successfully sign.  |  |
 | `template_ids` | ```string[]``` |  Templates IDs used in this SignatureRequest (if any).  |  |
-| `custom_fields` | [```\HelloSignSDK\Model\SignatureRequestResponseCustomFieldBase[]```](SignatureRequestResponseCustomFieldBase.md) |  An array of Custom Field objects containing the name and type of each custom field.<br><br>* Text Field uses `SignatureRequestResponseCustomFieldText`<br>* Checkbox Field uses `SignatureRequestResponseCustomFieldCheckbox`  |  |
-| `attachments` | [```\HelloSignSDK\Model\SignatureRequestResponseAttachment[]```](SignatureRequestResponseAttachment.md) |  Signer attachments.  |  |
-| `response_data` | [```\HelloSignSDK\Model\SignatureRequestResponseDataBase[]```](SignatureRequestResponseDataBase.md) |  An array of form field objects containing the name, value, and type of each textbox or checkmark field filled in by the signers.  |  |
-| `signatures` | [```\HelloSignSDK\Model\SignatureRequestResponseSignatures[]```](SignatureRequestResponseSignatures.md) |  An array of signature objects, 1 for each signer.  |  |
+| `custom_fields` | [```\Dropbox\Sign\Model\SignatureRequestResponseCustomFieldBase[]```](SignatureRequestResponseCustomFieldBase.md) |  An array of Custom Field objects containing the name and type of each custom field.<br><br>* Text Field uses `SignatureRequestResponseCustomFieldText`<br>* Checkbox Field uses `SignatureRequestResponseCustomFieldCheckbox`  |  |
+| `attachments` | [```\Dropbox\Sign\Model\SignatureRequestResponseAttachment[]```](SignatureRequestResponseAttachment.md) |  Signer attachments.  |  |
+| `response_data` | [```\Dropbox\Sign\Model\SignatureRequestResponseDataBase[]```](SignatureRequestResponseDataBase.md) |  An array of form field objects containing the name, value, and type of each textbox or checkmark field filled in by the signers.  |  |
+| `signatures` | [```\Dropbox\Sign\Model\SignatureRequestResponseSignatures[]```](SignatureRequestResponseSignatures.md) |  An array of signature objects, 1 for each signer.  |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

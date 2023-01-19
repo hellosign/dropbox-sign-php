@@ -26,9 +26,9 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 
 /**
  * SignatureRequestResponseDataValueSignature Class Doc Comment
@@ -179,7 +179,14 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
         $this->container['value'] = $data['value'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestResponseDataValueSignature
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestResponseDataValueSignature
     {
         /** @var SignatureRequestResponseDataValueSignature $obj */
         $obj = ObjectSerializer::deserialize(

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use SplFileObject;
@@ -62,17 +62,17 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      */
     protected static $openAPITypes = [
         'template_ids' => 'string[]',
-        'signers' => '\HelloSignSDK\Model\SubSignatureRequestTemplateSigner[]',
+        'signers' => '\Dropbox\Sign\Model\SubSignatureRequestTemplateSigner[]',
         'allow_decline' => 'bool',
-        'ccs' => '\HelloSignSDK\Model\SubCC[]',
+        'ccs' => '\Dropbox\Sign\Model\SubCC[]',
         'client_id' => 'string',
-        'custom_fields' => '\HelloSignSDK\Model\SubCustomField[]',
-        'file' => '\SplFileObject[]',
-        'file_url' => 'string[]',
+        'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
         'is_qualified_signature' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
-        'signing_options' => '\HelloSignSDK\Model\SubSigningOptions',
+        'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
         'signing_redirect_url' => 'string',
         'subject' => 'string',
         'test_mode' => 'bool',
@@ -93,8 +93,8 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'ccs' => null,
         'client_id' => null,
         'custom_fields' => null,
-        'file' => 'binary',
-        'file_url' => null,
+        'files' => 'binary',
+        'file_urls' => null,
         'is_qualified_signature' => null,
         'message' => null,
         'metadata' => null,
@@ -138,8 +138,8 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'ccs' => 'ccs',
         'client_id' => 'client_id',
         'custom_fields' => 'custom_fields',
-        'file' => 'file',
-        'file_url' => 'file_url',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
         'is_qualified_signature' => 'is_qualified_signature',
         'message' => 'message',
         'metadata' => 'metadata',
@@ -162,8 +162,8 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'ccs' => 'setCcs',
         'client_id' => 'setClientId',
         'custom_fields' => 'setCustomFields',
-        'file' => 'setFile',
-        'file_url' => 'setFileUrl',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
         'is_qualified_signature' => 'setIsQualifiedSignature',
         'message' => 'setMessage',
         'metadata' => 'setMetadata',
@@ -186,8 +186,8 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'ccs' => 'getCcs',
         'client_id' => 'getClientId',
         'custom_fields' => 'getCustomFields',
-        'file' => 'getFile',
-        'file_url' => 'getFileUrl',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
         'is_qualified_signature' => 'getIsQualifiedSignature',
         'message' => 'getMessage',
         'metadata' => 'getMetadata',
@@ -260,8 +260,8 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         $this->container['ccs'] = $data['ccs'] ?? null;
         $this->container['client_id'] = $data['client_id'] ?? null;
         $this->container['custom_fields'] = $data['custom_fields'] ?? null;
-        $this->container['file'] = $data['file'] ?? null;
-        $this->container['file_url'] = $data['file_url'] ?? null;
+        $this->container['files'] = $data['files'] ?? null;
+        $this->container['file_urls'] = $data['file_urls'] ?? null;
         $this->container['is_qualified_signature'] = $data['is_qualified_signature'] ?? false;
         $this->container['message'] = $data['message'] ?? null;
         $this->container['metadata'] = $data['metadata'] ?? null;
@@ -272,7 +272,14 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         $this->container['title'] = $data['title'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SignatureRequestSendWithTemplateRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SignatureRequestSendWithTemplateRequest
     {
         /** @var SignatureRequestSendWithTemplateRequest $obj */
         $obj = ObjectSerializer::deserialize(
@@ -469,49 +476,49 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
     }
 
     /**
-     * Gets file
+     * Gets files
      *
      * @return SplFileObject[]|null
      */
-    public function getFile()
+    public function getFiles()
     {
-        return $this->container['file'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets file
+     * Sets files
      *
-     * @param SplFileObject[]|null $file Use `file[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param SplFileObject[]|null $files Use `files[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFile(?array $file)
+    public function setFiles(?array $files)
     {
-        $this->container['file'] = $file;
+        $this->container['files'] = $files;
 
         return $this;
     }
 
     /**
-     * Gets file_url
+     * Gets file_urls
      *
      * @return string[]|null
      */
-    public function getFileUrl()
+    public function getFileUrls()
     {
-        return $this->container['file_url'];
+        return $this->container['file_urls'];
     }
 
     /**
-     * Sets file_url
+     * Sets file_urls
      *
-     * @param string[]|null $file_url Use `file_url[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **file** or **file_url[]**, but not both.
+     * @param string[]|null $file_urls Use `file_urls[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
      *
      * @return self
      */
-    public function setFileUrl(?array $file_url)
+    public function setFileUrls(?array $file_urls)
     {
-        $this->container['file_url'] = $file_url;
+        $this->container['file_urls'] = $file_urls;
 
         return $this;
     }

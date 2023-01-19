@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -59,10 +59,10 @@ class EventCallbackRequest implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'event' => '\HelloSignSDK\Model\EventCallbackRequestEvent',
-        'account' => '\HelloSignSDK\Model\AccountResponse',
-        'signature_request' => '\HelloSignSDK\Model\SignatureRequestResponse',
-        'template' => '\HelloSignSDK\Model\TemplateResponse',
+        'event' => '\Dropbox\Sign\Model\EventCallbackRequestEvent',
+        'account' => '\Dropbox\Sign\Model\AccountResponse',
+        'signature_request' => '\Dropbox\Sign\Model\SignatureRequestResponse',
+        'template' => '\Dropbox\Sign\Model\TemplateResponse',
     ];
 
     /**
@@ -198,7 +198,14 @@ class EventCallbackRequest implements ModelInterface, ArrayAccess, JsonSerializa
         $this->container['template'] = $data['template'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): EventCallbackRequest
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): EventCallbackRequest
     {
         /** @var EventCallbackRequest $obj */
         $obj = ObjectSerializer::deserialize(

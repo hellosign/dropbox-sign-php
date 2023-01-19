@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -186,7 +186,14 @@ class SubTemplateRole implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['order'] = $data['order'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubTemplateRole
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubTemplateRole
     {
         /** @var SubTemplateRole $obj */
         $obj = ObjectSerializer::deserialize(

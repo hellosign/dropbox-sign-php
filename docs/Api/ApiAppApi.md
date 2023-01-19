@@ -1,4 +1,4 @@
-# HelloSignSDK\ApiAppApi
+# Dropbox\Sign\ApiAppApi
 
 All URIs are relative to https://api.hellosign.com/v3.
 
@@ -14,7 +14,7 @@ All URIs are relative to https://api.hellosign.com/v3.
 ## `apiAppCreate()`
 
 ```php
-apiAppCreate($api_app_create_request): \HelloSignSDK\Model\ApiAppGetResponse
+apiAppCreate($api_app_create_request): \Dropbox\Sign\Model\ApiAppGetResponse
 ```
 
 Create API App
@@ -28,7 +28,7 @@ Creates a new API App.
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -36,22 +36,22 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\ApiAppApi($config);
+$apiAppApi = new Dropbox\Sign\Api\ApiAppApi($config);
 
-$oauth = new HelloSignSDK\Model\SubOAuth();
+$oauth = new Dropbox\Sign\Model\SubOAuth();
 $oauth->setCallbackUrl("https://example.com/oauth")
     ->setScopes([
-        HelloSignSDK\Model\SubOAuth::SCOPES_BASIC_ACCOUNT_INFO,
-        HelloSignSDK\Model\SubOAuth::SCOPES_REQUEST_SIGNATURE,
+        Dropbox\Sign\Model\SubOAuth::SCOPES_BASIC_ACCOUNT_INFO,
+        Dropbox\Sign\Model\SubOAuth::SCOPES_REQUEST_SIGNATURE,
     ]);
 
-$whiteLabelingOptions = new HelloSignSDK\Model\SubWhiteLabelingOptions();
+$whiteLabelingOptions = new Dropbox\Sign\Model\SubWhiteLabelingOptions();
 $whiteLabelingOptions->setPrimaryButtonColor("#00b3e6")
     ->setPrimaryButtonTextColor("#ffffff");
 
 $customLogoFile = new SplFileObject(__DIR__ . "/CustomLogoFile.png");
 
-$data = new HelloSignSDK\Model\ApiAppCreateRequest();
+$data = new Dropbox\Sign\Model\ApiAppCreateRequest();
 $data->setName("My Production App")
     ->setDomains(["example.com"])
     ->setOauth($oauth)
@@ -59,11 +59,11 @@ $data->setName("My Production App")
     ->setCustomLogoFile($customLogoFile);
 
 try {
-    $result = $api->apiAppCreate($data);
+    $result = $apiAppApi->apiAppCreate($data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -73,11 +73,11 @@ try {
 
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **api_app_create_request** | [**\HelloSignSDK\Model\ApiAppCreateRequest**](../Model/ApiAppCreateRequest.md)|  | |
+| **api_app_create_request** | [**\Dropbox\Sign\Model\ApiAppCreateRequest**](../Model/ApiAppCreateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
+[**\Dropbox\Sign\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
 
 ### Authorization
 
@@ -109,7 +109,7 @@ Deletes an API App. Can only be invoked for apps you own.
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -117,15 +117,15 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\ApiAppApi($config);
+$apiAppApi = new Dropbox\Sign\Api\ApiAppApi($config);
 
 $clientId = "0dd3b823a682527788c4e40cb7b6f7e9";
 
 try {
-    $api->apiAppDelete($clientId);
-} catch (HelloSignSDK\ApiException $e) {
+    $apiAppApi->apiAppDelete($clientId);
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -157,7 +157,7 @@ void (empty response body)
 ## `apiAppGet()`
 
 ```php
-apiAppGet($client_id): \HelloSignSDK\Model\ApiAppGetResponse
+apiAppGet($client_id): \Dropbox\Sign\Model\ApiAppGetResponse
 ```
 
 Get API App
@@ -171,7 +171,7 @@ Returns an object with information about an API App.
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -179,16 +179,16 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\ApiAppApi($config);
+$apiAppApi = new Dropbox\Sign\Api\ApiAppApi($config);
 
 $clientId = "0dd3b823a682527788c4e40cb7b6f7e9";
 
 try {
-    $result = $api->apiAppGet($clientId);
+    $result = $apiAppApi->apiAppGet($clientId);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -202,7 +202,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
+[**\Dropbox\Sign\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
 
 ### Authorization
 
@@ -220,7 +220,7 @@ try {
 ## `apiAppList()`
 
 ```php
-apiAppList($page, $page_size): \HelloSignSDK\Model\ApiAppListResponse
+apiAppList($page, $page_size): \Dropbox\Sign\Model\ApiAppListResponse
 ```
 
 List API Apps
@@ -234,7 +234,7 @@ Returns a list of API Apps that are accessible by you. If you are on a team with
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -242,17 +242,17 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\ApiAppApi($config);
+$apiAppApi = new Dropbox\Sign\Api\ApiAppApi($config);
 
 $page = 1;
 $pageSize = 2;
 
 try {
-    $result = $api->apiAppList($page, $pageSize);
+    $result = $apiAppApi->apiAppList($page, $pageSize);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -267,7 +267,7 @@ try {
 
 ### Return type
 
-[**\HelloSignSDK\Model\ApiAppListResponse**](../Model/ApiAppListResponse.md)
+[**\Dropbox\Sign\Model\ApiAppListResponse**](../Model/ApiAppListResponse.md)
 
 ### Authorization
 
@@ -285,7 +285,7 @@ try {
 ## `apiAppUpdate()`
 
 ```php
-apiAppUpdate($client_id, $api_app_update_request): \HelloSignSDK\Model\ApiAppGetResponse
+apiAppUpdate($client_id, $api_app_update_request): \Dropbox\Sign\Model\ApiAppGetResponse
 ```
 
 Update API App
@@ -299,7 +299,7 @@ Updates an existing API App. Can only be invoked for apps you own. Only the fiel
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$config = HelloSignSDK\Configuration::getDefaultConfiguration();
+$config = Dropbox\Sign\Configuration::getDefaultConfiguration();
 
 // Configure HTTP basic authorization: api_key
 $config->setUsername("YOUR_API_KEY");
@@ -307,28 +307,28 @@ $config->setUsername("YOUR_API_KEY");
 // or, configure Bearer (JWT) authorization: oauth2
 // $config->setAccessToken("YOUR_ACCESS_TOKEN");
 
-$api = new HelloSignSDK\Api\ApiAppApi($config);
+$apiAppApi = new Dropbox\Sign\Api\ApiAppApi($config);
 
-$whiteLabelingOptions = new HelloSignSDK\Model\SubWhiteLabelingOptions();
+$whiteLabelingOptions = new Dropbox\Sign\Model\SubWhiteLabelingOptions();
 $whiteLabelingOptions->setPrimaryButtonColor("#00b3e6")
     ->setPrimaryButtonTextColor("#ffffff");
 
 $customLogoFile = new SplFileObject(__DIR__ . "/CustomLogoFile.png");
 
-$data = new HelloSignSDK\Model\ApiAppUpdateRequest();
+$data = new Dropbox\Sign\Model\ApiAppUpdateRequest();
 $data->setName("New Name")
-    ->setCallbackUrl("http://example.com/hellosign")
+    ->setCallbackUrl("http://example.com/dropboxsign")
     ->setWhiteLabelingOptions($whiteLabelingOptions)
     ->setCustomLogoFile($customLogoFile);
 
 $clientId = "0dd3b823a682527788c4e40cb7b6f7e9";
 
 try {
-    $result = $api->apiAppUpdate($clientId, $data);
+    $result = $apiAppApi->apiAppUpdate($clientId, $data);
     print_r($result);
-} catch (HelloSignSDK\ApiException $e) {
+} catch (Dropbox\Sign\ApiException $e) {
     $error = $e->getResponseObject();
-    echo "Exception when calling HelloSign API: "
+    echo "Exception when calling Dropbox Sign API: "
         . print_r($error->getError());
 }
 
@@ -339,11 +339,11 @@ try {
 |Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **client_id** | **string**| The client id of the API App to update. | |
-| **api_app_update_request** | [**\HelloSignSDK\Model\ApiAppUpdateRequest**](../Model/ApiAppUpdateRequest.md)|  | |
+| **api_app_update_request** | [**\Dropbox\Sign\Model\ApiAppUpdateRequest**](../Model/ApiAppUpdateRequest.md)|  | |
 
 ### Return type
 
-[**\HelloSignSDK\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
+[**\Dropbox\Sign\Model\ApiAppGetResponse**](../Model/ApiAppGetResponse.md)
 
 ### Authorization
 

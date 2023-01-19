@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -65,7 +65,7 @@ class AccountResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'is_locked' => 'bool',
         'is_paid_hs' => 'bool',
         'is_paid_hf' => 'bool',
-        'quotas' => '\HelloSignSDK\Model\AccountResponseQuotas',
+        'quotas' => '\Dropbox\Sign\Model\AccountResponseQuotas',
         'callback_url' => 'string',
         'role_code' => 'string',
         'team_id' => 'string',
@@ -235,7 +235,14 @@ class AccountResponse implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['locale'] = $data['locale'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): AccountResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): AccountResponse
     {
         /** @var AccountResponse $obj */
         $obj = ObjectSerializer::deserialize(

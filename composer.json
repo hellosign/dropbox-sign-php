@@ -1,7 +1,7 @@
 {
-    "name": "hellosign/hellosign-php-sdk",
-    "version": "6.0.0-beta22.24",
-    "description": "Official HelloSign APIv3 OpenAPI PHP SDK",
+    "name": "dropbox/sign",
+    "version": "1.0.0-beta23.1",
+    "description": "Official Dropbox Sign APIv3 OpenAPI PHP SDK",
     "keywords": [
         "openapitools",
         "openapi-generator",
@@ -10,7 +10,8 @@
         "sdk",
         "rest",
         "api",
-        "hellosign"
+        "hellosign",
+        "dropboxsign"
     ],
     "homepage": "https://hellosign.com",
     "license": [
@@ -18,7 +19,7 @@
     ],
     "authors": [
         {
-            "name": "HelloSign",
+            "name": "Dropbox Sign",
             "homepage": "https://hellosign.com",
             "email": "apisupport@hellosign.com"
         },
@@ -28,7 +29,7 @@
         }
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -42,11 +43,10 @@
     },
     "autoload": {
         "psr-4": {
-            "HelloSignSDK\\": "src/",
-            "HelloSignLegacy\\": "legacy/library/HelloSignLegacy/"
+            "Dropbox\\Sign\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": { "HelloSignSDK\\Test\\" : "test/" }
+        "psr-4": { "Dropbox\\Sign\\Test\\" : "test/" }
     }
 }

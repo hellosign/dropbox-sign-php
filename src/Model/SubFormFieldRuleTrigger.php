@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 
@@ -221,7 +221,14 @@ class SubFormFieldRuleTrigger implements ModelInterface, ArrayAccess, JsonSerial
         $this->container['values'] = $data['values'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubFormFieldRuleTrigger
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubFormFieldRuleTrigger
     {
         /** @var SubFormFieldRuleTrigger $obj */
         $obj = ObjectSerializer::deserialize(

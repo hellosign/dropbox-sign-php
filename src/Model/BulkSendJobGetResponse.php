@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,10 +60,10 @@ class BulkSendJobGetResponse implements ModelInterface, ArrayAccess, JsonSeriali
      * @var string[]
      */
     protected static $openAPITypes = [
-        'bulk_send_job' => '\HelloSignSDK\Model\BulkSendJobResponse',
-        'list_info' => '\HelloSignSDK\Model\ListInfoResponse',
-        'signature_requests' => '\HelloSignSDK\Model\BulkSendJobGetResponseSignatureRequests[]',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'bulk_send_job' => '\Dropbox\Sign\Model\BulkSendJobResponse',
+        'list_info' => '\Dropbox\Sign\Model\ListInfoResponse',
+        'signature_requests' => '\Dropbox\Sign\Model\BulkSendJobGetResponseSignatureRequests[]',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -199,7 +199,14 @@ class BulkSendJobGetResponse implements ModelInterface, ArrayAccess, JsonSeriali
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): BulkSendJobGetResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): BulkSendJobGetResponse
     {
         /** @var BulkSendJobGetResponse $obj */
         $obj = ObjectSerializer::deserialize(

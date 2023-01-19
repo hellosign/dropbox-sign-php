@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -187,7 +187,14 @@ class SubEditorOptions implements ModelInterface, ArrayAccess, JsonSerializable
         $this->container['allow_edit_documents'] = $data['allow_edit_documents'] ?? false;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): SubEditorOptions
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): SubEditorOptions
     {
         /** @var SubEditorOptions $obj */
         $obj = ObjectSerializer::deserialize(

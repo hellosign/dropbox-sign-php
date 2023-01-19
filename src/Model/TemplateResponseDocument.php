@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -62,10 +62,10 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
     protected static $openAPITypes = [
         'name' => 'string',
         'index' => 'int',
-        'field_groups' => '\HelloSignSDK\Model\TemplateResponseDocumentFieldGroup[]',
-        'form_fields' => '\HelloSignSDK\Model\TemplateResponseDocumentFormField[]',
-        'custom_fields' => '\HelloSignSDK\Model\TemplateResponseDocumentCustomField[]',
-        'static_fields' => '\HelloSignSDK\Model\TemplateResponseDocumentStaticField[]',
+        'field_groups' => '\Dropbox\Sign\Model\TemplateResponseDocumentFieldGroup[]',
+        'form_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentFormField[]',
+        'custom_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentCustomField[]',
+        'static_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentStaticField[]',
     ];
 
     /**
@@ -211,7 +211,14 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
         $this->container['static_fields'] = $data['static_fields'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TemplateResponseDocument
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TemplateResponseDocument
     {
         /** @var TemplateResponseDocument $obj */
         $obj = ObjectSerializer::deserialize(

@@ -26,10 +26,10 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
-use HelloSignSDK\ObjectSerializer;
+use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
@@ -60,8 +60,8 @@ class TeamGetInfoResponse implements ModelInterface, ArrayAccess, JsonSerializab
      * @var string[]
      */
     protected static $openAPITypes = [
-        'team' => '\HelloSignSDK\Model\TeamInfoResponse',
-        'warnings' => '\HelloSignSDK\Model\WarningResponse[]',
+        'team' => '\Dropbox\Sign\Model\TeamInfoResponse',
+        'warnings' => '\Dropbox\Sign\Model\WarningResponse[]',
     ];
 
     /**
@@ -187,7 +187,14 @@ class TeamGetInfoResponse implements ModelInterface, ArrayAccess, JsonSerializab
         $this->container['warnings'] = $data['warnings'] ?? null;
     }
 
+    /** @deprecated use ::init() */
     public static function fromArray(array $data): TeamGetInfoResponse
+    {
+        return self::init($data);
+    }
+
+    /** Attempt to instantiate and hydrate a new instance of this class */
+    public static function init(array $data): TeamGetInfoResponse
     {
         /** @var TeamGetInfoResponse $obj */
         $obj = ObjectSerializer::deserialize(

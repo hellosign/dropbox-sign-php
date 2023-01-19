@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace HelloSignSDK\Model;
+namespace Dropbox\Sign\Model;
 
 /**
  * SignatureRequestResponseCustomFieldTypeEnum Class Doc Comment
