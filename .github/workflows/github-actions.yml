@@ -1,6 +1,17 @@
-on: [push]
+# This workflow will build the project, run integration tests, and release.
+# Because secrets are not available on external forks, this job is expected to fail
+# on external pull requests.
+
+name: Build, Check, Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  sdk-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
