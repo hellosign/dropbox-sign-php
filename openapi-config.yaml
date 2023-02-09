@@ -4,7 +4,7 @@ typeMappings:
 additionalProperties:
   packageName: dropbox/sign
   packageVersion: "^1.0.0"
-  artifactVersion: 1.0.0
+  artifactVersion: 1.0.1
   invokerPackage: "Dropbox\\Sign"
   sortModelPropertiesByRequiredFlag: true
   srcBasePath: src
@@ -13,6 +13,9 @@ files:
   EventCallbackHelper.mustache:
     templateType: SupportingFiles
     destinationFilename: src/EventCallbackHelper.php
+  VERSION.mustache:
+    templateType: SupportingFiles
+    destinationFilename: VERSION
 globalProperties:
   apiTests: false
   modelTests: false
