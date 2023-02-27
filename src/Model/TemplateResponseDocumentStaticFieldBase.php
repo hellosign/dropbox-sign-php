@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseDocumentCustomField
+ * TemplateResponseDocumentStaticFieldBase
  *
  * PHP version 7.4
  *
@@ -30,13 +30,13 @@ namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
-use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * TemplateResponseDocumentCustomField Class Doc Comment
+ * TemplateResponseDocumentStaticFieldBase Class Doc Comment
  *
  * @category Class
+ * @description An array describing static overlay fields. **Note** only available for certain subscriptions.
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -44,16 +44,16 @@ use JsonSerializable;
  * @template TValue mixed|null
  * @internal This class should not be instantiated directly
  */
-class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess, JsonSerializable
+abstract class TemplateResponseDocumentStaticFieldBase implements ModelInterface, ArrayAccess, JsonSerializable
 {
-    public const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = 'type';
 
     /**
      * The original name of the model.
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseDocumentCustomField';
+    protected static $openAPIModelName = 'TemplateResponseDocumentStaticFieldBase';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -61,22 +61,17 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
         'type' => 'string',
+        'api_id' => 'string',
+        'name' => 'string',
         'signer' => 'string',
         'x' => 'int',
         'y' => 'int',
         'width' => 'int',
         'height' => 'int',
         'required' => 'bool',
-        'api_id' => 'string',
         'group' => 'string',
-        'avg_text_length' => '\Dropbox\Sign\Model\TemplateResponseFieldAvgTextLength',
-        'is_multiline' => 'bool',
-        'original_font_size' => 'int',
-        'font_family' => 'string',
-        'named_form_fields' => 'array',
-        'reusable_form_id' => 'string',
+        'font_size' => 'int',
     ];
 
     /**
@@ -87,22 +82,17 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
         'type' => null,
+        'api_id' => null,
+        'name' => null,
         'signer' => null,
         'x' => null,
         'y' => null,
         'width' => null,
         'height' => null,
         'required' => null,
-        'api_id' => null,
         'group' => null,
-        'avg_text_length' => null,
-        'is_multiline' => null,
-        'original_font_size' => null,
-        'font_family' => null,
-        'named_form_fields' => null,
-        'reusable_form_id' => null,
+        'font_size' => null,
     ];
 
     /**
@@ -132,22 +122,17 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
         'type' => 'type',
+        'api_id' => 'api_id',
+        'name' => 'name',
         'signer' => 'signer',
         'x' => 'x',
         'y' => 'y',
         'width' => 'width',
         'height' => 'height',
         'required' => 'required',
-        'api_id' => 'api_id',
         'group' => 'group',
-        'avg_text_length' => 'avg_text_length',
-        'is_multiline' => 'isMultiline',
-        'original_font_size' => 'originalFontSize',
-        'font_family' => 'fontFamily',
-        'named_form_fields' => 'named_form_fields',
-        'reusable_form_id' => 'reusable_form_id',
+        'font_size' => 'fontSize',
     ];
 
     /**
@@ -156,22 +141,17 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
         'type' => 'setType',
+        'api_id' => 'setApiId',
+        'name' => 'setName',
         'signer' => 'setSigner',
         'x' => 'setX',
         'y' => 'setY',
         'width' => 'setWidth',
         'height' => 'setHeight',
         'required' => 'setRequired',
-        'api_id' => 'setApiId',
         'group' => 'setGroup',
-        'avg_text_length' => 'setAvgTextLength',
-        'is_multiline' => 'setIsMultiline',
-        'original_font_size' => 'setOriginalFontSize',
-        'font_family' => 'setFontFamily',
-        'named_form_fields' => 'setNamedFormFields',
-        'reusable_form_id' => 'setReusableFormId',
+        'font_size' => 'setFontSize',
     ];
 
     /**
@@ -180,22 +160,17 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
         'type' => 'getType',
+        'api_id' => 'getApiId',
+        'name' => 'getName',
         'signer' => 'getSigner',
         'x' => 'getX',
         'y' => 'getY',
         'width' => 'getWidth',
         'height' => 'getHeight',
         'required' => 'getRequired',
-        'api_id' => 'getApiId',
         'group' => 'getGroup',
-        'avg_text_length' => 'getAvgTextLength',
-        'is_multiline' => 'getIsMultiline',
-        'original_font_size' => 'getOriginalFontSize',
-        'font_family' => 'getFontFamily',
-        'named_form_fields' => 'getNamedFormFields',
-        'reusable_form_id' => 'getReusableFormId',
+        'font_size' => 'getFontSize',
     ];
 
     /**
@@ -239,22 +214,6 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    public const TYPE_TEXT = 'text';
-    public const TYPE_CHECKBOX = 'checkbox';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_TEXT,
-            self::TYPE_CHECKBOX,
-        ];
-    }
-
     /**
      * Associative array for storing property values
      *
@@ -270,40 +229,54 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
         $this->container['type'] = $data['type'] ?? null;
-        $this->container['signer'] = $data['signer'] ?? null;
+        $this->container['api_id'] = $data['api_id'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['signer'] = $data['signer'] ?? 'me_now';
         $this->container['x'] = $data['x'] ?? null;
         $this->container['y'] = $data['y'] ?? null;
         $this->container['width'] = $data['width'] ?? null;
         $this->container['height'] = $data['height'] ?? null;
         $this->container['required'] = $data['required'] ?? null;
-        $this->container['api_id'] = $data['api_id'] ?? null;
         $this->container['group'] = $data['group'] ?? null;
-        $this->container['avg_text_length'] = $data['avg_text_length'] ?? null;
-        $this->container['is_multiline'] = $data['is_multiline'] ?? null;
-        $this->container['original_font_size'] = $data['original_font_size'] ?? null;
-        $this->container['font_family'] = $data['font_family'] ?? null;
-        $this->container['named_form_fields'] = $data['named_form_fields'] ?? null;
-        $this->container['reusable_form_id'] = $data['reusable_form_id'] ?? null;
+        $this->container['font_size'] = $data['font_size'] ?? null;
+
+        // Initialize discriminator property with the model name.
+        $this->container['type'] = static::$openAPIModelName;
     }
 
-    /** @deprecated use ::init() */
-    public static function fromArray(array $data): TemplateResponseDocumentCustomField
+    public static function discriminatorClassName(array $data): ?string
     {
-        return self::init($data);
-    }
+        if (!array_key_exists('type', $data)) {
+            return null;
+        }
 
-    /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TemplateResponseDocumentCustomField
-    {
-        /** @var TemplateResponseDocumentCustomField $obj */
-        $obj = ObjectSerializer::deserialize(
-            $data,
-            TemplateResponseDocumentCustomField::class,
-        );
+        if ($data['type'] === 'checkbox') {
+            return TemplateResponseDocumentStaticFieldCheckbox::class;
+        }
+        if ($data['type'] === 'date_signed') {
+            return TemplateResponseDocumentStaticFieldDateSigned::class;
+        }
+        if ($data['type'] === 'dropdown') {
+            return TemplateResponseDocumentStaticFieldDropdown::class;
+        }
+        if ($data['type'] === 'hyperlink') {
+            return TemplateResponseDocumentStaticFieldHyperlink::class;
+        }
+        if ($data['type'] === 'initials') {
+            return TemplateResponseDocumentStaticFieldInitials::class;
+        }
+        if ($data['type'] === 'radio') {
+            return TemplateResponseDocumentStaticFieldRadio::class;
+        }
+        if ($data['type'] === 'signature') {
+            return TemplateResponseDocumentStaticFieldSignature::class;
+        }
+        if ($data['type'] === 'text') {
+            return TemplateResponseDocumentStaticFieldText::class;
+        }
 
-        return $obj;
+        return null;
     }
 
     /**
@@ -315,13 +288,8 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
 
         return $invalidProperties;
@@ -339,6 +307,54 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type type
+     *
+     * @return self
+     */
+    public function setType(string $type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_id
+     *
+     * @return string|null
+     */
+    public function getApiId()
+    {
+        return $this->container['api_id'];
+    }
+
+    /**
+     * Sets api_id
+     *
+     * @param string|null $api_id a unique id for the static field
+     *
+     * @return self
+     */
+    public function setApiId(?string $api_id)
+    {
+        $this->container['api_id'] = $api_id;
+
+        return $this;
+    }
+
+    /**
      * Gets name
      *
      * @return string|null
@@ -351,47 +367,13 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name the name of the Custom Field
+     * @param string|null $name the name of the static field
      *
      * @return self
      */
     public function setName(?string $name)
     {
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type The type of this Custom Field. Only `text` and `checkbox` are currently supported.
-     *
-     * @return self
-     */
-    public function setType(?string $type)
-    {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
 
         return $this;
     }
@@ -409,7 +391,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets signer
      *
-     * @param string|null $signer the signer of the Custom Field
+     * @param string|null $signer the signer of the Static Field
      *
      * @return self
      */
@@ -433,7 +415,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets x
      *
-     * @param int|null $x the horizontal offset in pixels for this form field
+     * @param int|null $x the horizontal offset in pixels for this static field
      *
      * @return self
      */
@@ -457,7 +439,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets y
      *
-     * @param int|null $y the vertical offset in pixels for this form field
+     * @param int|null $y the vertical offset in pixels for this static field
      *
      * @return self
      */
@@ -481,7 +463,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets width
      *
-     * @param int|null $width the width in pixels of this form field
+     * @param int|null $width the width in pixels of this static field
      *
      * @return self
      */
@@ -505,7 +487,7 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     /**
      * Sets height
      *
-     * @param int|null $height the height in pixels of this form field
+     * @param int|null $height the height in pixels of this static field
      *
      * @return self
      */
@@ -541,30 +523,6 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets api_id
-     *
-     * @return string|null
-     */
-    public function getApiId()
-    {
-        return $this->container['api_id'];
-    }
-
-    /**
-     * Sets api_id
-     *
-     * @param string|null $api_id the unique ID for this field
-     *
-     * @return self
-     */
-    public function setApiId(?string $api_id)
-    {
-        $this->container['api_id'] = $api_id;
-
-        return $this;
-    }
-
-    /**
      * Gets group
      *
      * @return string|null
@@ -589,149 +547,25 @@ class TemplateResponseDocumentCustomField implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets avg_text_length
-     *
-     * @return TemplateResponseFieldAvgTextLength|null
-     */
-    public function getAvgTextLength()
-    {
-        return $this->container['avg_text_length'];
-    }
-
-    /**
-     * Sets avg_text_length
-     *
-     * @param TemplateResponseFieldAvgTextLength|null $avg_text_length avg_text_length
-     *
-     * @return self
-     */
-    public function setAvgTextLength(?TemplateResponseFieldAvgTextLength $avg_text_length)
-    {
-        $this->container['avg_text_length'] = $avg_text_length;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_multiline
-     *
-     * @return bool|null
-     */
-    public function getIsMultiline()
-    {
-        return $this->container['is_multiline'];
-    }
-
-    /**
-     * Sets is_multiline
-     *
-     * @param bool|null $is_multiline whether this form field is multiline text
-     *
-     * @return self
-     */
-    public function setIsMultiline(?bool $is_multiline)
-    {
-        $this->container['is_multiline'] = $is_multiline;
-
-        return $this;
-    }
-
-    /**
-     * Gets original_font_size
+     * Gets font_size
      *
      * @return int|null
      */
-    public function getOriginalFontSize()
+    public function getFontSize()
     {
-        return $this->container['original_font_size'];
+        return $this->container['font_size'];
     }
 
     /**
-     * Sets original_font_size
+     * Sets font_size
      *
-     * @param int|null $original_font_size original font size used in this form field's text
+     * @param int|null $font_size final font size used by this form field
      *
      * @return self
      */
-    public function setOriginalFontSize(?int $original_font_size)
+    public function setFontSize(?int $font_size)
     {
-        $this->container['original_font_size'] = $original_font_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets font_family
-     *
-     * @return string|null
-     */
-    public function getFontFamily()
-    {
-        return $this->container['font_family'];
-    }
-
-    /**
-     * Sets font_family
-     *
-     * @param string|null $font_family font family used in this form field's text
-     *
-     * @return self
-     */
-    public function setFontFamily(?string $font_family)
-    {
-        $this->container['font_family'] = $font_family;
-
-        return $this;
-    }
-
-    /**
-     * Gets named_form_fields
-     *
-     * @return array|null
-     * @deprecated
-     */
-    public function getNamedFormFields()
-    {
-        return $this->container['named_form_fields'];
-    }
-
-    /**
-     * Sets named_form_fields
-     *
-     * @param array|null $named_form_fields Deprecated. Use `form_fields` inside the [documents](https://developers.hellosign.com/api/reference/operation/templateGet/#!c=200&path=template/documents&t=response) array instead.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setNamedFormFields(?array $named_form_fields)
-    {
-        $this->container['named_form_fields'] = $named_form_fields;
-
-        return $this;
-    }
-
-    /**
-     * Gets reusable_form_id
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getReusableFormId()
-    {
-        return $this->container['reusable_form_id'];
-    }
-
-    /**
-     * Sets reusable_form_id
-     *
-     * @param string|null $reusable_form_id reusable_form_id
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setReusableFormId(?string $reusable_form_id)
-    {
-        $this->container['reusable_form_id'] = $reusable_form_id;
+        $this->container['font_size'] = $font_size;
 
         return $this;
     }

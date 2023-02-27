@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseCustomField
+ * TemplateResponseDocumentCustomFieldBase
  *
  * PHP version 7.4
  *
@@ -30,13 +30,13 @@ namespace Dropbox\Sign\Model;
 
 use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
-use InvalidArgumentException;
 use JsonSerializable;
 
 /**
- * TemplateResponseCustomField Class Doc Comment
+ * TemplateResponseDocumentCustomFieldBase Class Doc Comment
  *
  * @category Class
+ * @description An array of Form Field objects containing the name and type of each named field.
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -44,16 +44,16 @@ use JsonSerializable;
  * @template TValue mixed|null
  * @internal This class should not be instantiated directly
  */
-class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSerializable
+abstract class TemplateResponseDocumentCustomFieldBase implements ModelInterface, ArrayAccess, JsonSerializable
 {
-    public const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = 'type';
 
     /**
      * The original name of the model.
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseCustomField';
+    protected static $openAPIModelName = 'TemplateResponseDocumentCustomFieldBase';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -61,19 +61,17 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
         'type' => 'string',
+        'api_id' => 'string',
+        'name' => 'string',
+        'signer' => 'string',
         'x' => 'int',
         'y' => 'int',
         'width' => 'int',
         'height' => 'int',
         'required' => 'bool',
-        'api_id' => 'string',
         'group' => 'string',
-        'avg_text_length' => '\Dropbox\Sign\Model\TemplateResponseFieldAvgTextLength',
-        'is_multiline' => 'bool',
-        'original_font_size' => 'int',
-        'font_family' => 'string',
+        'font_size' => 'int',
     ];
 
     /**
@@ -84,19 +82,17 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
         'type' => null,
+        'api_id' => null,
+        'name' => null,
+        'signer' => null,
         'x' => null,
         'y' => null,
         'width' => null,
         'height' => null,
         'required' => null,
-        'api_id' => null,
         'group' => null,
-        'avg_text_length' => null,
-        'is_multiline' => null,
-        'original_font_size' => null,
-        'font_family' => null,
+        'font_size' => null,
     ];
 
     /**
@@ -126,19 +122,17 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
         'type' => 'type',
+        'api_id' => 'api_id',
+        'name' => 'name',
+        'signer' => 'signer',
         'x' => 'x',
         'y' => 'y',
         'width' => 'width',
         'height' => 'height',
         'required' => 'required',
-        'api_id' => 'api_id',
         'group' => 'group',
-        'avg_text_length' => 'avg_text_length',
-        'is_multiline' => 'isMultiline',
-        'original_font_size' => 'originalFontSize',
-        'font_family' => 'fontFamily',
+        'font_size' => 'fontSize',
     ];
 
     /**
@@ -147,19 +141,17 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
         'type' => 'setType',
+        'api_id' => 'setApiId',
+        'name' => 'setName',
+        'signer' => 'setSigner',
         'x' => 'setX',
         'y' => 'setY',
         'width' => 'setWidth',
         'height' => 'setHeight',
         'required' => 'setRequired',
-        'api_id' => 'setApiId',
         'group' => 'setGroup',
-        'avg_text_length' => 'setAvgTextLength',
-        'is_multiline' => 'setIsMultiline',
-        'original_font_size' => 'setOriginalFontSize',
-        'font_family' => 'setFontFamily',
+        'font_size' => 'setFontSize',
     ];
 
     /**
@@ -168,19 +160,17 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
         'type' => 'getType',
+        'api_id' => 'getApiId',
+        'name' => 'getName',
+        'signer' => 'getSigner',
         'x' => 'getX',
         'y' => 'getY',
         'width' => 'getWidth',
         'height' => 'getHeight',
         'required' => 'getRequired',
-        'api_id' => 'getApiId',
         'group' => 'getGroup',
-        'avg_text_length' => 'getAvgTextLength',
-        'is_multiline' => 'getIsMultiline',
-        'original_font_size' => 'getOriginalFontSize',
-        'font_family' => 'getFontFamily',
+        'font_size' => 'getFontSize',
     ];
 
     /**
@@ -224,22 +214,6 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
         return self::$openAPIModelName;
     }
 
-    public const TYPE_TEXT = 'text';
-    public const TYPE_CHECKBOX = 'checkbox';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_TEXT,
-            self::TYPE_CHECKBOX,
-        ];
-    }
-
     /**
      * Associative array for storing property values
      *
@@ -255,37 +229,36 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
         $this->container['type'] = $data['type'] ?? null;
+        $this->container['api_id'] = $data['api_id'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['signer'] = $data['signer'] ?? null;
         $this->container['x'] = $data['x'] ?? null;
         $this->container['y'] = $data['y'] ?? null;
         $this->container['width'] = $data['width'] ?? null;
         $this->container['height'] = $data['height'] ?? null;
         $this->container['required'] = $data['required'] ?? null;
-        $this->container['api_id'] = $data['api_id'] ?? null;
         $this->container['group'] = $data['group'] ?? null;
-        $this->container['avg_text_length'] = $data['avg_text_length'] ?? null;
-        $this->container['is_multiline'] = $data['is_multiline'] ?? null;
-        $this->container['original_font_size'] = $data['original_font_size'] ?? null;
-        $this->container['font_family'] = $data['font_family'] ?? null;
+        $this->container['font_size'] = $data['font_size'] ?? null;
+
+        // Initialize discriminator property with the model name.
+        $this->container['type'] = static::$openAPIModelName;
     }
 
-    /** @deprecated use ::init() */
-    public static function fromArray(array $data): TemplateResponseCustomField
+    public static function discriminatorClassName(array $data): ?string
     {
-        return self::init($data);
-    }
+        if (!array_key_exists('type', $data)) {
+            return null;
+        }
 
-    /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TemplateResponseCustomField
-    {
-        /** @var TemplateResponseCustomField $obj */
-        $obj = ObjectSerializer::deserialize(
-            $data,
-            TemplateResponseCustomField::class,
-        );
+        if ($data['type'] === 'checkbox') {
+            return TemplateResponseDocumentCustomFieldCheckbox::class;
+        }
+        if ($data['type'] === 'text') {
+            return TemplateResponseDocumentCustomFieldText::class;
+        }
 
-        return $obj;
+        return null;
     }
 
     /**
@@ -297,13 +270,8 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
 
         return $invalidProperties;
@@ -318,6 +286,54 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type type
+     *
+     * @return self
+     */
+    public function setType(string $type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_id
+     *
+     * @return string|null
+     */
+    public function getApiId()
+    {
+        return $this->container['api_id'];
+    }
+
+    /**
+     * Sets api_id
+     *
+     * @param string|null $api_id the unique ID for this field
+     *
+     * @return self
+     */
+    public function setApiId(?string $api_id)
+    {
+        $this->container['api_id'] = $api_id;
+
+        return $this;
     }
 
     /**
@@ -345,35 +361,25 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
     }
 
     /**
-     * Gets type
+     * Gets signer
      *
      * @return string|null
      */
-    public function getType()
+    public function getSigner()
     {
-        return $this->container['type'];
+        return $this->container['signer'];
     }
 
     /**
-     * Sets type
+     * Sets signer
      *
-     * @param string|null $type The type of this Custom Field. Only `text` and `checkbox` are currently supported.
+     * @param string|null $signer The signer of the Custom Field. Can be `null` if field is a merge field (assigned to Sender).
      *
      * @return self
      */
-    public function setType(?string $type)
+    public function setSigner(?string $signer)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
+        $this->container['signer'] = $signer;
 
         return $this;
     }
@@ -499,30 +505,6 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
     }
 
     /**
-     * Gets api_id
-     *
-     * @return string|null
-     */
-    public function getApiId()
-    {
-        return $this->container['api_id'];
-    }
-
-    /**
-     * Sets api_id
-     *
-     * @param string|null $api_id the unique ID for this field
-     *
-     * @return self
-     */
-    public function setApiId(?string $api_id)
-    {
-        $this->container['api_id'] = $api_id;
-
-        return $this;
-    }
-
-    /**
      * Gets group
      *
      * @return string|null
@@ -547,97 +529,25 @@ class TemplateResponseCustomField implements ModelInterface, ArrayAccess, JsonSe
     }
 
     /**
-     * Gets avg_text_length
-     *
-     * @return TemplateResponseFieldAvgTextLength|null
-     */
-    public function getAvgTextLength()
-    {
-        return $this->container['avg_text_length'];
-    }
-
-    /**
-     * Sets avg_text_length
-     *
-     * @param TemplateResponseFieldAvgTextLength|null $avg_text_length avg_text_length
-     *
-     * @return self
-     */
-    public function setAvgTextLength(?TemplateResponseFieldAvgTextLength $avg_text_length)
-    {
-        $this->container['avg_text_length'] = $avg_text_length;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_multiline
-     *
-     * @return bool|null
-     */
-    public function getIsMultiline()
-    {
-        return $this->container['is_multiline'];
-    }
-
-    /**
-     * Sets is_multiline
-     *
-     * @param bool|null $is_multiline whether this form field is multiline text
-     *
-     * @return self
-     */
-    public function setIsMultiline(?bool $is_multiline)
-    {
-        $this->container['is_multiline'] = $is_multiline;
-
-        return $this;
-    }
-
-    /**
-     * Gets original_font_size
+     * Gets font_size
      *
      * @return int|null
      */
-    public function getOriginalFontSize()
+    public function getFontSize()
     {
-        return $this->container['original_font_size'];
+        return $this->container['font_size'];
     }
 
     /**
-     * Sets original_font_size
+     * Sets font_size
      *
-     * @param int|null $original_font_size original font size used in this form field's text
+     * @param int|null $font_size final font size used by this form field
      *
      * @return self
      */
-    public function setOriginalFontSize(?int $original_font_size)
+    public function setFontSize(?int $font_size)
     {
-        $this->container['original_font_size'] = $original_font_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets font_family
-     *
-     * @return string|null
-     */
-    public function getFontFamily()
-    {
-        return $this->container['font_family'];
-    }
-
-    /**
-     * Sets font_family
-     *
-     * @param string|null $font_family font family used in this form field's text
-     *
-     * @return self
-     */
-    public function setFontFamily(?string $font_family)
-    {
-        $this->container['font_family'] = $font_family;
+        $this->container['font_size'] = $font_size;
 
         return $this;
     }

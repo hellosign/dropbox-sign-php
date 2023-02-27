@@ -1,6 +1,6 @@
 <?php
 /**
- * TeamResponse
+ * TemplateResponseDocumentFieldGroupRule
  *
  * PHP version 7.4
  *
@@ -33,10 +33,10 @@ use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * TeamResponse Class Doc Comment
+ * TemplateResponseDocumentFieldGroupRule Class Doc Comment
  *
  * @category Class
- * @description Contains information about your team and its members
+ * @description The rule used to validate checkboxes in the form field group. See [checkbox field grouping](/api/reference/constants/#checkbox-field-grouping).
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -44,7 +44,7 @@ use JsonSerializable;
  * @template TValue mixed|null
  * @internal This class should not be instantiated directly
  */
-class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class TemplateResponseDocumentFieldGroupRule implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +53,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TeamResponse';
+    protected static $openAPIModelName = 'TemplateResponseDocumentFieldGroupRule';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -61,10 +61,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_emails' => 'string[]',
+        'requirement' => 'string',
+        'group_label' => 'string',
     ];
 
     /**
@@ -75,10 +73,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
-        'accounts' => null,
-        'invited_accounts' => null,
-        'invited_emails' => null,
+        'requirement' => null,
+        'group_label' => null,
     ];
 
     /**
@@ -108,10 +104,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'accounts' => 'accounts',
-        'invited_accounts' => 'invited_accounts',
-        'invited_emails' => 'invited_emails',
+        'requirement' => 'requirement',
+        'group_label' => 'groupLabel',
     ];
 
     /**
@@ -120,10 +114,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'accounts' => 'setAccounts',
-        'invited_accounts' => 'setInvitedAccounts',
-        'invited_emails' => 'setInvitedEmails',
+        'requirement' => 'setRequirement',
+        'group_label' => 'setGroupLabel',
     ];
 
     /**
@@ -132,10 +124,8 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'accounts' => 'getAccounts',
-        'invited_accounts' => 'getInvitedAccounts',
-        'invited_emails' => 'getInvitedEmails',
+        'requirement' => 'getRequirement',
+        'group_label' => 'getGroupLabel',
     ];
 
     /**
@@ -194,25 +184,23 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['accounts'] = $data['accounts'] ?? null;
-        $this->container['invited_accounts'] = $data['invited_accounts'] ?? null;
-        $this->container['invited_emails'] = $data['invited_emails'] ?? null;
+        $this->container['requirement'] = $data['requirement'] ?? null;
+        $this->container['group_label'] = $data['group_label'] ?? null;
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): TeamResponse
+    public static function fromArray(array $data): TemplateResponseDocumentFieldGroupRule
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TeamResponse
+    public static function init(array $data): TemplateResponseDocumentFieldGroupRule
     {
-        /** @var TeamResponse $obj */
+        /** @var TemplateResponseDocumentFieldGroupRule $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            TeamResponse::class,
+            TemplateResponseDocumentFieldGroupRule::class,
         );
 
         return $obj;
@@ -242,97 +230,49 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets name
+     * Gets requirement
      *
      * @return string|null
      */
-    public function getName()
+    public function getRequirement()
     {
-        return $this->container['name'];
+        return $this->container['requirement'];
     }
 
     /**
-     * Sets name
+     * Sets requirement
      *
-     * @param string|null $name The name of your Team
+     * @param string|null $requirement Examples: `require_0-1` `require_1` `require_1-ormore`  - Check out the list of [acceptable `requirement` checkbox type values](/api/reference/constants/#checkbox-field-grouping). - Check out the list of [acceptable `requirement` radio type fields](/api/reference/constants/#radio-field-grouping). - Radio groups require **at least** two fields per group.
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setRequirement(?string $requirement)
     {
-        $this->container['name'] = $name;
+        $this->container['requirement'] = $requirement;
 
         return $this;
     }
 
     /**
-     * Gets accounts
+     * Gets group_label
      *
-     * @return AccountResponse[]|null
+     * @return string|null
      */
-    public function getAccounts()
+    public function getGroupLabel()
     {
-        return $this->container['accounts'];
+        return $this->container['group_label'];
     }
 
     /**
-     * Sets accounts
+     * Sets group_label
      *
-     * @param AccountResponse[]|null $accounts accounts
+     * @param string|null $group_label Name of the group
      *
      * @return self
      */
-    public function setAccounts(?array $accounts)
+    public function setGroupLabel(?string $group_label)
     {
-        $this->container['accounts'] = $accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_accounts
-     *
-     * @return AccountResponse[]|null
-     */
-    public function getInvitedAccounts()
-    {
-        return $this->container['invited_accounts'];
-    }
-
-    /**
-     * Sets invited_accounts
-     *
-     * @param AccountResponse[]|null $invited_accounts A list of all Accounts that have an outstanding invitation to join your Team. Note that this response is a subset of the response parameters found in `GET /account`.
-     *
-     * @return self
-     */
-    public function setInvitedAccounts(?array $invited_accounts)
-    {
-        $this->container['invited_accounts'] = $invited_accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_emails
-     *
-     * @return string[]|null
-     */
-    public function getInvitedEmails()
-    {
-        return $this->container['invited_emails'];
-    }
-
-    /**
-     * Sets invited_emails
-     *
-     * @param string[]|null $invited_emails a list of email addresses that have an outstanding invitation to join your Team and do not yet have a Dropbox Sign account
-     *
-     * @return self
-     */
-    public function setInvitedEmails(?array $invited_emails)
-    {
-        $this->container['invited_emails'] = $invited_emails;
+        $this->container['group_label'] = $group_label;
 
         return $this;
     }

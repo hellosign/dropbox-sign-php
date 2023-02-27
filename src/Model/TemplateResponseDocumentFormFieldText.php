@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseNamedFormField
+ * TemplateResponseDocumentFormFieldText
  *
  * PHP version 7.4
  *
@@ -28,22 +28,21 @@
 
 namespace Dropbox\Sign\Model;
 
-use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
-use JsonSerializable;
+use InvalidArgumentException;
 
 /**
- * TemplateResponseNamedFormField Class Doc Comment
+ * TemplateResponseDocumentFormFieldText Class Doc Comment
  *
  * @category Class
+ * @description This class extends &#x60;TemplateResponseDocumentFormFieldBase&#x60;
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
  * @template TKey int|null
  * @template TValue mixed|null
- * @internal This class should not be instantiated directly
  */
-class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, JsonSerializable
+class TemplateResponseDocumentFormFieldText extends TemplateResponseDocumentFormFieldBase
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +51,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseNamedFormField';
+    protected static $openAPIModelName = 'TemplateResponseDocumentFormFieldText';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -60,20 +59,12 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
         'type' => 'string',
-        'signer' => 'string',
-        'x' => 'int',
-        'y' => 'int',
-        'width' => 'int',
-        'height' => 'int',
-        'required' => 'bool',
-        'api_id' => 'string',
-        'group' => 'string',
         'avg_text_length' => '\Dropbox\Sign\Model\TemplateResponseFieldAvgTextLength',
         'is_multiline' => 'bool',
         'original_font_size' => 'int',
         'font_family' => 'string',
+        'validation_type' => 'string',
     ];
 
     /**
@@ -84,20 +75,12 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
         'type' => null,
-        'signer' => null,
-        'x' => null,
-        'y' => null,
-        'width' => null,
-        'height' => null,
-        'required' => null,
-        'api_id' => null,
-        'group' => null,
         'avg_text_length' => null,
         'is_multiline' => null,
         'original_font_size' => null,
         'font_family' => null,
+        'validation_type' => null,
     ];
 
     /**
@@ -107,7 +90,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -117,7 +100,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -127,20 +110,12 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
         'type' => 'type',
-        'signer' => 'signer',
-        'x' => 'x',
-        'y' => 'y',
-        'width' => 'width',
-        'height' => 'height',
-        'required' => 'required',
-        'api_id' => 'api_id',
-        'group' => 'group',
         'avg_text_length' => 'avg_text_length',
         'is_multiline' => 'isMultiline',
         'original_font_size' => 'originalFontSize',
         'font_family' => 'fontFamily',
+        'validation_type' => 'validation_type',
     ];
 
     /**
@@ -149,20 +124,12 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
         'type' => 'setType',
-        'signer' => 'setSigner',
-        'x' => 'setX',
-        'y' => 'setY',
-        'width' => 'setWidth',
-        'height' => 'setHeight',
-        'required' => 'setRequired',
-        'api_id' => 'setApiId',
-        'group' => 'setGroup',
         'avg_text_length' => 'setAvgTextLength',
         'is_multiline' => 'setIsMultiline',
         'original_font_size' => 'setOriginalFontSize',
         'font_family' => 'setFontFamily',
+        'validation_type' => 'setValidationType',
     ];
 
     /**
@@ -171,20 +138,12 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
         'type' => 'getType',
-        'signer' => 'getSigner',
-        'x' => 'getX',
-        'y' => 'getY',
-        'width' => 'getWidth',
-        'height' => 'getHeight',
-        'required' => 'getRequired',
-        'api_id' => 'getApiId',
-        'group' => 'getGroup',
         'avg_text_length' => 'getAvgTextLength',
         'is_multiline' => 'getIsMultiline',
         'original_font_size' => 'getOriginalFontSize',
         'font_family' => 'getFontFamily',
+        'validation_type' => 'getValidationType',
     ];
 
     /**
@@ -195,7 +154,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -205,7 +164,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -215,7 +174,7 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -228,12 +187,37 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
         return self::$openAPIModelName;
     }
 
+    public const VALIDATION_TYPE_NUMBERS_ONLY = 'numbers_only';
+    public const VALIDATION_TYPE_LETTERS_ONLY = 'letters_only';
+    public const VALIDATION_TYPE_PHONE_NUMBER = 'phone_number';
+    public const VALIDATION_TYPE_BANK_ROUTING_NUMBER = 'bank_routing_number';
+    public const VALIDATION_TYPE_BANK_ACCOUNT_NUMBER = 'bank_account_number';
+    public const VALIDATION_TYPE_EMAIL_ADDRESS = 'email_address';
+    public const VALIDATION_TYPE_ZIP_CODE = 'zip_code';
+    public const VALIDATION_TYPE_SOCIAL_SECURITY_NUMBER = 'social_security_number';
+    public const VALIDATION_TYPE_EMPLOYER_IDENTIFICATION_NUMBER = 'employer_identification_number';
+    public const VALIDATION_TYPE_CUSTOM_REGEX = 'custom_regex';
+
     /**
-     * Associative array for storing property values
+     * Gets allowable values of the enum
      *
-     * @var array
+     * @return string[]
      */
-    protected $container = [];
+    public function getValidationTypeAllowableValues()
+    {
+        return [
+            self::VALIDATION_TYPE_NUMBERS_ONLY,
+            self::VALIDATION_TYPE_LETTERS_ONLY,
+            self::VALIDATION_TYPE_PHONE_NUMBER,
+            self::VALIDATION_TYPE_BANK_ROUTING_NUMBER,
+            self::VALIDATION_TYPE_BANK_ACCOUNT_NUMBER,
+            self::VALIDATION_TYPE_EMAIL_ADDRESS,
+            self::VALIDATION_TYPE_ZIP_CODE,
+            self::VALIDATION_TYPE_SOCIAL_SECURITY_NUMBER,
+            self::VALIDATION_TYPE_EMPLOYER_IDENTIFICATION_NUMBER,
+            self::VALIDATION_TYPE_CUSTOM_REGEX,
+        ];
+    }
 
     /**
      * Constructor
@@ -243,35 +227,29 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['signer'] = $data['signer'] ?? null;
-        $this->container['x'] = $data['x'] ?? null;
-        $this->container['y'] = $data['y'] ?? null;
-        $this->container['width'] = $data['width'] ?? null;
-        $this->container['height'] = $data['height'] ?? null;
-        $this->container['required'] = $data['required'] ?? null;
-        $this->container['api_id'] = $data['api_id'] ?? null;
-        $this->container['group'] = $data['group'] ?? null;
+        parent::__construct($data);
+
+        $this->container['type'] = $data['type'] ?? 'text';
         $this->container['avg_text_length'] = $data['avg_text_length'] ?? null;
         $this->container['is_multiline'] = $data['is_multiline'] ?? null;
         $this->container['original_font_size'] = $data['original_font_size'] ?? null;
         $this->container['font_family'] = $data['font_family'] ?? null;
+        $this->container['validation_type'] = $data['validation_type'] ?? null;
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): TemplateResponseNamedFormField
+    public static function fromArray(array $data): TemplateResponseDocumentFormFieldText
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TemplateResponseNamedFormField
+    public static function init(array $data): TemplateResponseDocumentFormFieldText
     {
-        /** @var TemplateResponseNamedFormField $obj */
+        /** @var TemplateResponseDocumentFormFieldText $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            TemplateResponseNamedFormField::class,
+            TemplateResponseDocumentFormFieldText::class,
         );
 
         return $obj;
@@ -284,7 +262,19 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
+
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        $allowedValues = $this->getValidationTypeAllowableValues();
+        if (!is_null($this->container['validation_type']) && !in_array($this->container['validation_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'validation_type', must be one of '%s'",
+                $this->container['validation_type'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -301,33 +291,9 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
     }
 
     /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name the name of the Named Form Field
-     *
-     * @return self
-     */
-    public function setName(?string $name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
      * Gets type
      *
-     * @return string|null
+     * @return string
      */
     public function getType()
     {
@@ -337,205 +303,13 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
     /**
      * Sets type
      *
-     * @param string|null $type The type of this Named Form Field. Only `text` and `checkbox` are currently supported.
+     * @param string $type The type of this form field. See [field types](/api/reference/constants/#field-types).  * Text Field uses `TemplateResponseDocumentFormFieldText` * Dropdown Field uses `TemplateResponseDocumentFormFieldDropdown` * Hyperlink Field uses `TemplateResponseDocumentFormFieldHyperlink` * Checkbox Field uses `TemplateResponseDocumentFormFieldCheckbox` * Radio Field uses `TemplateResponseDocumentFormFieldRadio` * Signature Field uses `TemplateResponseDocumentFormFieldSignature` * Date Signed Field uses `TemplateResponseDocumentFormFieldDateSigned` * Initials Field uses `TemplateResponseDocumentFormFieldInitials`
      *
      * @return self
      */
-    public function setType(?string $type)
+    public function setType(string $type)
     {
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets signer
-     *
-     * @return string|null
-     */
-    public function getSigner()
-    {
-        return $this->container['signer'];
-    }
-
-    /**
-     * Sets signer
-     *
-     * @param string|null $signer the signer of the Named Form Field
-     *
-     * @return self
-     */
-    public function setSigner(?string $signer)
-    {
-        $this->container['signer'] = $signer;
-
-        return $this;
-    }
-
-    /**
-     * Gets x
-     *
-     * @return int|null
-     */
-    public function getX()
-    {
-        return $this->container['x'];
-    }
-
-    /**
-     * Sets x
-     *
-     * @param int|null $x the horizontal offset in pixels for this form field
-     *
-     * @return self
-     */
-    public function setX(?int $x)
-    {
-        $this->container['x'] = $x;
-
-        return $this;
-    }
-
-    /**
-     * Gets y
-     *
-     * @return int|null
-     */
-    public function getY()
-    {
-        return $this->container['y'];
-    }
-
-    /**
-     * Sets y
-     *
-     * @param int|null $y the vertical offset in pixels for this form field
-     *
-     * @return self
-     */
-    public function setY(?int $y)
-    {
-        $this->container['y'] = $y;
-
-        return $this;
-    }
-
-    /**
-     * Gets width
-     *
-     * @return int|null
-     */
-    public function getWidth()
-    {
-        return $this->container['width'];
-    }
-
-    /**
-     * Sets width
-     *
-     * @param int|null $width the width in pixels of this form field
-     *
-     * @return self
-     */
-    public function setWidth(?int $width)
-    {
-        $this->container['width'] = $width;
-
-        return $this;
-    }
-
-    /**
-     * Gets height
-     *
-     * @return int|null
-     */
-    public function getHeight()
-    {
-        return $this->container['height'];
-    }
-
-    /**
-     * Sets height
-     *
-     * @param int|null $height the height in pixels of this form field
-     *
-     * @return self
-     */
-    public function setHeight(?int $height)
-    {
-        $this->container['height'] = $height;
-
-        return $this;
-    }
-
-    /**
-     * Gets required
-     *
-     * @return bool|null
-     */
-    public function getRequired()
-    {
-        return $this->container['required'];
-    }
-
-    /**
-     * Sets required
-     *
-     * @param bool|null $required boolean showing whether or not this field is required
-     *
-     * @return self
-     */
-    public function setRequired(?bool $required)
-    {
-        $this->container['required'] = $required;
-
-        return $this;
-    }
-
-    /**
-     * Gets api_id
-     *
-     * @return string|null
-     */
-    public function getApiId()
-    {
-        return $this->container['api_id'];
-    }
-
-    /**
-     * Sets api_id
-     *
-     * @param string|null $api_id the unique ID for this field
-     *
-     * @return self
-     */
-    public function setApiId(?string $api_id)
-    {
-        $this->container['api_id'] = $api_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets group
-     *
-     * @return string|null
-     */
-    public function getGroup()
-    {
-        return $this->container['group'];
-    }
-
-    /**
-     * Sets group
-     *
-     * @param string|null $group The name of the group this field is in. If this field is not a group, this defaults to `null`.
-     *
-     * @return self
-     */
-    public function setGroup(?string $group)
-    {
-        $this->container['group'] = $group;
 
         return $this;
     }
@@ -632,6 +406,40 @@ class TemplateResponseNamedFormField implements ModelInterface, ArrayAccess, Jso
     public function setFontFamily(?string $font_family)
     {
         $this->container['font_family'] = $font_family;
+
+        return $this;
+    }
+
+    /**
+     * Gets validation_type
+     *
+     * @return string|null
+     */
+    public function getValidationType()
+    {
+        return $this->container['validation_type'];
+    }
+
+    /**
+     * Sets validation_type
+     *
+     * @param string|null $validation_type Each text field may contain a `validation_type` parameter. Check out the list of [validation types](https://faq.hellosign.com/hc/en-us/articles/217115577) to learn more about the possible values.
+     *
+     * @return self
+     */
+    public function setValidationType(?string $validation_type)
+    {
+        $allowedValues = $this->getValidationTypeAllowableValues();
+        if (!is_null($validation_type) && !in_array($validation_type, $allowedValues, true)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'validation_type', must be one of '%s'",
+                    $validation_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['validation_type'] = $validation_type;
 
         return $this;
     }

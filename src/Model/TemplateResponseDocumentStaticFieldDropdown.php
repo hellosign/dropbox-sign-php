@@ -1,6 +1,6 @@
 <?php
 /**
- * TeamResponse
+ * TemplateResponseDocumentStaticFieldDropdown
  *
  * PHP version 7.4
  *
@@ -28,23 +28,20 @@
 
 namespace Dropbox\Sign\Model;
 
-use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
-use JsonSerializable;
 
 /**
- * TeamResponse Class Doc Comment
+ * TemplateResponseDocumentStaticFieldDropdown Class Doc Comment
  *
  * @category Class
- * @description Contains information about your team and its members
+ * @description This class extends &#x60;TemplateResponseDocumentStaticFieldBase&#x60;
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
  * @template TKey int|null
  * @template TValue mixed|null
- * @internal This class should not be instantiated directly
  */
-class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class TemplateResponseDocumentStaticFieldDropdown extends TemplateResponseDocumentStaticFieldBase
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +50,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TeamResponse';
+    protected static $openAPIModelName = 'TemplateResponseDocumentStaticFieldDropdown';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -61,10 +58,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_emails' => 'string[]',
+        'type' => 'string',
     ];
 
     /**
@@ -75,10 +69,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
-        'accounts' => null,
-        'invited_accounts' => null,
-        'invited_emails' => null,
+        'type' => null,
     ];
 
     /**
@@ -88,7 +79,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -98,7 +89,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -108,10 +99,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'accounts' => 'accounts',
-        'invited_accounts' => 'invited_accounts',
-        'invited_emails' => 'invited_emails',
+        'type' => 'type',
     ];
 
     /**
@@ -120,10 +108,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'accounts' => 'setAccounts',
-        'invited_accounts' => 'setInvitedAccounts',
-        'invited_emails' => 'setInvitedEmails',
+        'type' => 'setType',
     ];
 
     /**
@@ -132,10 +117,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'accounts' => 'getAccounts',
-        'invited_accounts' => 'getInvitedAccounts',
-        'invited_emails' => 'getInvitedEmails',
+        'type' => 'getType',
     ];
 
     /**
@@ -146,7 +128,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -156,7 +138,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -166,7 +148,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -180,13 +162,6 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Associative array for storing property values
-     *
-     * @var array
-     */
-    protected $container = [];
-
-    /**
      * Constructor
      *
      * @param array|null $data Associated array of property values
@@ -194,25 +169,24 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['accounts'] = $data['accounts'] ?? null;
-        $this->container['invited_accounts'] = $data['invited_accounts'] ?? null;
-        $this->container['invited_emails'] = $data['invited_emails'] ?? null;
+        parent::__construct($data);
+
+        $this->container['type'] = $data['type'] ?? 'dropdown';
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): TeamResponse
+    public static function fromArray(array $data): TemplateResponseDocumentStaticFieldDropdown
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TeamResponse
+    public static function init(array $data): TemplateResponseDocumentStaticFieldDropdown
     {
-        /** @var TeamResponse $obj */
+        /** @var TemplateResponseDocumentStaticFieldDropdown $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            TeamResponse::class,
+            TemplateResponseDocumentStaticFieldDropdown::class,
         );
 
         return $obj;
@@ -225,7 +199,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
+
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -242,97 +220,25 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets name
+     * Gets type
      *
-     * @return string|null
+     * @return string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->container['name'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets name
+     * Sets type
      *
-     * @param string|null $name The name of your Team
+     * @param string $type The type of this static field. See [field types](/api/reference/constants/#field-types).  * Text Field uses `TemplateResponseDocumentStaticFieldText` * Dropdown Field uses `TemplateResponseDocumentStaticFieldDropdown` * Hyperlink Field uses `TemplateResponseDocumentStaticFieldHyperlink` * Checkbox Field uses `TemplateResponseDocumentStaticFieldCheckbox` * Radio Field uses `TemplateResponseDocumentStaticFieldRadio` * Signature Field uses `TemplateResponseDocumentStaticFieldSignature` * Date Signed Field uses `TemplateResponseDocumentStaticFieldDateSigned` * Initials Field uses `TemplateResponseDocumentStaticFieldInitials`
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setType(string $type)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets accounts
-     *
-     * @return AccountResponse[]|null
-     */
-    public function getAccounts()
-    {
-        return $this->container['accounts'];
-    }
-
-    /**
-     * Sets accounts
-     *
-     * @param AccountResponse[]|null $accounts accounts
-     *
-     * @return self
-     */
-    public function setAccounts(?array $accounts)
-    {
-        $this->container['accounts'] = $accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_accounts
-     *
-     * @return AccountResponse[]|null
-     */
-    public function getInvitedAccounts()
-    {
-        return $this->container['invited_accounts'];
-    }
-
-    /**
-     * Sets invited_accounts
-     *
-     * @param AccountResponse[]|null $invited_accounts A list of all Accounts that have an outstanding invitation to join your Team. Note that this response is a subset of the response parameters found in `GET /account`.
-     *
-     * @return self
-     */
-    public function setInvitedAccounts(?array $invited_accounts)
-    {
-        $this->container['invited_accounts'] = $invited_accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_emails
-     *
-     * @return string[]|null
-     */
-    public function getInvitedEmails()
-    {
-        return $this->container['invited_emails'];
-    }
-
-    /**
-     * Sets invited_emails
-     *
-     * @param string[]|null $invited_emails a list of email addresses that have an outstanding invitation to join your Team and do not yet have a Dropbox Sign account
-     *
-     * @return self
-     */
-    public function setInvitedEmails(?array $invited_emails)
-    {
-        $this->container['invited_emails'] = $invited_emails;
+        $this->container['type'] = $type;
 
         return $this;
     }
