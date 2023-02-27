@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseDocumentStaticField
+ * TemplateResponseDocumentFormFieldBase
  *
  * PHP version 7.4
  *
@@ -33,9 +33,10 @@ use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
 
 /**
- * TemplateResponseDocumentStaticField Class Doc Comment
+ * TemplateResponseDocumentFormFieldBase Class Doc Comment
  *
  * @category Class
+ * @description An array of Form Field objects containing the name and type of each named field.
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -43,16 +44,16 @@ use JsonSerializable;
  * @template TValue mixed|null
  * @internal This class should not be instantiated directly
  */
-class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess, JsonSerializable
+abstract class TemplateResponseDocumentFormFieldBase implements ModelInterface, ArrayAccess, JsonSerializable
 {
-    public const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = 'type';
 
     /**
      * The original name of the model.
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseDocumentStaticField';
+    protected static $openAPIModelName = 'TemplateResponseDocumentFormFieldBase';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -60,16 +61,17 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
         'type' => 'string',
+        'api_id' => 'string',
+        'name' => 'string',
         'signer' => 'string',
         'x' => 'int',
         'y' => 'int',
         'width' => 'int',
         'height' => 'int',
         'required' => 'bool',
-        'api_id' => 'string',
         'group' => 'string',
+        'font_size' => 'int',
     ];
 
     /**
@@ -80,16 +82,17 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
         'type' => null,
+        'api_id' => null,
+        'name' => null,
         'signer' => null,
         'x' => null,
         'y' => null,
         'width' => null,
         'height' => null,
         'required' => null,
-        'api_id' => null,
         'group' => null,
+        'font_size' => null,
     ];
 
     /**
@@ -119,16 +122,17 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
         'type' => 'type',
+        'api_id' => 'api_id',
+        'name' => 'name',
         'signer' => 'signer',
         'x' => 'x',
         'y' => 'y',
         'width' => 'width',
         'height' => 'height',
         'required' => 'required',
-        'api_id' => 'api_id',
         'group' => 'group',
+        'font_size' => 'fontSize',
     ];
 
     /**
@@ -137,16 +141,17 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
         'type' => 'setType',
+        'api_id' => 'setApiId',
+        'name' => 'setName',
         'signer' => 'setSigner',
         'x' => 'setX',
         'y' => 'setY',
         'width' => 'setWidth',
         'height' => 'setHeight',
         'required' => 'setRequired',
-        'api_id' => 'setApiId',
         'group' => 'setGroup',
+        'font_size' => 'setFontSize',
     ];
 
     /**
@@ -155,16 +160,17 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
         'type' => 'getType',
+        'api_id' => 'getApiId',
+        'name' => 'getName',
         'signer' => 'getSigner',
         'x' => 'getX',
         'y' => 'getY',
         'width' => 'getWidth',
         'height' => 'getHeight',
         'required' => 'getRequired',
-        'api_id' => 'getApiId',
         'group' => 'getGroup',
+        'font_size' => 'getFontSize',
     ];
 
     /**
@@ -223,34 +229,54 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
         $this->container['type'] = $data['type'] ?? null;
+        $this->container['api_id'] = $data['api_id'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
         $this->container['signer'] = $data['signer'] ?? null;
         $this->container['x'] = $data['x'] ?? null;
         $this->container['y'] = $data['y'] ?? null;
         $this->container['width'] = $data['width'] ?? null;
         $this->container['height'] = $data['height'] ?? null;
         $this->container['required'] = $data['required'] ?? null;
-        $this->container['api_id'] = $data['api_id'] ?? null;
         $this->container['group'] = $data['group'] ?? null;
+        $this->container['font_size'] = $data['font_size'] ?? null;
+
+        // Initialize discriminator property with the model name.
+        $this->container['type'] = static::$openAPIModelName;
     }
 
-    /** @deprecated use ::init() */
-    public static function fromArray(array $data): TemplateResponseDocumentStaticField
+    public static function discriminatorClassName(array $data): ?string
     {
-        return self::init($data);
-    }
+        if (!array_key_exists('type', $data)) {
+            return null;
+        }
 
-    /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TemplateResponseDocumentStaticField
-    {
-        /** @var TemplateResponseDocumentStaticField $obj */
-        $obj = ObjectSerializer::deserialize(
-            $data,
-            TemplateResponseDocumentStaticField::class,
-        );
+        if ($data['type'] === 'checkbox') {
+            return TemplateResponseDocumentFormFieldCheckbox::class;
+        }
+        if ($data['type'] === 'date_signed') {
+            return TemplateResponseDocumentFormFieldDateSigned::class;
+        }
+        if ($data['type'] === 'dropdown') {
+            return TemplateResponseDocumentFormFieldDropdown::class;
+        }
+        if ($data['type'] === 'hyperlink') {
+            return TemplateResponseDocumentFormFieldHyperlink::class;
+        }
+        if ($data['type'] === 'initials') {
+            return TemplateResponseDocumentFormFieldInitials::class;
+        }
+        if ($data['type'] === 'radio') {
+            return TemplateResponseDocumentFormFieldRadio::class;
+        }
+        if ($data['type'] === 'signature') {
+            return TemplateResponseDocumentFormFieldSignature::class;
+        }
+        if ($data['type'] === 'text') {
+            return TemplateResponseDocumentFormFieldText::class;
+        }
 
-        return $obj;
+        return null;
     }
 
     /**
@@ -261,6 +287,10 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -277,6 +307,54 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type type
+     *
+     * @return self
+     */
+    public function setType(string $type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_id
+     *
+     * @return string|null
+     */
+    public function getApiId()
+    {
+        return $this->container['api_id'];
+    }
+
+    /**
+     * Sets api_id
+     *
+     * @param string|null $api_id a unique id for the form field
+     *
+     * @return self
+     */
+    public function setApiId(?string $api_id)
+    {
+        $this->container['api_id'] = $api_id;
+
+        return $this;
+    }
+
+    /**
      * Gets name
      *
      * @return string|null
@@ -289,37 +367,13 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name the name of the static field
+     * @param string|null $name the name of the form field
      *
      * @return self
      */
     public function setName(?string $name)
     {
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type The type of this static field. See [field types](/api/reference/constants/#field-types).
-     *
-     * @return self
-     */
-    public function setType(?string $type)
-    {
-        $this->container['type'] = $type;
 
         return $this;
     }
@@ -337,7 +391,7 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets signer
      *
-     * @param string|null $signer the signer of the Static Field
+     * @param string|null $signer the signer of the Form Field
      *
      * @return self
      */
@@ -361,7 +415,7 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets x
      *
-     * @param int|null $x the horizontal offset in pixels for this static field
+     * @param int|null $x the horizontal offset in pixels for this form field
      *
      * @return self
      */
@@ -385,7 +439,7 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets y
      *
-     * @param int|null $y the vertical offset in pixels for this static field
+     * @param int|null $y the vertical offset in pixels for this form field
      *
      * @return self
      */
@@ -409,7 +463,7 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets width
      *
-     * @param int|null $width the width in pixels of this static field
+     * @param int|null $width the width in pixels of this form field
      *
      * @return self
      */
@@ -433,7 +487,7 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets height
      *
-     * @param int|null $height the height in pixels of this static field
+     * @param int|null $height the height in pixels of this form field
      *
      * @return self
      */
@@ -469,30 +523,6 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets api_id
-     *
-     * @return string|null
-     */
-    public function getApiId()
-    {
-        return $this->container['api_id'];
-    }
-
-    /**
-     * Sets api_id
-     *
-     * @param string|null $api_id a unique id for the static field
-     *
-     * @return self
-     */
-    public function setApiId(?string $api_id)
-    {
-        $this->container['api_id'] = $api_id;
-
-        return $this;
-    }
-
-    /**
      * Gets group
      *
      * @return string|null
@@ -505,13 +535,37 @@ class TemplateResponseDocumentStaticField implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param string|null $group The name of the group this field is in. If this field is not a group, this defaults to `null`.
+     * @param string|null $group The name of the group this field is in. If this field is not a group, this defaults to `null` except for Radio fields.
      *
      * @return self
      */
     public function setGroup(?string $group)
     {
         $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets font_size
+     *
+     * @return int|null
+     */
+    public function getFontSize()
+    {
+        return $this->container['font_size'];
+    }
+
+    /**
+     * Sets font_size
+     *
+     * @param int|null $font_size final font size used by this form field
+     *
+     * @return self
+     */
+    public function setFontSize(?int $font_size)
+    {
+        $this->container['font_size'] = $font_size;
 
         return $this;
     }

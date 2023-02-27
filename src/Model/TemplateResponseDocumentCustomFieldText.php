@@ -1,6 +1,6 @@
 <?php
 /**
- * TeamResponse
+ * TemplateResponseDocumentCustomFieldText
  *
  * PHP version 7.4
  *
@@ -28,23 +28,20 @@
 
 namespace Dropbox\Sign\Model;
 
-use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
-use JsonSerializable;
 
 /**
- * TeamResponse Class Doc Comment
+ * TemplateResponseDocumentCustomFieldText Class Doc Comment
  *
  * @category Class
- * @description Contains information about your team and its members
+ * @description This class extends &#x60;TemplateResponseDocumentCustomFieldBase&#x60;
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
  * @template TKey int|null
  * @template TValue mixed|null
- * @internal This class should not be instantiated directly
  */
-class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class TemplateResponseDocumentCustomFieldText extends TemplateResponseDocumentCustomFieldBase
 {
     public const DISCRIMINATOR = null;
 
@@ -53,7 +50,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TeamResponse';
+    protected static $openAPIModelName = 'TemplateResponseDocumentCustomFieldText';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -61,10 +58,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_accounts' => '\Dropbox\Sign\Model\AccountResponse[]',
-        'invited_emails' => 'string[]',
+        'type' => 'string',
+        'avg_text_length' => '\Dropbox\Sign\Model\TemplateResponseFieldAvgTextLength',
+        'is_multiline' => 'bool',
+        'original_font_size' => 'int',
+        'font_family' => 'string',
     ];
 
     /**
@@ -75,10 +73,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
-        'accounts' => null,
-        'invited_accounts' => null,
-        'invited_emails' => null,
+        'type' => null,
+        'avg_text_length' => null,
+        'is_multiline' => null,
+        'original_font_size' => null,
+        'font_family' => null,
     ];
 
     /**
@@ -88,7 +87,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -98,7 +97,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -108,10 +107,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'accounts' => 'accounts',
-        'invited_accounts' => 'invited_accounts',
-        'invited_emails' => 'invited_emails',
+        'type' => 'type',
+        'avg_text_length' => 'avg_text_length',
+        'is_multiline' => 'isMultiline',
+        'original_font_size' => 'originalFontSize',
+        'font_family' => 'fontFamily',
     ];
 
     /**
@@ -120,10 +120,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'accounts' => 'setAccounts',
-        'invited_accounts' => 'setInvitedAccounts',
-        'invited_emails' => 'setInvitedEmails',
+        'type' => 'setType',
+        'avg_text_length' => 'setAvgTextLength',
+        'is_multiline' => 'setIsMultiline',
+        'original_font_size' => 'setOriginalFontSize',
+        'font_family' => 'setFontFamily',
     ];
 
     /**
@@ -132,10 +133,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'accounts' => 'getAccounts',
-        'invited_accounts' => 'getInvitedAccounts',
-        'invited_emails' => 'getInvitedEmails',
+        'type' => 'getType',
+        'avg_text_length' => 'getAvgTextLength',
+        'is_multiline' => 'getIsMultiline',
+        'original_font_size' => 'getOriginalFontSize',
+        'font_family' => 'getFontFamily',
     ];
 
     /**
@@ -146,7 +148,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -156,7 +158,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -166,7 +168,7 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -180,13 +182,6 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Associative array for storing property values
-     *
-     * @var array
-     */
-    protected $container = [];
-
-    /**
      * Constructor
      *
      * @param array|null $data Associated array of property values
@@ -194,25 +189,28 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['accounts'] = $data['accounts'] ?? null;
-        $this->container['invited_accounts'] = $data['invited_accounts'] ?? null;
-        $this->container['invited_emails'] = $data['invited_emails'] ?? null;
+        parent::__construct($data);
+
+        $this->container['type'] = $data['type'] ?? 'text';
+        $this->container['avg_text_length'] = $data['avg_text_length'] ?? null;
+        $this->container['is_multiline'] = $data['is_multiline'] ?? null;
+        $this->container['original_font_size'] = $data['original_font_size'] ?? null;
+        $this->container['font_family'] = $data['font_family'] ?? null;
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): TeamResponse
+    public static function fromArray(array $data): TemplateResponseDocumentCustomFieldText
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): TeamResponse
+    public static function init(array $data): TemplateResponseDocumentCustomFieldText
     {
-        /** @var TeamResponse $obj */
+        /** @var TemplateResponseDocumentCustomFieldText $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            TeamResponse::class,
+            TemplateResponseDocumentCustomFieldText::class,
         );
 
         return $obj;
@@ -225,7 +223,11 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
+
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -242,97 +244,121 @@ class TeamResponse implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets name
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type The type of this Custom Field. Only `text` and `checkbox` are currently supported.  * Text uses `TemplateResponseDocumentCustomFieldText` * Checkbox uses `TemplateResponseDocumentCustomFieldCheckbox`
+     *
+     * @return self
+     */
+    public function setType(string $type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets avg_text_length
+     *
+     * @return TemplateResponseFieldAvgTextLength|null
+     */
+    public function getAvgTextLength()
+    {
+        return $this->container['avg_text_length'];
+    }
+
+    /**
+     * Sets avg_text_length
+     *
+     * @param TemplateResponseFieldAvgTextLength|null $avg_text_length avg_text_length
+     *
+     * @return self
+     */
+    public function setAvgTextLength(?TemplateResponseFieldAvgTextLength $avg_text_length)
+    {
+        $this->container['avg_text_length'] = $avg_text_length;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_multiline
+     *
+     * @return bool|null
+     */
+    public function getIsMultiline()
+    {
+        return $this->container['is_multiline'];
+    }
+
+    /**
+     * Sets is_multiline
+     *
+     * @param bool|null $is_multiline whether this form field is multiline text
+     *
+     * @return self
+     */
+    public function setIsMultiline(?bool $is_multiline)
+    {
+        $this->container['is_multiline'] = $is_multiline;
+
+        return $this;
+    }
+
+    /**
+     * Gets original_font_size
+     *
+     * @return int|null
+     */
+    public function getOriginalFontSize()
+    {
+        return $this->container['original_font_size'];
+    }
+
+    /**
+     * Sets original_font_size
+     *
+     * @param int|null $original_font_size original font size used in this form field's text
+     *
+     * @return self
+     */
+    public function setOriginalFontSize(?int $original_font_size)
+    {
+        $this->container['original_font_size'] = $original_font_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets font_family
      *
      * @return string|null
      */
-    public function getName()
+    public function getFontFamily()
     {
-        return $this->container['name'];
+        return $this->container['font_family'];
     }
 
     /**
-     * Sets name
+     * Sets font_family
      *
-     * @param string|null $name The name of your Team
+     * @param string|null $font_family font family used in this form field's text
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setFontFamily(?string $font_family)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets accounts
-     *
-     * @return AccountResponse[]|null
-     */
-    public function getAccounts()
-    {
-        return $this->container['accounts'];
-    }
-
-    /**
-     * Sets accounts
-     *
-     * @param AccountResponse[]|null $accounts accounts
-     *
-     * @return self
-     */
-    public function setAccounts(?array $accounts)
-    {
-        $this->container['accounts'] = $accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_accounts
-     *
-     * @return AccountResponse[]|null
-     */
-    public function getInvitedAccounts()
-    {
-        return $this->container['invited_accounts'];
-    }
-
-    /**
-     * Sets invited_accounts
-     *
-     * @param AccountResponse[]|null $invited_accounts A list of all Accounts that have an outstanding invitation to join your Team. Note that this response is a subset of the response parameters found in `GET /account`.
-     *
-     * @return self
-     */
-    public function setInvitedAccounts(?array $invited_accounts)
-    {
-        $this->container['invited_accounts'] = $invited_accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_emails
-     *
-     * @return string[]|null
-     */
-    public function getInvitedEmails()
-    {
-        return $this->container['invited_emails'];
-    }
-
-    /**
-     * Sets invited_emails
-     *
-     * @param string[]|null $invited_emails a list of email addresses that have an outstanding invitation to join your Team and do not yet have a Dropbox Sign account
-     *
-     * @return self
-     */
-    public function setInvitedEmails(?array $invited_emails)
-    {
-        $this->container['invited_emails'] = $invited_emails;
+        $this->container['font_family'] = $font_family;
 
         return $this;
     }
