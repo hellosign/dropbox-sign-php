@@ -32,6 +32,7 @@ use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
+use ReturnTypeWillChange;
 use SplFileObject;
 
 /**
@@ -70,6 +71,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'files' => '\SplFileObject[]',
         'file_urls' => 'string[]',
         'is_qualified_signature' => 'bool',
+        'is_eid' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
@@ -96,6 +98,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'files' => 'binary',
         'file_urls' => null,
         'is_qualified_signature' => null,
+        'is_eid' => null,
         'message' => null,
         'metadata' => null,
         'signing_options' => null,
@@ -141,6 +144,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'files' => 'files',
         'file_urls' => 'file_urls',
         'is_qualified_signature' => 'is_qualified_signature',
+        'is_eid' => 'is_eid',
         'message' => 'message',
         'metadata' => 'metadata',
         'signing_options' => 'signing_options',
@@ -165,6 +169,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'files' => 'setFiles',
         'file_urls' => 'setFileUrls',
         'is_qualified_signature' => 'setIsQualifiedSignature',
+        'is_eid' => 'setIsEid',
         'message' => 'setMessage',
         'metadata' => 'setMetadata',
         'signing_options' => 'setSigningOptions',
@@ -189,6 +194,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         'files' => 'getFiles',
         'file_urls' => 'getFileUrls',
         'is_qualified_signature' => 'getIsQualifiedSignature',
+        'is_eid' => 'getIsEid',
         'message' => 'getMessage',
         'metadata' => 'getMetadata',
         'signing_options' => 'getSigningOptions',
@@ -263,6 +269,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
         $this->container['files'] = $data['files'] ?? null;
         $this->container['file_urls'] = $data['file_urls'] ?? null;
         $this->container['is_qualified_signature'] = $data['is_qualified_signature'] ?? false;
+        $this->container['is_eid'] = $data['is_eid'] ?? false;
         $this->container['message'] = $data['message'] ?? null;
         $this->container['metadata'] = $data['metadata'] ?? null;
         $this->container['signing_options'] = $data['signing_options'] ?? null;
@@ -527,6 +534,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      * Gets is_qualified_signature
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsQualifiedSignature()
     {
@@ -539,10 +547,35 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      * @param bool|null $is_qualified_signature Send with a value of `true` if you wish to enable [Qualified Electronic Signatures](https://www.hellosign.com/features/qualified-electronic-signatures) (QES), which requires a face-to-face call to verify the signer's identity.<br> **Note**: QES is only available on the Premium API plan as an add-on purchase. Cannot be used in `test_mode`. Only works on requests with one signer.
      *
      * @return self
+     * @deprecated
      */
     public function setIsQualifiedSignature(?bool $is_qualified_signature)
     {
         $this->container['is_qualified_signature'] = $is_qualified_signature;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_eid
+     *
+     * @return bool|null
+     */
+    public function getIsEid()
+    {
+        return $this->container['is_eid'];
+    }
+
+    /**
+     * Sets is_eid
+     *
+     * @param bool|null $is_eid Send with a value of `true` if you wish to enable [electronic identification (eID)](https://www.hellosign.com/features/electronic-id), which requires the signer to verify their identity with an eID provider to sign a document.<br> **Note**: eID is only available on the Premium API plan. Cannot be used in `test_mode`. Only works on requests with one signer.
+     *
+     * @return self
+     */
+    public function setIsEid(?bool $is_eid)
+    {
+        $this->container['is_eid'] = $is_eid;
 
         return $this;
     }
@@ -734,7 +767,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -747,7 +780,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -761,7 +794,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -778,7 +811,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -791,7 +824,7 @@ class SignatureRequestSendWithTemplateRequest implements ModelInterface, ArrayAc
      * @return scalar|object|array|null returns data which can be serialized by json_encode(), which is a value
      *                                  of any type other than a resource
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -31,6 +31,7 @@ namespace Dropbox\Sign\Model;
 use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * TemplateCreateEmbeddedDraftResponseTemplate Class Doc Comment
@@ -317,6 +318,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      * Gets warnings
      *
      * @return WarningResponse[]|null
+     * @deprecated
      */
     public function getWarnings()
     {
@@ -329,6 +331,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      * @param WarningResponse[]|null $warnings a list of warnings
      *
      * @return self
+     * @deprecated
      */
     public function setWarnings(?array $warnings)
     {
@@ -344,7 +347,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -357,7 +360,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -371,7 +374,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -388,7 +391,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -401,7 +404,7 @@ class TemplateCreateEmbeddedDraftResponseTemplate implements ModelInterface, Arr
      * @return scalar|object|array|null returns data which can be serialized by json_encode(), which is a value
      *                                  of any type other than a resource
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
