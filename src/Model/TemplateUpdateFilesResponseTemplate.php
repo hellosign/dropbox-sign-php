@@ -31,6 +31,7 @@ namespace Dropbox\Sign\Model;
 use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * TemplateUpdateFilesResponseTemplate Class Doc Comment
@@ -257,6 +258,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      * Gets warnings
      *
      * @return WarningResponse[]|null
+     * @deprecated
      */
     public function getWarnings()
     {
@@ -269,6 +271,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      * @param WarningResponse[]|null $warnings a list of warnings
      *
      * @return self
+     * @deprecated
      */
     public function setWarnings(?array $warnings)
     {
@@ -284,7 +287,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -297,7 +300,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -311,7 +314,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -328,7 +331,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -341,7 +344,7 @@ class TemplateUpdateFilesResponseTemplate implements ModelInterface, ArrayAccess
      * @return scalar|object|array|null returns data which can be serialized by json_encode(), which is a value
      *                                  of any type other than a resource
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

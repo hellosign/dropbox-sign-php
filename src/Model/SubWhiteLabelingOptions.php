@@ -32,12 +32,13 @@ use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SubWhiteLabelingOptions Class Doc Comment
  *
  * @category Class
- * @description An array of elements and values serialized to a string, to be used to customize the app&#39;s signer page. (Only applies to some API plans)  Take a look at our [white labeling guide](/api/reference/white-labeling/) to learn more.
+ * @description An array of elements and values serialized to a string, to be used to customize the app&#39;s signer page. (Only applies to some API plans)  Take a look at our [white labeling guide](https://developers.hellosign.com/api/reference/premium-branding/) to learn more.
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -709,7 +710,7 @@ class SubWhiteLabelingOptions implements ModelInterface, ArrayAccess, JsonSerial
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -722,7 +723,7 @@ class SubWhiteLabelingOptions implements ModelInterface, ArrayAccess, JsonSerial
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -736,7 +737,7 @@ class SubWhiteLabelingOptions implements ModelInterface, ArrayAccess, JsonSerial
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -753,7 +754,7 @@ class SubWhiteLabelingOptions implements ModelInterface, ArrayAccess, JsonSerial
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -766,7 +767,7 @@ class SubWhiteLabelingOptions implements ModelInterface, ArrayAccess, JsonSerial
      * @return scalar|object|array|null returns data which can be serialized by json_encode(), which is a value
      *                                  of any type other than a resource
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

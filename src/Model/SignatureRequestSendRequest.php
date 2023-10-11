@@ -32,6 +32,7 @@ use ArrayAccess;
 use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
+use ReturnTypeWillChange;
 use SplFileObject;
 
 /**
@@ -77,6 +78,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         'form_fields_per_document' => '\Dropbox\Sign\Model\SubFormFieldsPerDocumentBase[]',
         'hide_text_tags' => 'bool',
         'is_qualified_signature' => 'bool',
+        'is_eid' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
         'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
@@ -112,6 +114,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         'form_fields_per_document' => null,
         'hide_text_tags' => null,
         'is_qualified_signature' => null,
+        'is_eid' => null,
         'message' => null,
         'metadata' => null,
         'signing_options' => null,
@@ -166,6 +169,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         'form_fields_per_document' => 'form_fields_per_document',
         'hide_text_tags' => 'hide_text_tags',
         'is_qualified_signature' => 'is_qualified_signature',
+        'is_eid' => 'is_eid',
         'message' => 'message',
         'metadata' => 'metadata',
         'signing_options' => 'signing_options',
@@ -199,6 +203,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         'form_fields_per_document' => 'setFormFieldsPerDocument',
         'hide_text_tags' => 'setHideTextTags',
         'is_qualified_signature' => 'setIsQualifiedSignature',
+        'is_eid' => 'setIsEid',
         'message' => 'setMessage',
         'metadata' => 'setMetadata',
         'signing_options' => 'setSigningOptions',
@@ -232,6 +237,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         'form_fields_per_document' => 'getFormFieldsPerDocument',
         'hide_text_tags' => 'getHideTextTags',
         'is_qualified_signature' => 'getIsQualifiedSignature',
+        'is_eid' => 'getIsEid',
         'message' => 'getMessage',
         'metadata' => 'getMetadata',
         'signing_options' => 'getSigningOptions',
@@ -315,6 +321,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
         $this->container['form_fields_per_document'] = $data['form_fields_per_document'] ?? null;
         $this->container['hide_text_tags'] = $data['hide_text_tags'] ?? false;
         $this->container['is_qualified_signature'] = $data['is_qualified_signature'] ?? false;
+        $this->container['is_eid'] = $data['is_eid'] ?? false;
         $this->container['message'] = $data['message'] ?? null;
         $this->container['metadata'] = $data['metadata'] ?? null;
         $this->container['signing_options'] = $data['signing_options'] ?? null;
@@ -704,7 +711,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Sets form_fields_per_document
      *
-     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (We're currently fixing a bug where this property only accepts a two-dimensional array. You can read about it here: [Using Form Fields per Document](/docs/openapi/form-fields-per-document).)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
+     * @param SubFormFieldsPerDocumentBase[]|null $form_fields_per_document The fields that should appear on the document, expressed as an array of objects. (For more details you can read about it here: [Using Form Fields per Document](/docs/openapi/form-fields-per-document).)  **NOTE**: Fields like **text**, **dropdown**, **checkbox**, **radio**, and **hyperlink** have additional required and optional parameters. Check out the list of [additional parameters](/api/reference/constants/#form-fields-per-document) for these field types.  * Text Field use `SubFormFieldsPerDocumentText` * Dropdown Field use `SubFormFieldsPerDocumentDropdown` * Hyperlink Field use `SubFormFieldsPerDocumentHyperlink` * Checkbox Field use `SubFormFieldsPerDocumentCheckbox` * Radio Field use `SubFormFieldsPerDocumentRadio` * Signature Field use `SubFormFieldsPerDocumentSignature` * Date Signed Field use `SubFormFieldsPerDocumentDateSigned` * Initials Field use `SubFormFieldsPerDocumentInitials` * Text Merge Field use `SubFormFieldsPerDocumentTextMerge` * Checkbox Merge Field use `SubFormFieldsPerDocumentCheckboxMerge`
      *
      * @return self
      */
@@ -743,6 +750,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      * Gets is_qualified_signature
      *
      * @return bool|null
+     * @deprecated
      */
     public function getIsQualifiedSignature()
     {
@@ -755,10 +763,35 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      * @param bool|null $is_qualified_signature Send with a value of `true` if you wish to enable [Qualified Electronic Signatures](https://www.hellosign.com/features/qualified-electronic-signatures) (QES), which requires a face-to-face call to verify the signer's identity.<br> **Note**: QES is only available on the Premium API plan as an add-on purchase. Cannot be used in `test_mode`. Only works on requests with one signer.
      *
      * @return self
+     * @deprecated
      */
     public function setIsQualifiedSignature(?bool $is_qualified_signature)
     {
         $this->container['is_qualified_signature'] = $is_qualified_signature;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_eid
+     *
+     * @return bool|null
+     */
+    public function getIsEid()
+    {
+        return $this->container['is_eid'];
+    }
+
+    /**
+     * Sets is_eid
+     *
+     * @param bool|null $is_eid Send with a value of `true` if you wish to enable [electronic identification (eID)](https://www.hellosign.com/features/electronic-id), which requires the signer to verify their identity with an eID provider to sign a document.<br> **Note**: eID is only available on the Premium API plan. Cannot be used in `test_mode`. Only works on requests with one signer.
+     *
+     * @return self
+     */
+    public function setIsEid(?bool $is_eid)
+    {
+        $this->container['is_eid'] = $is_eid;
 
         return $this;
     }
@@ -998,7 +1031,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -1011,7 +1044,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -1025,7 +1058,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -1042,7 +1075,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
@@ -1055,7 +1088,7 @@ class SignatureRequestSendRequest implements ModelInterface, ArrayAccess, JsonSe
      * @return scalar|object|array|null returns data which can be serialized by json_encode(), which is a value
      *                                  of any type other than a resource
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);
