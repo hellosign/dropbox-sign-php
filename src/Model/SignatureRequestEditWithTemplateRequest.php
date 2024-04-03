@@ -1,6 +1,6 @@
 <?php
 /**
- * SignatureRequestBulkCreateEmbeddedWithTemplateRequest
+ * SignatureRequestEditWithTemplateRequest
  *
  * PHP version 7.4
  *
@@ -36,7 +36,7 @@ use ReturnTypeWillChange;
 use SplFileObject;
 
 /**
- * SignatureRequestBulkCreateEmbeddedWithTemplateRequest Class Doc Comment
+ * SignatureRequestEditWithTemplateRequest Class Doc Comment
  *
  * @category Class
  * @author   OpenAPI Generator team
@@ -45,7 +45,7 @@ use SplFileObject;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInterface, ArrayAccess, JsonSerializable
+class SignatureRequestEditWithTemplateRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -54,7 +54,7 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SignatureRequestBulkCreateEmbeddedWithTemplateRequest';
+    protected static $openAPIModelName = 'SignatureRequestEditWithTemplateRequest';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -63,14 +63,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      */
     protected static $openAPITypes = [
         'template_ids' => 'string[]',
-        'client_id' => 'string',
-        'signer_file' => '\SplFileObject',
-        'signer_list' => '\Dropbox\Sign\Model\SubBulkSignerList[]',
+        'signers' => '\Dropbox\Sign\Model\SubSignatureRequestTemplateSigner[]',
         'allow_decline' => 'bool',
         'ccs' => '\Dropbox\Sign\Model\SubCC[]',
+        'client_id' => 'string',
         'custom_fields' => '\Dropbox\Sign\Model\SubCustomField[]',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
+        'is_qualified_signature' => 'bool',
+        'is_eid' => 'bool',
         'message' => 'string',
         'metadata' => 'array<string,mixed>',
+        'signing_options' => '\Dropbox\Sign\Model\SubSigningOptions',
         'signing_redirect_url' => 'string',
         'subject' => 'string',
         'test_mode' => 'bool',
@@ -86,14 +90,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      */
     protected static $openAPIFormats = [
         'template_ids' => null,
-        'client_id' => null,
-        'signer_file' => 'binary',
-        'signer_list' => null,
+        'signers' => null,
         'allow_decline' => null,
         'ccs' => null,
+        'client_id' => null,
         'custom_fields' => null,
+        'files' => 'binary',
+        'file_urls' => null,
+        'is_qualified_signature' => null,
+        'is_eid' => null,
         'message' => null,
         'metadata' => null,
+        'signing_options' => null,
         'signing_redirect_url' => null,
         'subject' => null,
         'test_mode' => null,
@@ -128,14 +136,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      */
     protected static $attributeMap = [
         'template_ids' => 'template_ids',
-        'client_id' => 'client_id',
-        'signer_file' => 'signer_file',
-        'signer_list' => 'signer_list',
+        'signers' => 'signers',
         'allow_decline' => 'allow_decline',
         'ccs' => 'ccs',
+        'client_id' => 'client_id',
         'custom_fields' => 'custom_fields',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
+        'is_qualified_signature' => 'is_qualified_signature',
+        'is_eid' => 'is_eid',
         'message' => 'message',
         'metadata' => 'metadata',
+        'signing_options' => 'signing_options',
         'signing_redirect_url' => 'signing_redirect_url',
         'subject' => 'subject',
         'test_mode' => 'test_mode',
@@ -149,14 +161,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      */
     protected static $setters = [
         'template_ids' => 'setTemplateIds',
-        'client_id' => 'setClientId',
-        'signer_file' => 'setSignerFile',
-        'signer_list' => 'setSignerList',
+        'signers' => 'setSigners',
         'allow_decline' => 'setAllowDecline',
         'ccs' => 'setCcs',
+        'client_id' => 'setClientId',
         'custom_fields' => 'setCustomFields',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
+        'is_qualified_signature' => 'setIsQualifiedSignature',
+        'is_eid' => 'setIsEid',
         'message' => 'setMessage',
         'metadata' => 'setMetadata',
+        'signing_options' => 'setSigningOptions',
         'signing_redirect_url' => 'setSigningRedirectUrl',
         'subject' => 'setSubject',
         'test_mode' => 'setTestMode',
@@ -170,14 +186,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
      */
     protected static $getters = [
         'template_ids' => 'getTemplateIds',
-        'client_id' => 'getClientId',
-        'signer_file' => 'getSignerFile',
-        'signer_list' => 'getSignerList',
+        'signers' => 'getSigners',
         'allow_decline' => 'getAllowDecline',
         'ccs' => 'getCcs',
+        'client_id' => 'getClientId',
         'custom_fields' => 'getCustomFields',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
+        'is_qualified_signature' => 'getIsQualifiedSignature',
+        'is_eid' => 'getIsEid',
         'message' => 'getMessage',
         'metadata' => 'getMetadata',
+        'signing_options' => 'getSigningOptions',
         'signing_redirect_url' => 'getSigningRedirectUrl',
         'subject' => 'getSubject',
         'test_mode' => 'getTestMode',
@@ -241,14 +261,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     public function __construct(array $data = null)
     {
         $this->container['template_ids'] = $data['template_ids'] ?? null;
-        $this->container['client_id'] = $data['client_id'] ?? null;
-        $this->container['signer_file'] = $data['signer_file'] ?? null;
-        $this->container['signer_list'] = $data['signer_list'] ?? null;
+        $this->container['signers'] = $data['signers'] ?? null;
         $this->container['allow_decline'] = $data['allow_decline'] ?? false;
         $this->container['ccs'] = $data['ccs'] ?? null;
+        $this->container['client_id'] = $data['client_id'] ?? null;
         $this->container['custom_fields'] = $data['custom_fields'] ?? null;
+        $this->container['files'] = $data['files'] ?? null;
+        $this->container['file_urls'] = $data['file_urls'] ?? null;
+        $this->container['is_qualified_signature'] = $data['is_qualified_signature'] ?? false;
+        $this->container['is_eid'] = $data['is_eid'] ?? false;
         $this->container['message'] = $data['message'] ?? null;
         $this->container['metadata'] = $data['metadata'] ?? null;
+        $this->container['signing_options'] = $data['signing_options'] ?? null;
         $this->container['signing_redirect_url'] = $data['signing_redirect_url'] ?? null;
         $this->container['subject'] = $data['subject'] ?? null;
         $this->container['test_mode'] = $data['test_mode'] ?? false;
@@ -256,18 +280,18 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): SignatureRequestBulkCreateEmbeddedWithTemplateRequest
+    public static function fromArray(array $data): SignatureRequestEditWithTemplateRequest
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): SignatureRequestBulkCreateEmbeddedWithTemplateRequest
+    public static function init(array $data): SignatureRequestEditWithTemplateRequest
     {
-        /** @var SignatureRequestBulkCreateEmbeddedWithTemplateRequest $obj */
+        /** @var SignatureRequestEditWithTemplateRequest $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            SignatureRequestBulkCreateEmbeddedWithTemplateRequest::class,
+            SignatureRequestEditWithTemplateRequest::class,
         );
 
         return $obj;
@@ -285,8 +309,8 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
         if ($this->container['template_ids'] === null) {
             $invalidProperties[] = "'template_ids' can't be null";
         }
-        if ($this->container['client_id'] === null) {
-            $invalidProperties[] = "'client_id' can't be null";
+        if ($this->container['signers'] === null) {
+            $invalidProperties[] = "'signers' can't be null";
         }
         if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) > 5000)) {
             $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 5000.";
@@ -339,73 +363,25 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     }
 
     /**
-     * Gets client_id
+     * Gets signers
      *
-     * @return string
+     * @return SubSignatureRequestTemplateSigner[]
      */
-    public function getClientId()
+    public function getSigners()
     {
-        return $this->container['client_id'];
+        return $this->container['signers'];
     }
 
     /**
-     * Sets client_id
+     * Sets signers
      *
-     * @param string $client_id Client id of the app you're using to create this embedded signature request. Used for security purposes.
+     * @param SubSignatureRequestTemplateSigner[] $signers add Signers to your Templated-based Signature Request
      *
      * @return self
      */
-    public function setClientId(string $client_id)
+    public function setSigners(array $signers)
     {
-        $this->container['client_id'] = $client_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets signer_file
-     *
-     * @return SplFileObject|null
-     */
-    public function getSignerFile()
-    {
-        return $this->container['signer_file'];
-    }
-
-    /**
-     * Sets signer_file
-     *
-     * @param SplFileObject|null $signer_file `signer_file` is a CSV file defining values and options for signer fields. Required unless a `signer_list` is used, you may not use both. The CSV can have the following columns:  - `name`: the name of the signer filling the role of RoleName - `email_address`: email address of the signer filling the role of RoleName - `pin`: the 4- to 12-character access code that will secure this signer's signature page (optional) - `sms_phone_number`: An E.164 formatted phone number that will receive a code via SMS to access this signer's signature page. (optional)      By using the feature, you agree you are responsible for obtaining a signer's consent to receive text messages from Dropbox Sign related to this signature request and confirm you have obtained such consent from all signers prior to enabling SMS delivery for this signature request. [Learn more](https://faq.hellosign.com/hc/en-us/articles/15815316468877-Dropbox-Sign-SMS-tools-add-on).      **Note**: Not available in test mode and requires a Standard plan or higher. - `*_field`: any column with a _field\" suffix will be treated as a custom field (optional)      You may only specify field values here, any other options should be set in the custom_fields request parameter.  Example CSV:  ``` name, email_address, pin, company_field George, george@example.com, d79a3td, ABC Corp Mary, mary@example.com, gd9as5b, 123 LLC ```
-     *
-     * @return self
-     */
-    public function setSignerFile(?SplFileObject $signer_file)
-    {
-        $this->container['signer_file'] = $signer_file;
-
-        return $this;
-    }
-
-    /**
-     * Gets signer_list
-     *
-     * @return SubBulkSignerList[]|null
-     */
-    public function getSignerList()
-    {
-        return $this->container['signer_list'];
-    }
-
-    /**
-     * Sets signer_list
-     *
-     * @param SubBulkSignerList[]|null $signer_list `signer_list` is an array defining values and options for signer fields. Required unless a `signer_file` is used, you may not use both.
-     *
-     * @return self
-     */
-    public function setSignerList(?array $signer_list)
-    {
-        $this->container['signer_list'] = $signer_list;
+        $this->container['signers'] = $signers;
 
         return $this;
     }
@@ -459,6 +435,30 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     }
 
     /**
+     * Gets client_id
+     *
+     * @return string|null
+     */
+    public function getClientId()
+    {
+        return $this->container['client_id'];
+    }
+
+    /**
+     * Sets client_id
+     *
+     * @param string|null $client_id Client id of the app to associate with the signature request. Used to apply the branding and callback url defined for the app.
+     *
+     * @return self
+     */
+    public function setClientId(?string $client_id)
+    {
+        $this->container['client_id'] = $client_id;
+
+        return $this;
+    }
+
+    /**
      * Gets custom_fields
      *
      * @return SubCustomField[]|null
@@ -471,13 +471,111 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     /**
      * Sets custom_fields
      *
-     * @param SubCustomField[]|null $custom_fields When used together with merge fields, `custom_fields` allows users to add pre-filled data to their signature requests.  Pre-filled data can be used with \"send-once\" signature requests by adding merge fields with `form_fields_per_document` or [Text Tags](https://app.hellosign.com/api/textTagsWalkthrough#TextTagIntro) while passing values back with `custom_fields` together in one API call.  For using pre-filled on repeatable signature requests, merge fields are added to templates in the Dropbox Sign UI or by calling [/template/create_embedded_draft](/api/reference/operation/templateCreateEmbeddedDraft) and then passing `custom_fields` on subsequent signature requests referencing that template.
+     * @param SubCustomField[]|null $custom_fields An array defining values and options for custom fields. Required when a custom field exists in the Template.
      *
      * @return self
      */
     public function setCustomFields(?array $custom_fields)
     {
         $this->container['custom_fields'] = $custom_fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets files
+     *
+     * @return SplFileObject[]|null
+     */
+    public function getFiles()
+    {
+        return $this->container['files'];
+    }
+
+    /**
+     * Sets files
+     *
+     * @param SplFileObject[]|null $files Use `files[]` to indicate the uploaded file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
+     *
+     * @return self
+     */
+    public function setFiles(?array $files)
+    {
+        $this->container['files'] = $files;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_urls
+     *
+     * @return string[]|null
+     */
+    public function getFileUrls()
+    {
+        return $this->container['file_urls'];
+    }
+
+    /**
+     * Sets file_urls
+     *
+     * @param string[]|null $file_urls Use `file_urls[]` to have Dropbox Sign download the file(s) to send for signature.  This endpoint requires either **files** or **file_urls[]**, but not both.
+     *
+     * @return self
+     */
+    public function setFileUrls(?array $file_urls)
+    {
+        $this->container['file_urls'] = $file_urls;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_qualified_signature
+     *
+     * @return bool|null
+     * @deprecated
+     */
+    public function getIsQualifiedSignature()
+    {
+        return $this->container['is_qualified_signature'];
+    }
+
+    /**
+     * Sets is_qualified_signature
+     *
+     * @param bool|null $is_qualified_signature Send with a value of `true` if you wish to enable [Qualified Electronic Signatures](https://www.hellosign.com/features/qualified-electronic-signatures) (QES), which requires a face-to-face call to verify the signer's identity.<br> **Note**: QES is only available on the Premium API plan as an add-on purchase. Cannot be used in `test_mode`. Only works on requests with one signer.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setIsQualifiedSignature(?bool $is_qualified_signature)
+    {
+        $this->container['is_qualified_signature'] = $is_qualified_signature;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_eid
+     *
+     * @return bool|null
+     */
+    public function getIsEid()
+    {
+        return $this->container['is_eid'];
+    }
+
+    /**
+     * Sets is_eid
+     *
+     * @param bool|null $is_eid Send with a value of `true` if you wish to enable [electronic identification (eID)](https://www.hellosign.com/features/electronic-id), which requires the signer to verify their identity with an eID provider to sign a document.<br> **Note**: eID is only available on the Premium API plan. Cannot be used in `test_mode`. Only works on requests with one signer.
+     *
+     * @return self
+     */
+    public function setIsEid(?bool $is_eid)
+    {
+        $this->container['is_eid'] = $is_eid;
 
         return $this;
     }
@@ -502,7 +600,7 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     public function setMessage(?string $message)
     {
         if (!is_null($message) && (mb_strlen($message) > 5000)) {
-            throw new InvalidArgumentException('invalid length for $message when calling SignatureRequestBulkCreateEmbeddedWithTemplateRequest., must be smaller than or equal to 5000.');
+            throw new InvalidArgumentException('invalid length for $message when calling SignatureRequestEditWithTemplateRequest., must be smaller than or equal to 5000.');
         }
 
         $this->container['message'] = $message;
@@ -530,6 +628,30 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     public function setMetadata(?array $metadata)
     {
         $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets signing_options
+     *
+     * @return SubSigningOptions|null
+     */
+    public function getSigningOptions()
+    {
+        return $this->container['signing_options'];
+    }
+
+    /**
+     * Sets signing_options
+     *
+     * @param SubSigningOptions|null $signing_options signing_options
+     *
+     * @return self
+     */
+    public function setSigningOptions(?SubSigningOptions $signing_options)
+    {
+        $this->container['signing_options'] = $signing_options;
 
         return $this;
     }
@@ -578,7 +700,7 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     public function setSubject(?string $subject)
     {
         if (!is_null($subject) && (mb_strlen($subject) > 255)) {
-            throw new InvalidArgumentException('invalid length for $subject when calling SignatureRequestBulkCreateEmbeddedWithTemplateRequest., must be smaller than or equal to 255.');
+            throw new InvalidArgumentException('invalid length for $subject when calling SignatureRequestEditWithTemplateRequest., must be smaller than or equal to 255.');
         }
 
         $this->container['subject'] = $subject;
@@ -630,7 +752,7 @@ class SignatureRequestBulkCreateEmbeddedWithTemplateRequest implements ModelInte
     public function setTitle(?string $title)
     {
         if (!is_null($title) && (mb_strlen($title) > 255)) {
-            throw new InvalidArgumentException('invalid length for $title when calling SignatureRequestBulkCreateEmbeddedWithTemplateRequest., must be smaller than or equal to 255.');
+            throw new InvalidArgumentException('invalid length for $title when calling SignatureRequestEditWithTemplateRequest., must be smaller than or equal to 255.');
         }
 
         $this->container['title'] = $title;
