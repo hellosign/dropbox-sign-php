@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountResponseQuotas
+ * AccountResponseUsage
  *
  * PHP version 7.4
  *
@@ -34,10 +34,10 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * AccountResponseQuotas Class Doc Comment
+ * AccountResponseUsage Class Doc Comment
  *
  * @category Class
- * @description Details concerning remaining monthly quotas.
+ * @description Details concerning monthly usage
  * @author   OpenAPI Generator team
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -45,7 +45,7 @@ use ReturnTypeWillChange;
  * @template TValue mixed|null
  * @internal This class should not be instantiated directly
  */
-class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializable
+class AccountResponseUsage implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -54,7 +54,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      *
      * @var string
      */
-    protected static $openAPIModelName = 'AccountResponseQuotas';
+    protected static $openAPIModelName = 'AccountResponseUsage';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -62,12 +62,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $openAPITypes = [
-        'api_signature_requests_left' => 'int',
-        'documents_left' => 'int',
-        'templates_total' => 'int',
-        'templates_left' => 'int',
-        'sms_verifications_left' => 'int',
-        'num_fax_pages_left' => 'int',
+        'fax_pages_sent' => 'int',
     ];
 
     /**
@@ -78,12 +73,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'api_signature_requests_left' => null,
-        'documents_left' => null,
-        'templates_total' => null,
-        'templates_left' => null,
-        'sms_verifications_left' => null,
-        'num_fax_pages_left' => null,
+        'fax_pages_sent' => null,
     ];
 
     /**
@@ -113,12 +103,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'api_signature_requests_left' => 'api_signature_requests_left',
-        'documents_left' => 'documents_left',
-        'templates_total' => 'templates_total',
-        'templates_left' => 'templates_left',
-        'sms_verifications_left' => 'sms_verifications_left',
-        'num_fax_pages_left' => 'num_fax_pages_left',
+        'fax_pages_sent' => 'fax_pages_sent',
     ];
 
     /**
@@ -127,12 +112,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'api_signature_requests_left' => 'setApiSignatureRequestsLeft',
-        'documents_left' => 'setDocumentsLeft',
-        'templates_total' => 'setTemplatesTotal',
-        'templates_left' => 'setTemplatesLeft',
-        'sms_verifications_left' => 'setSmsVerificationsLeft',
-        'num_fax_pages_left' => 'setNumFaxPagesLeft',
+        'fax_pages_sent' => 'setFaxPagesSent',
     ];
 
     /**
@@ -141,12 +121,7 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'api_signature_requests_left' => 'getApiSignatureRequestsLeft',
-        'documents_left' => 'getDocumentsLeft',
-        'templates_total' => 'getTemplatesTotal',
-        'templates_left' => 'getTemplatesLeft',
-        'sms_verifications_left' => 'getSmsVerificationsLeft',
-        'num_fax_pages_left' => 'getNumFaxPagesLeft',
+        'fax_pages_sent' => 'getFaxPagesSent',
     ];
 
     /**
@@ -205,27 +180,22 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->container['api_signature_requests_left'] = $data['api_signature_requests_left'] ?? null;
-        $this->container['documents_left'] = $data['documents_left'] ?? null;
-        $this->container['templates_total'] = $data['templates_total'] ?? null;
-        $this->container['templates_left'] = $data['templates_left'] ?? null;
-        $this->container['sms_verifications_left'] = $data['sms_verifications_left'] ?? null;
-        $this->container['num_fax_pages_left'] = $data['num_fax_pages_left'] ?? null;
+        $this->container['fax_pages_sent'] = $data['fax_pages_sent'] ?? null;
     }
 
     /** @deprecated use ::init() */
-    public static function fromArray(array $data): AccountResponseQuotas
+    public static function fromArray(array $data): AccountResponseUsage
     {
         return self::init($data);
     }
 
     /** Attempt to instantiate and hydrate a new instance of this class */
-    public static function init(array $data): AccountResponseQuotas
+    public static function init(array $data): AccountResponseUsage
     {
-        /** @var AccountResponseQuotas $obj */
+        /** @var AccountResponseUsage $obj */
         $obj = ObjectSerializer::deserialize(
             $data,
-            AccountResponseQuotas::class,
+            AccountResponseUsage::class,
         );
 
         return $obj;
@@ -255,145 +225,25 @@ class AccountResponseQuotas implements ModelInterface, ArrayAccess, JsonSerializ
     }
 
     /**
-     * Gets api_signature_requests_left
+     * Gets fax_pages_sent
      *
      * @return int|null
      */
-    public function getApiSignatureRequestsLeft()
+    public function getFaxPagesSent()
     {
-        return $this->container['api_signature_requests_left'];
+        return $this->container['fax_pages_sent'];
     }
 
     /**
-     * Sets api_signature_requests_left
+     * Sets fax_pages_sent
      *
-     * @param int|null $api_signature_requests_left API signature requests remaining
+     * @param int|null $fax_pages_sent Number of fax pages sent
      *
      * @return self
      */
-    public function setApiSignatureRequestsLeft(?int $api_signature_requests_left)
+    public function setFaxPagesSent(?int $fax_pages_sent)
     {
-        $this->container['api_signature_requests_left'] = $api_signature_requests_left;
-
-        return $this;
-    }
-
-    /**
-     * Gets documents_left
-     *
-     * @return int|null
-     */
-    public function getDocumentsLeft()
-    {
-        return $this->container['documents_left'];
-    }
-
-    /**
-     * Sets documents_left
-     *
-     * @param int|null $documents_left signature requests remaining
-     *
-     * @return self
-     */
-    public function setDocumentsLeft(?int $documents_left)
-    {
-        $this->container['documents_left'] = $documents_left;
-
-        return $this;
-    }
-
-    /**
-     * Gets templates_total
-     *
-     * @return int|null
-     */
-    public function getTemplatesTotal()
-    {
-        return $this->container['templates_total'];
-    }
-
-    /**
-     * Sets templates_total
-     *
-     * @param int|null $templates_total total API templates allowed
-     *
-     * @return self
-     */
-    public function setTemplatesTotal(?int $templates_total)
-    {
-        $this->container['templates_total'] = $templates_total;
-
-        return $this;
-    }
-
-    /**
-     * Gets templates_left
-     *
-     * @return int|null
-     */
-    public function getTemplatesLeft()
-    {
-        return $this->container['templates_left'];
-    }
-
-    /**
-     * Sets templates_left
-     *
-     * @param int|null $templates_left API templates remaining
-     *
-     * @return self
-     */
-    public function setTemplatesLeft(?int $templates_left)
-    {
-        $this->container['templates_left'] = $templates_left;
-
-        return $this;
-    }
-
-    /**
-     * Gets sms_verifications_left
-     *
-     * @return int|null
-     */
-    public function getSmsVerificationsLeft()
-    {
-        return $this->container['sms_verifications_left'];
-    }
-
-    /**
-     * Sets sms_verifications_left
-     *
-     * @param int|null $sms_verifications_left SMS verifications  remaining
-     *
-     * @return self
-     */
-    public function setSmsVerificationsLeft(?int $sms_verifications_left)
-    {
-        $this->container['sms_verifications_left'] = $sms_verifications_left;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_fax_pages_left
-     *
-     * @return int|null
-     */
-    public function getNumFaxPagesLeft()
-    {
-        return $this->container['num_fax_pages_left'];
-    }
-
-    /**
-     * Sets num_fax_pages_left
-     *
-     * @param int|null $num_fax_pages_left Number of fax pages left
-     *
-     * @return self
-     */
-    public function setNumFaxPagesLeft(?int $num_fax_pages_left)
-    {
-        $this->container['num_fax_pages_left'] = $num_fax_pages_left;
+        $this->container['fax_pages_sent'] = $fax_pages_sent;
 
         return $this;
     }
