@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseDocument
+ * FaxListResponse
  *
  * PHP version 7.4
  *
@@ -34,13 +34,13 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * TemplateResponseDocument Class Doc Comment
+ * FaxListResponse Class Doc Comment
  *
  * @category Class
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSerializable
+class FaxListResponse implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseDocument';
+    protected static $openAPIModelName = 'FaxListResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'index' => 'int',
-        'field_groups' => '\Dropbox\Sign\Model\TemplateResponseDocumentFieldGroup[]',
-        'form_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentFormFieldBase[]',
-        'custom_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentCustomFieldBase[]',
-        'static_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentStaticFieldBase[]',
+        'faxes' => '\Dropbox\Sign\Model\FaxResponse[]',
+        'list_info' => '\Dropbox\Sign\Model\ListInfoResponse',
     ];
 
     /**
@@ -73,12 +69,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
-        'index' => null,
-        'field_groups' => null,
-        'form_fields' => null,
-        'custom_fields' => null,
-        'static_fields' => null,
+        'faxes' => null,
+        'list_info' => null,
     ];
 
     /**
@@ -87,12 +79,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'name' => false,
-        'index' => false,
-        'field_groups' => false,
-        'form_fields' => false,
-        'custom_fields' => false,
-        'static_fields' => false,
+        'faxes' => false,
+        'list_info' => false,
     ];
 
     /**
@@ -173,12 +161,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'index' => 'index',
-        'field_groups' => 'field_groups',
-        'form_fields' => 'form_fields',
-        'custom_fields' => 'custom_fields',
-        'static_fields' => 'static_fields',
+        'faxes' => 'faxes',
+        'list_info' => 'list_info',
     ];
 
     /**
@@ -187,12 +171,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'index' => 'setIndex',
-        'field_groups' => 'setFieldGroups',
-        'form_fields' => 'setFormFields',
-        'custom_fields' => 'setCustomFields',
-        'static_fields' => 'setStaticFields',
+        'faxes' => 'setFaxes',
+        'list_info' => 'setListInfo',
     ];
 
     /**
@@ -201,12 +181,8 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'index' => 'getIndex',
-        'field_groups' => 'getFieldGroups',
-        'form_fields' => 'getFormFields',
-        'custom_fields' => 'getCustomFields',
-        'static_fields' => 'getStaticFields',
+        'faxes' => 'getFaxes',
+        'list_info' => 'getListInfo',
     ];
 
     /**
@@ -265,18 +241,14 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('index', $data ?? [], null);
-        $this->setIfExists('field_groups', $data ?? [], null);
-        $this->setIfExists('form_fields', $data ?? [], null);
-        $this->setIfExists('custom_fields', $data ?? [], null);
-        $this->setIfExists('static_fields', $data ?? [], null);
+        $this->setIfExists('faxes', $data ?? [], null);
+        $this->setIfExists('list_info', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): TemplateResponseDocument
+    public static function fromArray(array $data): FaxListResponse
     {
         return self::init($data);
     }
@@ -284,12 +256,12 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): TemplateResponseDocument
+    public static function init(array $data): FaxListResponse
     {
-        /** @var TemplateResponseDocument */
+        /** @var FaxListResponse */
         return ObjectSerializer::deserialize(
             $data,
-            TemplateResponseDocument::class,
+            FaxListResponse::class,
         );
     }
 
@@ -316,7 +288,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if ($this->container['faxes'] === null) {
+            $invalidProperties[] = "'faxes' can't be null";
+        }
+        if ($this->container['list_info'] === null) {
+            $invalidProperties[] = "'list_info' can't be null";
+        }
+        return $invalidProperties;
     }
 
     /**
@@ -331,163 +311,55 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
     }
 
     /**
-     * Gets name
+     * Gets faxes
      *
-     * @return string|null
+     * @return FaxResponse[]
      */
-    public function getName()
+    public function getFaxes()
     {
-        return $this->container['name'];
+        return $this->container['faxes'];
     }
 
     /**
-     * Sets name
+     * Sets faxes
      *
-     * @param string|null $name name of the associated file
+     * @param FaxResponse[] $faxes faxes
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setFaxes(array $faxes)
     {
-        if (is_null($name)) {
-            throw new InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($faxes)) {
+            throw new InvalidArgumentException('non-nullable faxes cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['faxes'] = $faxes;
 
         return $this;
     }
 
     /**
-     * Gets index
+     * Gets list_info
      *
-     * @return int|null
+     * @return ListInfoResponse
      */
-    public function getIndex()
+    public function getListInfo()
     {
-        return $this->container['index'];
+        return $this->container['list_info'];
     }
 
     /**
-     * Sets index
+     * Sets list_info
      *
-     * @param int|null $index document ordering, the lowest index is displayed first and the highest last (0-based indexing)
+     * @param ListInfoResponse $list_info list_info
      *
      * @return self
      */
-    public function setIndex(?int $index)
+    public function setListInfo(ListInfoResponse $list_info)
     {
-        if (is_null($index)) {
-            throw new InvalidArgumentException('non-nullable index cannot be null');
+        if (is_null($list_info)) {
+            throw new InvalidArgumentException('non-nullable list_info cannot be null');
         }
-        $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets field_groups
-     *
-     * @return TemplateResponseDocumentFieldGroup[]|null
-     */
-    public function getFieldGroups()
-    {
-        return $this->container['field_groups'];
-    }
-
-    /**
-     * Sets field_groups
-     *
-     * @param TemplateResponseDocumentFieldGroup[]|null $field_groups an array of Form Field Group objects
-     *
-     * @return self
-     */
-    public function setFieldGroups(?array $field_groups)
-    {
-        if (is_null($field_groups)) {
-            throw new InvalidArgumentException('non-nullable field_groups cannot be null');
-        }
-        $this->container['field_groups'] = $field_groups;
-
-        return $this;
-    }
-
-    /**
-     * Gets form_fields
-     *
-     * @return TemplateResponseDocumentFormFieldBase[]|null
-     */
-    public function getFormFields()
-    {
-        return $this->container['form_fields'];
-    }
-
-    /**
-     * Sets form_fields
-     *
-     * @param TemplateResponseDocumentFormFieldBase[]|null $form_fields an array of Form Field objects containing the name and type of each named field
-     *
-     * @return self
-     */
-    public function setFormFields(?array $form_fields)
-    {
-        if (is_null($form_fields)) {
-            throw new InvalidArgumentException('non-nullable form_fields cannot be null');
-        }
-        $this->container['form_fields'] = $form_fields;
-
-        return $this;
-    }
-
-    /**
-     * Gets custom_fields
-     *
-     * @return TemplateResponseDocumentCustomFieldBase[]|null
-     */
-    public function getCustomFields()
-    {
-        return $this->container['custom_fields'];
-    }
-
-    /**
-     * Sets custom_fields
-     *
-     * @param TemplateResponseDocumentCustomFieldBase[]|null $custom_fields an array of Form Field objects containing the name and type of each named field
-     *
-     * @return self
-     */
-    public function setCustomFields(?array $custom_fields)
-    {
-        if (is_null($custom_fields)) {
-            throw new InvalidArgumentException('non-nullable custom_fields cannot be null');
-        }
-        $this->container['custom_fields'] = $custom_fields;
-
-        return $this;
-    }
-
-    /**
-     * Gets static_fields
-     *
-     * @return TemplateResponseDocumentStaticFieldBase[]|null
-     */
-    public function getStaticFields()
-    {
-        return $this->container['static_fields'];
-    }
-
-    /**
-     * Sets static_fields
-     *
-     * @param TemplateResponseDocumentStaticFieldBase[]|null $static_fields An array describing static overlay fields. **NOTE:** Only available for certain subscriptions.
-     *
-     * @return self
-     */
-    public function setStaticFields(?array $static_fields)
-    {
-        if (is_null($static_fields)) {
-            throw new InvalidArgumentException('non-nullable static_fields cannot be null');
-        }
-        $this->container['static_fields'] = $static_fields;
+        $this->container['list_info'] = $list_info;
 
         return $this;
     }
