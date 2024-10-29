@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateResponseDocument
+ * FaxSendRequest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use Dropbox\Sign\ObjectSerializer;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReturnTypeWillChange;
+use SplFileObject;
 
 /**
- * TemplateResponseDocument Class Doc Comment
+ * FaxSendRequest Class Doc Comment
  *
  * @category Class
  * @see     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSerializable
+class FaxSendRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateResponseDocument';
+    protected static $openAPIModelName = 'FaxSendRequest';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +58,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'index' => 'int',
-        'field_groups' => '\Dropbox\Sign\Model\TemplateResponseDocumentFieldGroup[]',
-        'form_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentFormFieldBase[]',
-        'custom_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentCustomFieldBase[]',
-        'static_fields' => '\Dropbox\Sign\Model\TemplateResponseDocumentStaticFieldBase[]',
+        'recipient' => 'string',
+        'sender' => 'string',
+        'files' => '\SplFileObject[]',
+        'file_urls' => 'string[]',
+        'test_mode' => 'bool',
+        'cover_page_to' => 'string',
+        'cover_page_from' => 'string',
+        'cover_page_message' => 'string',
+        'title' => 'string',
     ];
 
     /**
@@ -73,12 +77,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'name' => null,
-        'index' => null,
-        'field_groups' => null,
-        'form_fields' => null,
-        'custom_fields' => null,
-        'static_fields' => null,
+        'recipient' => null,
+        'sender' => null,
+        'files' => 'binary',
+        'file_urls' => null,
+        'test_mode' => null,
+        'cover_page_to' => null,
+        'cover_page_from' => null,
+        'cover_page_message' => null,
+        'title' => null,
     ];
 
     /**
@@ -87,12 +94,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'name' => false,
-        'index' => false,
-        'field_groups' => false,
-        'form_fields' => false,
-        'custom_fields' => false,
-        'static_fields' => false,
+        'recipient' => false,
+        'sender' => false,
+        'files' => false,
+        'file_urls' => false,
+        'test_mode' => false,
+        'cover_page_to' => false,
+        'cover_page_from' => false,
+        'cover_page_message' => false,
+        'title' => false,
     ];
 
     /**
@@ -173,12 +183,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'index' => 'index',
-        'field_groups' => 'field_groups',
-        'form_fields' => 'form_fields',
-        'custom_fields' => 'custom_fields',
-        'static_fields' => 'static_fields',
+        'recipient' => 'recipient',
+        'sender' => 'sender',
+        'files' => 'files',
+        'file_urls' => 'file_urls',
+        'test_mode' => 'test_mode',
+        'cover_page_to' => 'cover_page_to',
+        'cover_page_from' => 'cover_page_from',
+        'cover_page_message' => 'cover_page_message',
+        'title' => 'title',
     ];
 
     /**
@@ -187,12 +200,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'index' => 'setIndex',
-        'field_groups' => 'setFieldGroups',
-        'form_fields' => 'setFormFields',
-        'custom_fields' => 'setCustomFields',
-        'static_fields' => 'setStaticFields',
+        'recipient' => 'setRecipient',
+        'sender' => 'setSender',
+        'files' => 'setFiles',
+        'file_urls' => 'setFileUrls',
+        'test_mode' => 'setTestMode',
+        'cover_page_to' => 'setCoverPageTo',
+        'cover_page_from' => 'setCoverPageFrom',
+        'cover_page_message' => 'setCoverPageMessage',
+        'title' => 'setTitle',
     ];
 
     /**
@@ -201,12 +217,15 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'index' => 'getIndex',
-        'field_groups' => 'getFieldGroups',
-        'form_fields' => 'getFormFields',
-        'custom_fields' => 'getCustomFields',
-        'static_fields' => 'getStaticFields',
+        'recipient' => 'getRecipient',
+        'sender' => 'getSender',
+        'files' => 'getFiles',
+        'file_urls' => 'getFileUrls',
+        'test_mode' => 'getTestMode',
+        'cover_page_to' => 'getCoverPageTo',
+        'cover_page_from' => 'getCoverPageFrom',
+        'cover_page_message' => 'getCoverPageMessage',
+        'title' => 'getTitle',
     ];
 
     /**
@@ -265,18 +284,21 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('index', $data ?? [], null);
-        $this->setIfExists('field_groups', $data ?? [], null);
-        $this->setIfExists('form_fields', $data ?? [], null);
-        $this->setIfExists('custom_fields', $data ?? [], null);
-        $this->setIfExists('static_fields', $data ?? [], null);
+        $this->setIfExists('recipient', $data ?? [], null);
+        $this->setIfExists('sender', $data ?? [], null);
+        $this->setIfExists('files', $data ?? [], null);
+        $this->setIfExists('file_urls', $data ?? [], null);
+        $this->setIfExists('test_mode', $data ?? [], false);
+        $this->setIfExists('cover_page_to', $data ?? [], null);
+        $this->setIfExists('cover_page_from', $data ?? [], null);
+        $this->setIfExists('cover_page_message', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): TemplateResponseDocument
+    public static function fromArray(array $data): FaxSendRequest
     {
         return self::init($data);
     }
@@ -284,12 +306,12 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): TemplateResponseDocument
+    public static function init(array $data): FaxSendRequest
     {
-        /** @var TemplateResponseDocument */
+        /** @var FaxSendRequest */
         return ObjectSerializer::deserialize(
             $data,
-            TemplateResponseDocument::class,
+            FaxSendRequest::class,
         );
     }
 
@@ -316,7 +338,12 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if ($this->container['recipient'] === null) {
+            $invalidProperties[] = "'recipient' can't be null";
+        }
+        return $invalidProperties;
     }
 
     /**
@@ -331,163 +358,244 @@ class TemplateResponseDocument implements ModelInterface, ArrayAccess, JsonSeria
     }
 
     /**
-     * Gets name
+     * Gets recipient
+     *
+     * @return string
+     */
+    public function getRecipient()
+    {
+        return $this->container['recipient'];
+    }
+
+    /**
+     * Sets recipient
+     *
+     * @param string $recipient Fax Send To Recipient
+     *
+     * @return self
+     */
+    public function setRecipient(string $recipient)
+    {
+        if (is_null($recipient)) {
+            throw new InvalidArgumentException('non-nullable recipient cannot be null');
+        }
+        $this->container['recipient'] = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * Gets sender
      *
      * @return string|null
      */
-    public function getName()
+    public function getSender()
     {
-        return $this->container['name'];
+        return $this->container['sender'];
     }
 
     /**
-     * Sets name
+     * Sets sender
      *
-     * @param string|null $name name of the associated file
+     * @param string|null $sender Fax Send From Sender (used only with fax number)
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setSender(?string $sender)
     {
-        if (is_null($name)) {
-            throw new InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($sender)) {
+            throw new InvalidArgumentException('non-nullable sender cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['sender'] = $sender;
 
         return $this;
     }
 
     /**
-     * Gets index
+     * Gets files
      *
-     * @return int|null
+     * @return SplFileObject[]|null
      */
-    public function getIndex()
+    public function getFiles()
     {
-        return $this->container['index'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets index
+     * Sets files
      *
-     * @param int|null $index document ordering, the lowest index is displayed first and the highest last (0-based indexing)
+     * @param SplFileObject[]|null $files Fax File to Send
      *
      * @return self
      */
-    public function setIndex(?int $index)
+    public function setFiles(?array $files)
     {
-        if (is_null($index)) {
-            throw new InvalidArgumentException('non-nullable index cannot be null');
+        if (is_null($files)) {
+            throw new InvalidArgumentException('non-nullable files cannot be null');
         }
-        $this->container['index'] = $index;
+        $this->container['files'] = $files;
 
         return $this;
     }
 
     /**
-     * Gets field_groups
+     * Gets file_urls
      *
-     * @return TemplateResponseDocumentFieldGroup[]|null
+     * @return string[]|null
      */
-    public function getFieldGroups()
+    public function getFileUrls()
     {
-        return $this->container['field_groups'];
+        return $this->container['file_urls'];
     }
 
     /**
-     * Sets field_groups
+     * Sets file_urls
      *
-     * @param TemplateResponseDocumentFieldGroup[]|null $field_groups an array of Form Field Group objects
+     * @param string[]|null $file_urls Fax File URL to Send
      *
      * @return self
      */
-    public function setFieldGroups(?array $field_groups)
+    public function setFileUrls(?array $file_urls)
     {
-        if (is_null($field_groups)) {
-            throw new InvalidArgumentException('non-nullable field_groups cannot be null');
+        if (is_null($file_urls)) {
+            throw new InvalidArgumentException('non-nullable file_urls cannot be null');
         }
-        $this->container['field_groups'] = $field_groups;
+        $this->container['file_urls'] = $file_urls;
 
         return $this;
     }
 
     /**
-     * Gets form_fields
+     * Gets test_mode
      *
-     * @return TemplateResponseDocumentFormFieldBase[]|null
+     * @return bool|null
      */
-    public function getFormFields()
+    public function getTestMode()
     {
-        return $this->container['form_fields'];
+        return $this->container['test_mode'];
     }
 
     /**
-     * Sets form_fields
+     * Sets test_mode
      *
-     * @param TemplateResponseDocumentFormFieldBase[]|null $form_fields an array of Form Field objects containing the name and type of each named field
+     * @param bool|null $test_mode API Test Mode Setting
      *
      * @return self
      */
-    public function setFormFields(?array $form_fields)
+    public function setTestMode(?bool $test_mode)
     {
-        if (is_null($form_fields)) {
-            throw new InvalidArgumentException('non-nullable form_fields cannot be null');
+        if (is_null($test_mode)) {
+            throw new InvalidArgumentException('non-nullable test_mode cannot be null');
         }
-        $this->container['form_fields'] = $form_fields;
+        $this->container['test_mode'] = $test_mode;
 
         return $this;
     }
 
     /**
-     * Gets custom_fields
+     * Gets cover_page_to
      *
-     * @return TemplateResponseDocumentCustomFieldBase[]|null
+     * @return string|null
      */
-    public function getCustomFields()
+    public function getCoverPageTo()
     {
-        return $this->container['custom_fields'];
+        return $this->container['cover_page_to'];
     }
 
     /**
-     * Sets custom_fields
+     * Sets cover_page_to
      *
-     * @param TemplateResponseDocumentCustomFieldBase[]|null $custom_fields an array of Form Field objects containing the name and type of each named field
+     * @param string|null $cover_page_to Fax Cover Page for Recipient
      *
      * @return self
      */
-    public function setCustomFields(?array $custom_fields)
+    public function setCoverPageTo(?string $cover_page_to)
     {
-        if (is_null($custom_fields)) {
-            throw new InvalidArgumentException('non-nullable custom_fields cannot be null');
+        if (is_null($cover_page_to)) {
+            throw new InvalidArgumentException('non-nullable cover_page_to cannot be null');
         }
-        $this->container['custom_fields'] = $custom_fields;
+        $this->container['cover_page_to'] = $cover_page_to;
 
         return $this;
     }
 
     /**
-     * Gets static_fields
+     * Gets cover_page_from
      *
-     * @return TemplateResponseDocumentStaticFieldBase[]|null
+     * @return string|null
      */
-    public function getStaticFields()
+    public function getCoverPageFrom()
     {
-        return $this->container['static_fields'];
+        return $this->container['cover_page_from'];
     }
 
     /**
-     * Sets static_fields
+     * Sets cover_page_from
      *
-     * @param TemplateResponseDocumentStaticFieldBase[]|null $static_fields An array describing static overlay fields. **NOTE:** Only available for certain subscriptions.
+     * @param string|null $cover_page_from Fax Cover Page for Sender
      *
      * @return self
      */
-    public function setStaticFields(?array $static_fields)
+    public function setCoverPageFrom(?string $cover_page_from)
     {
-        if (is_null($static_fields)) {
-            throw new InvalidArgumentException('non-nullable static_fields cannot be null');
+        if (is_null($cover_page_from)) {
+            throw new InvalidArgumentException('non-nullable cover_page_from cannot be null');
         }
-        $this->container['static_fields'] = $static_fields;
+        $this->container['cover_page_from'] = $cover_page_from;
+
+        return $this;
+    }
+
+    /**
+     * Gets cover_page_message
+     *
+     * @return string|null
+     */
+    public function getCoverPageMessage()
+    {
+        return $this->container['cover_page_message'];
+    }
+
+    /**
+     * Sets cover_page_message
+     *
+     * @param string|null $cover_page_message Fax Cover Page Message
+     *
+     * @return self
+     */
+    public function setCoverPageMessage(?string $cover_page_message)
+    {
+        if (is_null($cover_page_message)) {
+            throw new InvalidArgumentException('non-nullable cover_page_message cannot be null');
+        }
+        $this->container['cover_page_message'] = $cover_page_message;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string|null
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string|null $title Fax Title
+     *
+     * @return self
+     */
+    public function setTitle(?string $title)
+    {
+        if (is_null($title)) {
+            throw new InvalidArgumentException('non-nullable title cannot be null');
+        }
+        $this->container['title'] = $title;
 
         return $this;
     }
