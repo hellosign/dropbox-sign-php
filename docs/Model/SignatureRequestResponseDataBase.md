@@ -11,5 +11,6 @@ Name | Type | Description | Notes
 | `name` | ```string``` |  The name of the form field.  |  |
 | `required` | ```bool``` |  A boolean value denoting if this field is required.  |  |
 | `type` | ```string``` |    |  |
+| `is_signed` | ```bool``` |  A boolean value denoting if this field has been signed.  |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

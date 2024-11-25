@@ -63,6 +63,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => 'string',
         'required' => 'bool',
         'type' => 'string',
+        'is_signed' => 'bool',
     ];
 
     /**
@@ -78,6 +79,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => null,
         'required' => null,
         'type' => null,
+        'is_signed' => null,
     ];
 
     /**
@@ -91,6 +93,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => false,
         'required' => false,
         'type' => false,
+        'is_signed' => false,
     ];
 
     /**
@@ -176,6 +179,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => 'name',
         'required' => 'required',
         'type' => 'type',
+        'is_signed' => 'is_signed',
     ];
 
     /**
@@ -189,6 +193,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => 'setName',
         'required' => 'setRequired',
         'type' => 'setType',
+        'is_signed' => 'setIsSigned',
     ];
 
     /**
@@ -202,6 +207,7 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
         'name' => 'getName',
         'required' => 'getRequired',
         'type' => 'getType',
+        'is_signed' => 'getIsSigned',
     ];
 
     /**
@@ -475,6 +481,33 @@ class SignatureRequestResponseDataBase implements ModelInterface, ArrayAccess, J
             throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_signed
+     *
+     * @return bool|null
+     */
+    public function getIsSigned()
+    {
+        return $this->container['is_signed'];
+    }
+
+    /**
+     * Sets is_signed
+     *
+     * @param bool|null $is_signed a boolean value denoting if this field has been signed
+     *
+     * @return self
+     */
+    public function setIsSigned(?bool $is_signed)
+    {
+        if (is_null($is_signed)) {
+            throw new InvalidArgumentException('non-nullable is_signed cannot be null');
+        }
+        $this->container['is_signed'] = $is_signed;
 
         return $this;
     }

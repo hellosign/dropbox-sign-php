@@ -57,6 +57,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static $openAPITypes = [
         'type' => 'string',
         'value' => 'string',
+        'is_signed' => 'bool',
     ];
 
     /**
@@ -69,6 +70,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static $openAPIFormats = [
         'type' => null,
         'value' => null,
+        'is_signed' => null,
     ];
 
     /**
@@ -79,6 +81,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static array $openAPINullables = [
         'type' => false,
         'value' => false,
+        'is_signed' => false,
     ];
 
     /**
@@ -161,6 +164,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static $attributeMap = [
         'type' => 'type',
         'value' => 'value',
+        'is_signed' => 'is_signed',
     ];
 
     /**
@@ -171,6 +175,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static $setters = [
         'type' => 'setType',
         'value' => 'setValue',
+        'is_signed' => 'setIsSigned',
     ];
 
     /**
@@ -181,6 +186,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
     protected static $getters = [
         'type' => 'getType',
         'value' => 'getValue',
+        'is_signed' => 'getIsSigned',
     ];
 
     /**
@@ -236,6 +242,7 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
 
         $this->setIfExists('type', $data ?? [], 'signature');
         $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('is_signed', $data ?? [], false);
     }
 
     /**
@@ -345,6 +352,33 @@ class SignatureRequestResponseDataValueSignature extends SignatureRequestRespons
             throw new InvalidArgumentException('non-nullable value cannot be null');
         }
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_signed
+     *
+     * @return bool|null
+     */
+    public function getIsSigned()
+    {
+        return $this->container['is_signed'];
+    }
+
+    /**
+     * Sets is_signed
+     *
+     * @param bool|null $is_signed whether the signature has been signed
+     *
+     * @return self
+     */
+    public function setIsSigned(?bool $is_signed)
+    {
+        if (is_null($is_signed)) {
+            throw new InvalidArgumentException('non-nullable is_signed cannot be null');
+        }
+        $this->container['is_signed'] = $is_signed;
 
         return $this;
     }
