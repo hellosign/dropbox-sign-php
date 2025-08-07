@@ -39,7 +39,7 @@ use SplFileObject;
  *
  * @category Class
  * @see     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
 class ApiAppUpdateRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
@@ -326,8 +326,8 @@ class ApiAppUpdateRequest implements ModelInterface, ArrayAccess, JsonSerializab
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['domains']) && (count($this->container['domains']) > 2)) {
-            $invalidProperties[] = "invalid value for 'domains', number of items must be less than or equal to 2.";
+        if (!is_null($this->container['domains']) && (count($this->container['domains']) > 10)) {
+            $invalidProperties[] = "invalid value for 'domains', number of items must be less than or equal to 10.";
         }
 
         return $invalidProperties;
@@ -421,8 +421,8 @@ class ApiAppUpdateRequest implements ModelInterface, ArrayAccess, JsonSerializab
             throw new InvalidArgumentException('non-nullable domains cannot be null');
         }
 
-        if (count($domains) > 2) {
-            throw new InvalidArgumentException('invalid value for $domains when calling ApiAppUpdateRequest., number of items must be less than or equal to 2.');
+        if (count($domains) > 10) {
+            throw new InvalidArgumentException('invalid value for $domains when calling ApiAppUpdateRequest., number of items must be less than or equal to 10.');
         }
         $this->container['domains'] = $domains;
 
