@@ -1,6 +1,6 @@
 <?php
 /**
- * SubSigningOptions
+ * AccountResponseSettings
  *
  * PHP version 7.4
  *
@@ -34,14 +34,14 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * SubSigningOptions Class Doc Comment
+ * AccountResponseSettings Class Doc Comment
  *
  * @category Class
- * @description This allows the requester to specify the types allowed for creating a signature and specify another signing options.  **NOTE:** If &#x60;signing_options&#x60; are not defined in the request, the allowed types will default to those specified in the account settings.  **NOTE:** If &#x60;force_advanced_signature_details&#x60; is set, allowed types has to be defined too.
+ * @description Subset of configured settings
  * @see     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
+class AccountResponseSettings implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SubSigningOptions';
+    protected static $openAPIModelName = 'AccountResponseSettings';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +58,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'default_type' => 'string',
-        'draw' => 'bool',
-        'phone' => 'bool',
-        'type' => 'bool',
-        'upload' => 'bool',
-        'force_advanced_signature_details' => 'bool',
+        'signer_access_codes' => 'bool',
+        'sms_delivery' => 'bool',
+        'sms_authentication' => 'bool',
     ];
 
     /**
@@ -74,12 +71,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'default_type' => null,
-        'draw' => null,
-        'phone' => null,
-        'type' => null,
-        'upload' => null,
-        'force_advanced_signature_details' => null,
+        'signer_access_codes' => null,
+        'sms_delivery' => null,
+        'sms_authentication' => null,
     ];
 
     /**
@@ -88,12 +82,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'default_type' => false,
-        'draw' => false,
-        'phone' => false,
-        'type' => false,
-        'upload' => false,
-        'force_advanced_signature_details' => false,
+        'signer_access_codes' => false,
+        'sms_delivery' => false,
+        'sms_authentication' => false,
     ];
 
     /**
@@ -174,12 +165,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'default_type' => 'default_type',
-        'draw' => 'draw',
-        'phone' => 'phone',
-        'type' => 'type',
-        'upload' => 'upload',
-        'force_advanced_signature_details' => 'force_advanced_signature_details',
+        'signer_access_codes' => 'signer_access_codes',
+        'sms_delivery' => 'sms_delivery',
+        'sms_authentication' => 'sms_authentication',
     ];
 
     /**
@@ -188,12 +176,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'default_type' => 'setDefaultType',
-        'draw' => 'setDraw',
-        'phone' => 'setPhone',
-        'type' => 'setType',
-        'upload' => 'setUpload',
-        'force_advanced_signature_details' => 'setForceAdvancedSignatureDetails',
+        'signer_access_codes' => 'setSignerAccessCodes',
+        'sms_delivery' => 'setSmsDelivery',
+        'sms_authentication' => 'setSmsAuthentication',
     ];
 
     /**
@@ -202,12 +187,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'default_type' => 'getDefaultType',
-        'draw' => 'getDraw',
-        'phone' => 'getPhone',
-        'type' => 'getType',
-        'upload' => 'getUpload',
-        'force_advanced_signature_details' => 'getForceAdvancedSignatureDetails',
+        'signer_access_codes' => 'getSignerAccessCodes',
+        'sms_delivery' => 'getSmsDelivery',
+        'sms_authentication' => 'getSmsAuthentication',
     ];
 
     /**
@@ -251,26 +233,6 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const DEFAULT_TYPE_DRAW = 'draw';
-    public const DEFAULT_TYPE_PHONE = 'phone';
-    public const DEFAULT_TYPE_TYPE = 'type';
-    public const DEFAULT_TYPE_UPLOAD = 'upload';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDefaultTypeAllowableValues()
-    {
-        return [
-            self::DEFAULT_TYPE_DRAW,
-            self::DEFAULT_TYPE_PHONE,
-            self::DEFAULT_TYPE_TYPE,
-            self::DEFAULT_TYPE_UPLOAD,
-        ];
-    }
-
     /**
      * Associative array for storing property values
      *
@@ -286,18 +248,15 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('default_type', $data ?? [], null);
-        $this->setIfExists('draw', $data ?? [], false);
-        $this->setIfExists('phone', $data ?? [], false);
-        $this->setIfExists('type', $data ?? [], false);
-        $this->setIfExists('upload', $data ?? [], false);
-        $this->setIfExists('force_advanced_signature_details', $data ?? [], false);
+        $this->setIfExists('signer_access_codes', $data ?? [], null);
+        $this->setIfExists('sms_delivery', $data ?? [], null);
+        $this->setIfExists('sms_authentication', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): SubSigningOptions
+    public static function fromArray(array $data): AccountResponseSettings
     {
         return self::init($data);
     }
@@ -305,12 +264,12 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): SubSigningOptions
+    public static function init(array $data): AccountResponseSettings
     {
-        /** @var SubSigningOptions */
+        /** @var AccountResponseSettings */
         return ObjectSerializer::deserialize(
             $data,
-            SubSigningOptions::class,
+            AccountResponseSettings::class,
         );
     }
 
@@ -337,21 +296,7 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if ($this->container['default_type'] === null) {
-            $invalidProperties[] = "'default_type' can't be null";
-        }
-        $allowedValues = $this->getDefaultTypeAllowableValues();
-        if (!is_null($this->container['default_type']) && !in_array($this->container['default_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'default_type', must be one of '%s'",
-                $this->container['default_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -366,173 +311,82 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets default_type
+     * Gets signer_access_codes
      *
-     * @return string
+     * @return bool|null
      */
-    public function getDefaultType()
+    public function getSignerAccessCodes()
     {
-        return $this->container['default_type'];
+        return $this->container['signer_access_codes'];
     }
 
     /**
-     * Sets default_type
+     * Sets signer_access_codes
      *
-     * @param string $default_type The default type shown (limited to the listed types)
+     * @param bool|null $signer_access_codes Returns `true` if _Custom access codes_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
      *
      * @return self
      */
-    public function setDefaultType(string $default_type)
+    public function setSignerAccessCodes(?bool $signer_access_codes)
     {
-        if (is_null($default_type)) {
-            throw new InvalidArgumentException('non-nullable default_type cannot be null');
+        if (is_null($signer_access_codes)) {
+            throw new InvalidArgumentException('non-nullable signer_access_codes cannot be null');
         }
-        $allowedValues = $this->getDefaultTypeAllowableValues();
-        if (!in_array($default_type, $allowedValues, true)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'default_type', must be one of '%s'",
-                    $default_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['default_type'] = $default_type;
+        $this->container['signer_access_codes'] = $signer_access_codes;
 
         return $this;
     }
 
     /**
-     * Gets draw
+     * Gets sms_delivery
      *
      * @return bool|null
      */
-    public function getDraw()
+    public function getSmsDelivery()
     {
-        return $this->container['draw'];
+        return $this->container['sms_delivery'];
     }
 
     /**
-     * Sets draw
+     * Sets sms_delivery
      *
-     * @param bool|null $draw Allows drawing the signature
+     * @param bool|null $sms_delivery Returns `true` if _Text message_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
      *
      * @return self
      */
-    public function setDraw(?bool $draw)
+    public function setSmsDelivery(?bool $sms_delivery)
     {
-        if (is_null($draw)) {
-            throw new InvalidArgumentException('non-nullable draw cannot be null');
+        if (is_null($sms_delivery)) {
+            throw new InvalidArgumentException('non-nullable sms_delivery cannot be null');
         }
-        $this->container['draw'] = $draw;
+        $this->container['sms_delivery'] = $sms_delivery;
 
         return $this;
     }
 
     /**
-     * Gets phone
+     * Gets sms_authentication
      *
      * @return bool|null
      */
-    public function getPhone()
+    public function getSmsAuthentication()
     {
-        return $this->container['phone'];
+        return $this->container['sms_authentication'];
     }
 
     /**
-     * Sets phone
+     * Sets sms_authentication
      *
-     * @param bool|null $phone Allows using a smartphone to email the signature
+     * @param bool|null $sms_authentication Returns `true` if _Signer authentication_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
      *
      * @return self
      */
-    public function setPhone(?bool $phone)
+    public function setSmsAuthentication(?bool $sms_authentication)
     {
-        if (is_null($phone)) {
-            throw new InvalidArgumentException('non-nullable phone cannot be null');
+        if (is_null($sms_authentication)) {
+            throw new InvalidArgumentException('non-nullable sms_authentication cannot be null');
         }
-        $this->container['phone'] = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return bool|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param bool|null $type Allows typing the signature
-     *
-     * @return self
-     */
-    public function setType(?bool $type)
-    {
-        if (is_null($type)) {
-            throw new InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets upload
-     *
-     * @return bool|null
-     */
-    public function getUpload()
-    {
-        return $this->container['upload'];
-    }
-
-    /**
-     * Sets upload
-     *
-     * @param bool|null $upload Allows uploading the signature
-     *
-     * @return self
-     */
-    public function setUpload(?bool $upload)
-    {
-        if (is_null($upload)) {
-            throw new InvalidArgumentException('non-nullable upload cannot be null');
-        }
-        $this->container['upload'] = $upload;
-
-        return $this;
-    }
-
-    /**
-     * Gets force_advanced_signature_details
-     *
-     * @return bool|null
-     */
-    public function getForceAdvancedSignatureDetails()
-    {
-        return $this->container['force_advanced_signature_details'];
-    }
-
-    /**
-     * Sets force_advanced_signature_details
-     *
-     * @param bool|null $force_advanced_signature_details Turning on advanced signature details for the signature request
-     *
-     * @return self
-     */
-    public function setForceAdvancedSignatureDetails(?bool $force_advanced_signature_details)
-    {
-        if (is_null($force_advanced_signature_details)) {
-            throw new InvalidArgumentException('non-nullable force_advanced_signature_details cannot be null');
-        }
-        $this->container['force_advanced_signature_details'] = $force_advanced_signature_details;
+        $this->container['sms_authentication'] = $sms_authentication;
 
         return $this;
     }

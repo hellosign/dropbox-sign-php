@@ -1,6 +1,6 @@
 <?php
 /**
- * SubSigningOptions
+ * SubUpdateFormField
  *
  * PHP version 7.4
  *
@@ -34,14 +34,13 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * SubSigningOptions Class Doc Comment
+ * SubUpdateFormField Class Doc Comment
  *
  * @category Class
- * @description This allows the requester to specify the types allowed for creating a signature and specify another signing options.  **NOTE:** If &#x60;signing_options&#x60; are not defined in the request, the allowed types will default to those specified in the account settings.  **NOTE:** If &#x60;force_advanced_signature_details&#x60; is set, allowed types has to be defined too.
  * @see     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
+class SubUpdateFormField implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SubSigningOptions';
+    protected static $openAPIModelName = 'SubUpdateFormField';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -58,12 +57,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'default_type' => 'string',
-        'draw' => 'bool',
-        'phone' => 'bool',
-        'type' => 'bool',
-        'upload' => 'bool',
-        'force_advanced_signature_details' => 'bool',
+        'api_id' => 'string',
+        'name' => 'string',
     ];
 
     /**
@@ -74,12 +69,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'default_type' => null,
-        'draw' => null,
-        'phone' => null,
-        'type' => null,
-        'upload' => null,
-        'force_advanced_signature_details' => null,
+        'api_id' => null,
+        'name' => null,
     ];
 
     /**
@@ -88,12 +79,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'default_type' => false,
-        'draw' => false,
-        'phone' => false,
-        'type' => false,
-        'upload' => false,
-        'force_advanced_signature_details' => false,
+        'api_id' => false,
+        'name' => false,
     ];
 
     /**
@@ -174,12 +161,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'default_type' => 'default_type',
-        'draw' => 'draw',
-        'phone' => 'phone',
-        'type' => 'type',
-        'upload' => 'upload',
-        'force_advanced_signature_details' => 'force_advanced_signature_details',
+        'api_id' => 'api_id',
+        'name' => 'name',
     ];
 
     /**
@@ -188,12 +171,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'default_type' => 'setDefaultType',
-        'draw' => 'setDraw',
-        'phone' => 'setPhone',
-        'type' => 'setType',
-        'upload' => 'setUpload',
-        'force_advanced_signature_details' => 'setForceAdvancedSignatureDetails',
+        'api_id' => 'setApiId',
+        'name' => 'setName',
     ];
 
     /**
@@ -202,12 +181,8 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'default_type' => 'getDefaultType',
-        'draw' => 'getDraw',
-        'phone' => 'getPhone',
-        'type' => 'getType',
-        'upload' => 'getUpload',
-        'force_advanced_signature_details' => 'getForceAdvancedSignatureDetails',
+        'api_id' => 'getApiId',
+        'name' => 'getName',
     ];
 
     /**
@@ -251,26 +226,6 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const DEFAULT_TYPE_DRAW = 'draw';
-    public const DEFAULT_TYPE_PHONE = 'phone';
-    public const DEFAULT_TYPE_TYPE = 'type';
-    public const DEFAULT_TYPE_UPLOAD = 'upload';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDefaultTypeAllowableValues()
-    {
-        return [
-            self::DEFAULT_TYPE_DRAW,
-            self::DEFAULT_TYPE_PHONE,
-            self::DEFAULT_TYPE_TYPE,
-            self::DEFAULT_TYPE_UPLOAD,
-        ];
-    }
-
     /**
      * Associative array for storing property values
      *
@@ -286,18 +241,14 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('default_type', $data ?? [], null);
-        $this->setIfExists('draw', $data ?? [], false);
-        $this->setIfExists('phone', $data ?? [], false);
-        $this->setIfExists('type', $data ?? [], false);
-        $this->setIfExists('upload', $data ?? [], false);
-        $this->setIfExists('force_advanced_signature_details', $data ?? [], false);
+        $this->setIfExists('api_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): SubSigningOptions
+    public static function fromArray(array $data): SubUpdateFormField
     {
         return self::init($data);
     }
@@ -305,12 +256,12 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): SubSigningOptions
+    public static function init(array $data): SubUpdateFormField
     {
-        /** @var SubSigningOptions */
+        /** @var SubUpdateFormField */
         return ObjectSerializer::deserialize(
             $data,
-            SubSigningOptions::class,
+            SubUpdateFormField::class,
         );
     }
 
@@ -339,18 +290,9 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['default_type'] === null) {
-            $invalidProperties[] = "'default_type' can't be null";
+        if ($this->container['api_id'] === null) {
+            $invalidProperties[] = "'api_id' can't be null";
         }
-        $allowedValues = $this->getDefaultTypeAllowableValues();
-        if (!is_null($this->container['default_type']) && !in_array($this->container['default_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'default_type', must be one of '%s'",
-                $this->container['default_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -366,173 +308,55 @@ class SubSigningOptions implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets default_type
+     * Gets api_id
      *
      * @return string
      */
-    public function getDefaultType()
+    public function getApiId()
     {
-        return $this->container['default_type'];
+        return $this->container['api_id'];
     }
 
     /**
-     * Sets default_type
+     * Sets api_id
      *
-     * @param string $default_type The default type shown (limited to the listed types)
+     * @param string $api_id The unique ID for this field. The endpoint will update an existing field with matching `api_id`, and warn you if no matches are found
      *
      * @return self
      */
-    public function setDefaultType(string $default_type)
+    public function setApiId(string $api_id)
     {
-        if (is_null($default_type)) {
-            throw new InvalidArgumentException('non-nullable default_type cannot be null');
+        if (is_null($api_id)) {
+            throw new InvalidArgumentException('non-nullable api_id cannot be null');
         }
-        $allowedValues = $this->getDefaultTypeAllowableValues();
-        if (!in_array($default_type, $allowedValues, true)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'default_type', must be one of '%s'",
-                    $default_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['default_type'] = $default_type;
+        $this->container['api_id'] = $api_id;
 
         return $this;
     }
 
     /**
-     * Gets draw
+     * Gets name
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getDraw()
+    public function getName()
     {
-        return $this->container['draw'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets draw
+     * Sets name
      *
-     * @param bool|null $draw Allows drawing the signature
+     * @param string|null $name The new name of the field. If not passed the name will remain unchanged.
      *
      * @return self
      */
-    public function setDraw(?bool $draw)
+    public function setName(?string $name)
     {
-        if (is_null($draw)) {
-            throw new InvalidArgumentException('non-nullable draw cannot be null');
+        if (is_null($name)) {
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['draw'] = $draw;
-
-        return $this;
-    }
-
-    /**
-     * Gets phone
-     *
-     * @return bool|null
-     */
-    public function getPhone()
-    {
-        return $this->container['phone'];
-    }
-
-    /**
-     * Sets phone
-     *
-     * @param bool|null $phone Allows using a smartphone to email the signature
-     *
-     * @return self
-     */
-    public function setPhone(?bool $phone)
-    {
-        if (is_null($phone)) {
-            throw new InvalidArgumentException('non-nullable phone cannot be null');
-        }
-        $this->container['phone'] = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return bool|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param bool|null $type Allows typing the signature
-     *
-     * @return self
-     */
-    public function setType(?bool $type)
-    {
-        if (is_null($type)) {
-            throw new InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets upload
-     *
-     * @return bool|null
-     */
-    public function getUpload()
-    {
-        return $this->container['upload'];
-    }
-
-    /**
-     * Sets upload
-     *
-     * @param bool|null $upload Allows uploading the signature
-     *
-     * @return self
-     */
-    public function setUpload(?bool $upload)
-    {
-        if (is_null($upload)) {
-            throw new InvalidArgumentException('non-nullable upload cannot be null');
-        }
-        $this->container['upload'] = $upload;
-
-        return $this;
-    }
-
-    /**
-     * Gets force_advanced_signature_details
-     *
-     * @return bool|null
-     */
-    public function getForceAdvancedSignatureDetails()
-    {
-        return $this->container['force_advanced_signature_details'];
-    }
-
-    /**
-     * Sets force_advanced_signature_details
-     *
-     * @param bool|null $force_advanced_signature_details Turning on advanced signature details for the signature request
-     *
-     * @return self
-     */
-    public function setForceAdvancedSignatureDetails(?bool $force_advanced_signature_details)
-    {
-        if (is_null($force_advanced_signature_details)) {
-            throw new InvalidArgumentException('non-nullable force_advanced_signature_details cannot be null');
-        }
-        $this->container['force_advanced_signature_details'] = $force_advanced_signature_details;
+        $this->container['name'] = $name;
 
         return $this;
     }

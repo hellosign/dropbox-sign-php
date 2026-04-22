@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateEditResponse
+ * SubSignerExperience
  *
  * PHP version 7.4
  *
@@ -34,13 +34,14 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * TemplateEditResponse Class Doc Comment
+ * SubSignerExperience Class Doc Comment
  *
  * @category Class
+ * @description Configuration options for modifying the settings of the signer application. Supports changing the form view behavior.
  * @see     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class SubSignerExperience implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateEditResponse';
+    protected static $openAPIModelName = 'SubSignerExperience';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +58,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'template_id' => 'string',
+        'form_view' => 'string',
     ];
 
     /**
@@ -68,7 +69,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'template_id' => null,
+        'form_view' => null,
     ];
 
     /**
@@ -77,7 +78,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'template_id' => false,
+        'form_view' => false,
     ];
 
     /**
@@ -158,7 +159,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'template_id' => 'template_id',
+        'form_view' => 'form_view',
     ];
 
     /**
@@ -167,7 +168,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'template_id' => 'setTemplateId',
+        'form_view' => 'setFormView',
     ];
 
     /**
@@ -176,7 +177,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'template_id' => 'getTemplateId',
+        'form_view' => 'getFormView',
     ];
 
     /**
@@ -220,6 +221,26 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
         return self::$openAPIModelName;
     }
 
+    public const FORM_VIEW_DISABLED = 'disabled';
+    public const FORM_VIEW_ENABLED = 'enabled';
+    public const FORM_VIEW_ENABLED_BY_DEFAULT = 'enabled_by_default';
+    public const FORM_VIEW_FORCED = 'forced';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFormViewAllowableValues()
+    {
+        return [
+            self::FORM_VIEW_DISABLED,
+            self::FORM_VIEW_ENABLED,
+            self::FORM_VIEW_ENABLED_BY_DEFAULT,
+            self::FORM_VIEW_FORCED,
+        ];
+    }
+
     /**
      * Associative array for storing property values
      *
@@ -235,13 +256,13 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('template_id', $data ?? [], null);
+        $this->setIfExists('form_view', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): TemplateEditResponse
+    public static function fromArray(array $data): SubSignerExperience
     {
         return self::init($data);
     }
@@ -249,12 +270,12 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): TemplateEditResponse
+    public static function init(array $data): SubSignerExperience
     {
-        /** @var TemplateEditResponse */
+        /** @var SubSignerExperience */
         return ObjectSerializer::deserialize(
             $data,
-            TemplateEditResponse::class,
+            SubSignerExperience::class,
         );
     }
 
@@ -283,9 +304,15 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['template_id'] === null) {
-            $invalidProperties[] = "'template_id' can't be null";
+        $allowedValues = $this->getFormViewAllowableValues();
+        if (!is_null($this->container['form_view']) && !in_array($this->container['form_view'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'form_view', must be one of '%s'",
+                $this->container['form_view'],
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -301,28 +328,38 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
     }
 
     /**
-     * Gets template_id
+     * Gets form_view
      *
-     * @return string
+     * @return string|null
      */
-    public function getTemplateId()
+    public function getFormView()
     {
-        return $this->container['template_id'];
+        return $this->container['form_view'];
     }
 
     /**
-     * Sets template_id
+     * Sets form_view
      *
-     * @param string $template_id the id of the Template
+     * @param string|null $form_view Changes the form view setting experienced by the signer. Supported versions are:  - `disabled` - Form view is disabled, and the signer cannot change it  - `enabled` - Form view is disabled initially, the signer can turn it on using a toggle  - `enabled_by_default` - Form view is enabled initially. The signer car turn it off using a toggle  - `forced` - Form view is enabled initially. The signer cannot change it, the toggle is hidden.
      *
      * @return self
      */
-    public function setTemplateId(string $template_id)
+    public function setFormView(?string $form_view)
     {
-        if (is_null($template_id)) {
-            throw new InvalidArgumentException('non-nullable template_id cannot be null');
+        if (is_null($form_view)) {
+            throw new InvalidArgumentException('non-nullable form_view cannot be null');
         }
-        $this->container['template_id'] = $template_id;
+        $allowedValues = $this->getFormViewAllowableValues();
+        if (!in_array($form_view, $allowedValues, true)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'form_view', must be one of '%s'",
+                    $form_view,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['form_view'] = $form_view;
 
         return $this;
     }
