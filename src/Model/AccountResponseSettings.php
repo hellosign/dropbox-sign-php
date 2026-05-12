@@ -1,6 +1,6 @@
 <?php
 /**
- * TemplateEditResponse
+ * AccountResponseSettings
  *
  * PHP version 7.4
  *
@@ -34,13 +34,14 @@ use JsonSerializable;
 use ReturnTypeWillChange;
 
 /**
- * TemplateEditResponse Class Doc Comment
+ * AccountResponseSettings Class Doc Comment
  *
  * @category Class
+ * @description Subset of configured settings
  * @see     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializable
+class AccountResponseSettings implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TemplateEditResponse';
+    protected static $openAPIModelName = 'AccountResponseSettings';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +58,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'template_id' => 'string',
+        'signer_access_codes' => 'bool',
+        'sms_delivery' => 'bool',
+        'sms_authentication' => 'bool',
     ];
 
     /**
@@ -68,7 +71,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'template_id' => null,
+        'signer_access_codes' => null,
+        'sms_delivery' => null,
+        'sms_authentication' => null,
     ];
 
     /**
@@ -77,7 +82,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var bool[]
      */
     protected static array $openAPINullables = [
-        'template_id' => false,
+        'signer_access_codes' => false,
+        'sms_delivery' => false,
+        'sms_authentication' => false,
     ];
 
     /**
@@ -158,7 +165,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'template_id' => 'template_id',
+        'signer_access_codes' => 'signer_access_codes',
+        'sms_delivery' => 'sms_delivery',
+        'sms_authentication' => 'sms_authentication',
     ];
 
     /**
@@ -167,7 +176,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'template_id' => 'setTemplateId',
+        'signer_access_codes' => 'setSignerAccessCodes',
+        'sms_delivery' => 'setSmsDelivery',
+        'sms_authentication' => 'setSmsAuthentication',
     ];
 
     /**
@@ -176,7 +187,9 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'template_id' => 'getTemplateId',
+        'signer_access_codes' => 'getSignerAccessCodes',
+        'sms_delivery' => 'getSmsDelivery',
+        'sms_authentication' => 'getSmsAuthentication',
     ];
 
     /**
@@ -235,13 +248,15 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('template_id', $data ?? [], null);
+        $this->setIfExists('signer_access_codes', $data ?? [], null);
+        $this->setIfExists('sms_delivery', $data ?? [], null);
+        $this->setIfExists('sms_authentication', $data ?? [], null);
     }
 
     /**
      * @deprecated use ::init()
      */
-    public static function fromArray(array $data): TemplateEditResponse
+    public static function fromArray(array $data): AccountResponseSettings
     {
         return self::init($data);
     }
@@ -249,12 +264,12 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Attempt to instantiate and hydrate a new instance of this class
      */
-    public static function init(array $data): TemplateEditResponse
+    public static function init(array $data): AccountResponseSettings
     {
-        /** @var TemplateEditResponse */
+        /** @var AccountResponseSettings */
         return ObjectSerializer::deserialize(
             $data,
-            TemplateEditResponse::class,
+            AccountResponseSettings::class,
         );
     }
 
@@ -281,12 +296,7 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if ($this->container['template_id'] === null) {
-            $invalidProperties[] = "'template_id' can't be null";
-        }
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -301,28 +311,82 @@ class TemplateEditResponse implements ModelInterface, ArrayAccess, JsonSerializa
     }
 
     /**
-     * Gets template_id
+     * Gets signer_access_codes
      *
-     * @return string
+     * @return bool|null
      */
-    public function getTemplateId()
+    public function getSignerAccessCodes()
     {
-        return $this->container['template_id'];
+        return $this->container['signer_access_codes'];
     }
 
     /**
-     * Sets template_id
+     * Sets signer_access_codes
      *
-     * @param string $template_id the id of the Template
+     * @param bool|null $signer_access_codes Returns `true` if _Custom access codes_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
      *
      * @return self
      */
-    public function setTemplateId(string $template_id)
+    public function setSignerAccessCodes(?bool $signer_access_codes)
     {
-        if (is_null($template_id)) {
-            throw new InvalidArgumentException('non-nullable template_id cannot be null');
+        if (is_null($signer_access_codes)) {
+            throw new InvalidArgumentException('non-nullable signer_access_codes cannot be null');
         }
-        $this->container['template_id'] = $template_id;
+        $this->container['signer_access_codes'] = $signer_access_codes;
+
+        return $this;
+    }
+
+    /**
+     * Gets sms_delivery
+     *
+     * @return bool|null
+     */
+    public function getSmsDelivery()
+    {
+        return $this->container['sms_delivery'];
+    }
+
+    /**
+     * Sets sms_delivery
+     *
+     * @param bool|null $sms_delivery Returns `true` if _Text message_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
+     *
+     * @return self
+     */
+    public function setSmsDelivery(?bool $sms_delivery)
+    {
+        if (is_null($sms_delivery)) {
+            throw new InvalidArgumentException('non-nullable sms_delivery cannot be null');
+        }
+        $this->container['sms_delivery'] = $sms_delivery;
+
+        return $this;
+    }
+
+    /**
+     * Gets sms_authentication
+     *
+     * @return bool|null
+     */
+    public function getSmsAuthentication()
+    {
+        return $this->container['sms_authentication'];
+    }
+
+    /**
+     * Sets sms_authentication
+     *
+     * @param bool|null $sms_authentication Returns `true` if _Signer authentication_ is enabled in Admin Console. [Read more](https://developers.hellosign.com/docs/sms-tools/walkthrough).
+     *
+     * @return self
+     */
+    public function setSmsAuthentication(?bool $sms_authentication)
+    {
+        if (is_null($sms_authentication)) {
+            throw new InvalidArgumentException('non-nullable sms_authentication cannot be null');
+        }
+        $this->container['sms_authentication'] = $sms_authentication;
 
         return $this;
     }
