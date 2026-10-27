@@ -62,7 +62,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
 ```json
 {
     "require": {
-        "dropbox/sign": "^2.0.0"
+        "dropbox/sign": "^2.0.1"
     },
     "minimum-stability": "dev"
 }
@@ -73,7 +73,7 @@ Then run `composer install`
 Alternatively, install directly with
 
 ```
-composer require dropbox/sign:^2.0.0
+composer require dropbox/sign:^2.0.1
 ```
 
 ## Getting Started
