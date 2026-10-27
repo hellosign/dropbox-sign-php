@@ -1,8 +1,8 @@
 generatorName: php
 additionalProperties:
   packageName: dropbox/sign
-  packageVersion: "^2.0.0"
-  artifactVersion: 2.0.0
+  packageVersion: "^2.0.1"
+  artifactVersion: 2.0.1
   invokerPackage: "Dropbox\\Sign"
   sortModelPropertiesByRequiredFlag: true
   srcBasePath: src
